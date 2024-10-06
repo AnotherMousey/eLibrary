@@ -11,23 +11,22 @@ public class BookAPI{
     private static JSONObject data;
     private int countBook = 0;
 
-    private static String encode(String keyword, String query) {
+    private static String encode(String query) {
         String googleBook = "https://www.googleapis.com/books/v1/volumes?";
         String personalKey = "AIzaSyCHkwZjMHLM8ZbtSvqJ4TRRqPxSUT4inuQ";
-        return googleBook + "q=" + keyword + "+" + query + ":keyes&key=" + personalKey;
+        return googleBook + "q=" + query + "&key=" + personalKey;
     }
 
     /**
      * Get book info via google book
-     * @param keyword keyword
-     * @param query 1 of the following: intitle, inauthor, inpublisher, subject, isbn, lccn, oclc
+     * @param query querytype is 1 of the following: intitle, inauthor, inpublisher, subject, isbn, lccn, oclc
      * see more on https://developers.google.com/books/docs/v1/using#WorkingVolumes
      * @return array of books satisfied
      */
-    public static ArrayList<Book> getBookInfo(String keyword, String query) throws IOException, ParseException {
+    public static ArrayList<Book> getBookInfo(Query query) throws IOException, ParseException {
         ArrayList<Book> bookshelf = new ArrayList<>();
 
-        String API = encode(keyword, query);
+        String API = encode(query.getQuery());
         URL url = new URL(API);
 
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -55,6 +54,7 @@ public class BookAPI{
         else {
             System.out.println("Status: Connection failed");
         }
+        return bookshelf;
     }
 }
 
