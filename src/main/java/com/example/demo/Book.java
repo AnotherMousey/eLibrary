@@ -1,16 +1,27 @@
 package com.example.demo;
 
+import java.util.ArrayList;
+
 public class Book {
     private String title;
-    private String author;
-    private int publishedDate;
+    private ArrayList<String> author;
+    private String publishedDate;
+    private String publisher;
     private String language;
     private String isbn;
     private int pages;
-    private String[] categories;
+    private ArrayList<String> categories;
     private int avgRating; //0-5
     private int totalRating;
     private String description;
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
 
     public String getTitle() {
         return title;
@@ -20,19 +31,19 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
+    public ArrayList<String> getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(ArrayList<String> author) {
         this.author = author;
     }
 
-    public int getPublishedDate() {
+    public String getPublishedDate() {
         return publishedDate;
     }
 
-    public void setPublishedDate(int publishedDate) {
+    public void setPublishedDate(String publishedDate) {
         this.publishedDate = publishedDate;
     }
 
@@ -60,11 +71,11 @@ public class Book {
         this.pages = pages;
     }
 
-    public String[] getCategories() {
+    public ArrayList<String> getCategories() {
         return categories;
     }
 
-    public void setCategories(String[] categories) {
+    public void setCategories(ArrayList<String> categories) {
         this.categories = categories;
     }
 
@@ -92,17 +103,7 @@ public class Book {
         this.description = description;
     }
 
-    public Book(String title, String author, int publishedDate, String language, String isbn, int pages,
-                String[] categories, int avgRating, int totalRating, String description) {
-        this.title = title;
-        this.author = author;
-        this.publishedDate = publishedDate;
-        this.language = language;
-        this.isbn = isbn;
-        this.pages = pages;
-        this.categories = categories;
-        this.avgRating = avgRating;
-        this.totalRating = totalRating;
-        this.description = description;
+    public Book() {
+
     }
 }

@@ -18,6 +18,11 @@ public class HelloApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+
+        Query query = new Query();
+        query.setInTitle("flowers");
+        query.setInAuthor("keyes");
+        getBookInfo(query);
     }
 
     public static void main(String[] args) {

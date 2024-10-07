@@ -8,8 +8,6 @@ import org.json.simple.*;
 import org.json.simple.parser.*;
 
 public class BookAPI{
-    private static JSONObject data;
-    private int countBook = 0;
 
     private static String encode(String query) {
         String googleBook = "https://www.googleapis.com/books/v1/volumes?";
@@ -21,7 +19,7 @@ public class BookAPI{
      * Get book info via google book
      * @param query querytype is 1 of the following: intitle, inauthor, inpublisher, subject, isbn, lccn, oclc
      * see more on https://developers.google.com/books/docs/v1/using#WorkingVolumes
-     * @return array of books satisfied
+     * @return arraylist of books satisfied
      */
     public static ArrayList<Book> getBookInfo(Query query) throws IOException, ParseException {
         ArrayList<Book> bookshelf = new ArrayList<>();
@@ -49,7 +47,72 @@ public class BookAPI{
             scanner.close();
 
             JSONParser parser = new JSONParser();
-            data = (JSONObject) parser.parse(file);
+            JSONObject dataFile = (JSONObject) parser.parse(file);
+            JSONArray data = (JSONArray) dataFile.get("items");
+            for (Object datum : data) {
+                Book newBook = new Book();
+                JSONObject currentBook = (JSONObject) datum;
+                JSONObject volumeInfo = (JSONObject) currentBook.get("volumeInfo");
+
+                //get Title of the book
+                newBook.setTitle(volumeInfo.get("title").toString());
+
+                //get Author of the book
+                JSONArray authors = (JSONArray) volumeInfo.get("authors");
+                ArrayList<String> authorsArray = new ArrayList<>();
+                for (Object author : authors) {
+                    authorsArray.add(author.toString());
+                }
+                newBook.setAuthor(authorsArray);
+
+                //get publishedDate if exists
+                if(volumeInfo.containsKey("publishedDate")) {
+                    newBook.setPublishedDate(volumeInfo.get("publishedDate").toString());
+                }
+
+                //get publisher if exists
+                if(volumeInfo.containsKey("publisher")) {
+                    newBook.setPublisher(volumeInfo.get("publisher").toString());
+                }
+
+                //get language if exists
+                if(volumeInfo.containsKey("language")) {
+                    newBook.setLanguage(volumeInfo.get("language").toString());
+                }
+
+                //get isbn if exists
+                if(volumeInfo.containsKey("industryIdentifiers")) {
+                    JSONArray isbns = (JSONArray) volumeInfo.get("industryIdentifiers");
+                    for (Object isbn : isbns) {
+                        JSONObject isbnInfo = (JSONObject) isbn;
+                        if (isbnInfo.get("type").toString().equals("ISBN_10")) {
+                            newBook.setIsbn(isbnInfo.get("identifier").toString());
+                        }
+                    }
+                }
+
+                //get page if exists
+                if(volumeInfo.containsKey("pageCount")) {
+                    newBook.setPages(Integer.parseInt(volumeInfo.get("pageCount").toString()));
+                }
+
+                //get categories if exists
+                if(volumeInfo.containsKey("categories")) {
+                    JSONArray cats = (JSONArray) volumeInfo.get("categories");
+                    ArrayList<String> categories = new ArrayList<>();
+                    for (Object cat : cats) {
+                        categories.add(cat.toString());
+                    }
+                    newBook.setCategories(categories);
+                }
+
+                //get description if exists
+                if(volumeInfo.containsKey("description")) {
+                    newBook.setDescription(volumeInfo.get("description").toString());
+                }
+
+                bookshelf.add(newBook);
+            }
         }
         else {
             System.out.println("Status: Connection failed");
