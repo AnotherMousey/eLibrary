@@ -1,5 +1,5 @@
 # TO DO
-### 7/10/2024
-Finish converting JSON file into an ArrayList of books
+### 8/10/2024 - 15/10/2024
+Link db & test putting books into db
 ### Remember to-do
 Find different APIs to upgrade the project
