@@ -19,10 +19,7 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        Query query = new Query();
-        query.setInTitle("flowers");
-        query.setInAuthor("keyes");
-        getBookInfo(query);
+        management.main(new String[]{"123"});
     }
 
     public static void main(String[] args) {

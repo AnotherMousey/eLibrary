@@ -8,10 +8,10 @@ import org.json.simple.*;
 import org.json.simple.parser.*;
 
 public class BookAPI{
+    private static final String googleBook = "https://www.googleapis.com/books/v1/volumes?";
+    private static final String personalKey = "AIzaSyCHkwZjMHLM8ZbtSvqJ4TRRqPxSUT4inuQ";
 
     private static String encode(String query) {
-        String googleBook = "https://www.googleapis.com/books/v1/volumes?";
-        String personalKey = "AIzaSyCHkwZjMHLM8ZbtSvqJ4TRRqPxSUT4inuQ";
         return googleBook + "q=" + query + "&key=" + personalKey;
     }
 
