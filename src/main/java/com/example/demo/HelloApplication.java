@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import BookManagement.management;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,8 +8,6 @@ import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-
-import static com.example.demo.BookAPI.getBookInfo;
 
 public class HelloApplication extends Application {
     @Override

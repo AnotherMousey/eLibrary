@@ -1,9 +1,10 @@
-package com.example.demo;
+package BookManagement;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.*;
 import java.util.*;
+
+import com.example.demo.Query;
 import org.json.simple.*;
 import org.json.simple.parser.*;
 

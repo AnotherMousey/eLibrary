@@ -1,4 +1,4 @@
-package com.example.demo;
+package BookManagement;
 import java.sql.*;
 
 public class management {
