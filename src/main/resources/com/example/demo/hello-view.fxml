@@ -1,17 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="368.0" prefWidth="467.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23" fx:controller="com.example.demo.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-
-    <Label fx:id="welcomeText" />
-   <Label fx:id="welcomeLabel" />
-   <Button fx:id="welcome" mnemonicParsing="false" onAction="#onWelcomeButtonClick" text="Welcome" />
-    <Button onAction="#onHelloButtonClick" text="Hello!" />
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="803.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="554.0" prefWidth="400.0" style="-fx-background-color: #CCCCFF;">
+         <children>
+            <Label layoutX="116.0" layoutY="345.0" prefHeight="25.0" prefWidth="167.0" text="WELCOME TO LIBRARY!">
+               <font>
+                  <Font name="MV Boli" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="162.0" fitWidth="153.0" layoutX="124.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../original.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="528.0" layoutY="79.0" prefHeight="35.0" prefWidth="153.0" text="LOGIN" textAlignment="CENTER" textFill="#7f7fe2" textOverrun="CLIP">
+         <font>
+            <Font name="Arial Black" size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="455.0" layoutY="152.0" prefHeight="24.0" prefWidth="78.0" text="Username">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="455.0" layoutY="183.0" prefHeight="37.0" prefWidth="299.0" />
+      <Label layoutX="455.0" layoutY="253.0" prefHeight="24.0" prefWidth="78.0" text="Password">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <PasswordField layoutX="455.0" layoutY="285.0" prefHeight="37.0" prefWidth="299.0" />
+      <Button fx:id="log" layoutX="455.0" layoutY="351.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #CCCCFF;" text="Log in" textAlignment="CENTER" />
+      <Label layoutX="455.0" layoutY="416.0" text="I don't have an account">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="sign" layoutX="605.0" layoutY="413.0" mnemonicParsing="false" style="-fx-background-color: #CCCCFF;" text="Sign in" textAlignment="CENTER" />
+   </children>
+</AnchorPane>
