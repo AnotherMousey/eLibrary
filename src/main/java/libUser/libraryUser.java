@@ -1,3 +1,5 @@
+package libUser;
+
 public class libraryUser {
     private String name;
     private String bday;
