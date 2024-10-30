@@ -1,4 +1,4 @@
-package BookManagement;
+package APIManagement;
 import java.sql.*;
 
 public class management {
@@ -12,7 +12,7 @@ public class management {
      * a password is valid if it contains lowercase, uppercase, and a number, and no special characters.
      * @return true if valid, false otherwise
      */
-    public boolean checkValidPassword(String password) {
+    public static boolean checkValidPassword(String password) {
         int cntLowerCase = 0, cntUpperCase = 0, cntNumber = 0;
         for (char c : password.toCharArray()) {
             if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
@@ -30,87 +30,93 @@ public class management {
         return cntNumber > 0 && cntUpperCase > 0 && cntLowerCase > 0 && password.length() <= 20;
     }
 
-    public boolean checkUserIfExists(String username) throws SQLException {
+    public static boolean checkUserIfExists(String username) throws SQLException {
         String query = "SELECT * FROM user WHERE username = " + username + ";";
         ResultSet rs = stmt.executeQuery(query);
         return rs.next();
     }
 
-    public void addUser(String username, String password, int priority) throws SQLException {
+    public static void addUser(String username, String password, int priority) throws SQLException {
         String query = "INSERT INTO user (username, password, priority)" +
                 " VALUES ('" + username + "', '" + password + "', " + priority + ");";
         stmt.executeUpdate(query);
     }
 
-    public int getUserUID(String username) throws SQLException {
-        String query = "SELECT * FROM user WHERE username = " + username + ";";
+    public static int getUserUID(String username, String password) throws SQLException {
+        String query = "SELECT * FROM user WHERE username = '" + username
+                + "' AND password = '" + password + "';";
         ResultSet rs = stmt.executeQuery(query);
         return rs.getInt(1);
     }
 
-    public String getUserName(int uid) throws SQLException {
+    public static String getUserName(int uid) throws SQLException {
         String query = "SELECT * FROM user WHERE uid = " + uid + ";";
         ResultSet rs = stmt.executeQuery(query);
         return rs.getString(5);
     }
 
-    public String getUserPhoneNumber(int uid) throws SQLException {
+    public static String getUserPhoneNumber(int uid) throws SQLException {
         String query = "SELECT * FROM user WHERE uid = " + uid + ";";
         ResultSet rs = stmt.executeQuery(query);
         return rs.getString(8);
     }
 
-    public String getUserEmail(int uid) throws SQLException {
+    public static String getUserEmail(int uid) throws SQLException {
         String query = "SELECT * FROM user WHERE uid = " + uid + ";";
         ResultSet rs = stmt.executeQuery(query);
         return rs.getString(7);
     }
 
-    public String getUserDoB(int uid) throws SQLException {
+    public static String getUserDoB(int uid) throws SQLException {
         String query = "SELECT * FROM user WHERE uid = " + uid + ";";
         ResultSet rs = stmt.executeQuery(query);
         return rs.getString(6).toString();
     }
 
-    public int getUserPriority(int uid) throws SQLException {
+    public static int getUserPriority(int uid) throws SQLException {
         String query = "SELECT * FROM user WHERE uid = " + uid + ";";
         ResultSet rs = stmt.executeQuery(query);
         return rs.getInt(4);
     }
 
-    public void updatePassword(int uid, String newPassword) throws SQLException {
+    public static void updatePassword(int uid, String newPassword) throws SQLException {
         String query = "UPDATE user SET password = '"
                 + newPassword + "' WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
     }
 
-    public void updatePhoneNumber(int uid, String newPhoneNumber) throws SQLException {
+    public static void updatePhoneNumber(int uid, String newPhoneNumber) throws SQLException {
         String query = "UPDATE user SET phoneNumber = '"
                 + newPhoneNumber + "' WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
     }
 
-    public void updateDoB(int uid, String newDoB) throws SQLException {
+    public static void updateDoB(int uid, String newDoB) throws SQLException {
         String query = "UPDATE user SET dob = '"
                 + newDoB + "' WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
     }
 
-    public void updateName(int uid, String newName) throws SQLException {
+    public static void updateName(int uid, String newName) throws SQLException {
         String query = "UPDATE user SET name = '"
                 + newName + "' WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
     }
 
-    public void updateEmail(int uid, String newEmail) throws SQLException {
+    public static void updateEmail(int uid, String newEmail) throws SQLException {
         String query = "UPDATE user SET email = '"
                 + newEmail + "' WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
     }
 
-    public void updatePriority(int uid, int newPriority) throws SQLException {
+    public static void updatePriority(int uid, int newPriority) throws SQLException {
         String query = "UPDATE user SET priority = '"
                 + newPriority + "' WHERE uid = " + uid + ";";
+        stmt.executeUpdate(query);
+    }
+
+    public static void deleteUser(int uid) throws SQLException {
+        String query = "DELETE FROM user WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
     }
 

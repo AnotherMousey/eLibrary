@@ -11,6 +11,8 @@ module com.example.demo {
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;
-    exports BookManagement;
-    opens BookManagement to javafx.fxml;
+    exports APIManagement.BookManagement;
+    opens APIManagement.BookManagement to javafx.fxml;
+    exports APIManagement;
+    opens APIManagement to javafx.fxml;
 }
