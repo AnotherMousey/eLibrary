@@ -1,5 +1,9 @@
 package libUser;
 
+import APIManagement.management;
+
+import java.sql.SQLException;
+
 public class libraryUser {
     private String name;
     private String bday;
@@ -7,7 +11,7 @@ public class libraryUser {
     private String email;
     private String username;
     private String password;
-    private String uid;
+    private int uid;
     protected int authority;
 
     public String getName() {
@@ -58,11 +62,11 @@ public class libraryUser {
         this.password = password;
     }
 
-    public String getUid() {
+    public int getUid() {
         return uid;
     }
 
-    public void setUid(String uId) {
+    public void setUid(int uId) {
         this.uid = uId;
     }
 
@@ -74,7 +78,8 @@ public class libraryUser {
         this.authority = authority;
     }
 
-    public libraryUser(String name, String bday, String phone, String email, String username, String password, String uid, int authority) {
+    public libraryUser(String name, String bday, String phone, String email,
+                       String username, String password, int uid, int authority) {
         this.name = name;
         this.bday = bday;
         this.phone = phone;
@@ -92,7 +97,7 @@ public class libraryUser {
         email = "";
         username = "";
         password = "";
-        uid = "0";
+        uid = 0;
         authority = 0;
     }
 
@@ -107,27 +112,27 @@ public class libraryUser {
         this.authority = p.authority;
     }
 
-    public void register(String tenDangNhap, String matKhau) {
-        if (checkUserIfExists(tenDangNhap)) {
+    public void register(String tenDangNhap, String matKhau) throws SQLException {
+        if (management.checkUserIfExists(tenDangNhap)) {
             System.out.println("User already exists");
             return;
         }
 
-        if (checkValidPassword(matKhau)) {
+        if (management.checkValidPassword(matKhau)) {
             System.out.println("Password is not in right format");
             return;
         }
 
-        addUser(tenDangNhap, matKhau);
+        management.addUser(tenDangNhap, matKhau, 1);
     }
 
-    public void logIn(String tenDangNhap, String matKhau){
-        uid = getUserUID(tenDangNhap, matKhau);
-        name = getUserName(uid);
-        phone = getUserPhone(uid);
-        bday = getUserDoB(uid);
-        email = getUserEmail(uid);
-        authority = getUserAuthority(uid);
+    public void logIn(String tenDangNhap, String matKhau) throws SQLException {
+        uid = management.getUserUID(tenDangNhap, matKhau);
+        name = management.getUserName(uid);
+        phone = management.getUserPhoneNumber(uid);
+        bday = management.getUserDoB(uid);
+        email = management.getUserEmail(uid);
+        authority = management.getUserPriority(uid);
     }
 
     public void logOut() {
@@ -137,24 +142,24 @@ public class libraryUser {
         email = "";
         username = "";
         password = "";
-        uid = "0";
+        uid = 0;
         authority = 0;
     }
 
-    public void deleteAccount() {
-        deleteUser(uid);
+    public void deleteAccount() throws SQLException {
+        management.deleteUser(uid);
         name = "";
         bday = "";
         phone = "";
         email = "";
         username = "";
         password = "";
-        uid = "0";
+        uid = 0;
         authority = 0;
     }
 
     //anh chua hieu cai update nay lem
-    public void updateName(String uid, String newPass) {
-        updateName();
-    }
+//    public void updateName(String uid, String newPass) {
+//        updateName();
+//    }
 }

@@ -1,19 +1,33 @@
-package BookManagement;
+package APIManagement.BookManagement;
 
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
-import com.example.demo.Query;
+import APIManagement.Query;
 import org.json.simple.*;
 import org.json.simple.parser.*;
+import APIManagement.API;
 
-public class BookAPI{
+public class BookAPI extends API {
     private static final String googleBook = "https://www.googleapis.com/books/v1/volumes?";
     private static final String personalKey = "AIzaSyCHkwZjMHLM8ZbtSvqJ4TRRqPxSUT4inuQ";
+    private String API;
+    private static URL url;
 
-    private static String encode(String query) {
-        return googleBook + "q=" + query + "&key=" + personalKey;
+    protected void encode(String query) {
+        this.API = googleBook + "q=" + query + "&key=" + personalKey;
+    }
+
+    public int connect(Query query) throws IOException {
+        encode(query.getQuery());
+        url = new URL(API);
+
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.connect();
+
+        return con.getResponseCode();
     }
 
     /**
@@ -22,17 +36,10 @@ public class BookAPI{
      * see more on https://developers.google.com/books/docs/v1/using#WorkingVolumes
      * @return arraylist of books satisfied
      */
-    public static ArrayList<Book> getBookInfo(Query query) throws IOException, ParseException {
+    public ArrayList<Book> getBookInfo(Query query) throws IOException, ParseException {
         ArrayList<Book> bookshelf = new ArrayList<>();
 
-        String API = encode(query.getQuery());
-        URL url = new URL(API);
-
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        con.connect();
-
-        int responseCode = con.getResponseCode();
+        int responseCode = connect(query);
         if(responseCode == HttpURLConnection.HTTP_OK) {
             System.out.println("Status: Connection success");
 
