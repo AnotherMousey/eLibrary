@@ -1,4 +1,4 @@
-package Interfaces;
+package LibraryManagement.Interfaces;
 
 public interface BorrowAndReturnBooks {
     public void borrowBook();

@@ -1,8 +1,13 @@
 package APIManagement;
 
+import APIManagement.BookManagement.BookQuery;
+
 import java.io.IOException;
 
-public abstract class API {
-    protected abstract void encode(String Query);
-    public abstract int connect(Query query) throws IOException;
+public interface API {
+    private void encode(String Query) {}
+
+    private int connect(BookQuery bookQuery) throws IOException {
+        return 0;
+    }
 }
