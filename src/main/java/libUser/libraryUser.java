@@ -1,6 +1,6 @@
 package libUser;
 
-import APIManagement.management;
+import SQLManagement.userManagement;
 
 import java.sql.SQLException;
 
@@ -112,27 +112,27 @@ public class libraryUser {
         this.authority = p.authority;
     }
 
-    public void register(String tenDangNhap, String matKhau) throws SQLException {
-        if (management.checkUserIfExists(tenDangNhap)) {
-            System.out.println("User already exists");
-            return;
+    public String register(String tenDangNhap, String matKhau,
+                           String dob, String email, String phoneNumber) throws SQLException {
+        if (userManagement.checkUserIfExists(tenDangNhap)) {
+            return "User already exists";
         }
 
-        if (management.checkValidPassword(matKhau)) {
-            System.out.println("Password is not in right format");
-            return;
+        if (userManagement.checkValidPassword(matKhau)) {
+            return "Password is not in right format";
         }
 
-        management.addUser(tenDangNhap, matKhau, 1);
+        userManagement.addUser(tenDangNhap, matKhau, 1, dob, email, phoneNumber);
+        return "Please login";
     }
 
     public void logIn(String tenDangNhap, String matKhau) throws SQLException {
-        uid = management.getUserUID(tenDangNhap, matKhau);
-        name = management.getUserName(uid);
-        phone = management.getUserPhoneNumber(uid);
-        bday = management.getUserDoB(uid);
-        email = management.getUserEmail(uid);
-        authority = management.getUserPriority(uid);
+        uid = userManagement.getUserUID(tenDangNhap, matKhau);
+        name = userManagement.getUserName(uid);
+        phone = userManagement.getUserPhoneNumber(uid);
+        bday = userManagement.getUserDoB(uid);
+        email = userManagement.getUserEmail(uid);
+        authority = userManagement.getUserPriority(uid);
     }
 
     public void logOut() {
@@ -147,7 +147,7 @@ public class libraryUser {
     }
 
     public void deleteAccount() throws SQLException {
-        management.deleteUser(uid);
+        userManagement.deleteUser(uid);
         name = "";
         bday = "";
         phone = "";

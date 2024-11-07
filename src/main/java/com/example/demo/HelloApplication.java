@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import SQLManagement.userManagement;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class HelloApplication extends Application {
 
@@ -15,7 +17,9 @@ public class HelloApplication extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) throws IOException, SQLException {
+        userManagement.main(new String[]{});
+
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         HelloController controller = new HelloController();
         loader.setController(controller);
@@ -24,6 +28,5 @@ public class HelloApplication extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Library");
         primaryStage.show();
-
     }
 }

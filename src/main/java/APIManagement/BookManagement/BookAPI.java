@@ -4,23 +4,22 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-import APIManagement.Query;
 import org.json.simple.*;
 import org.json.simple.parser.*;
 import APIManagement.API;
 
-public class BookAPI extends API {
+public class BookAPI implements API {
     private static final String googleBook = "https://www.googleapis.com/books/v1/volumes?";
     private static final String personalKey = "AIzaSyCHkwZjMHLM8ZbtSvqJ4TRRqPxSUT4inuQ";
     private String API;
     private static URL url;
 
-    protected void encode(String query) {
+    private void encode(String query) {
         this.API = googleBook + "q=" + query + "&key=" + personalKey;
     }
 
-    public int connect(Query query) throws IOException {
-        encode(query.getQuery());
+    private int connect(BookQuery bookQuery) throws IOException {
+        encode(bookQuery.getQuery());
         url = new URL(API);
 
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -32,14 +31,14 @@ public class BookAPI extends API {
 
     /**
      * Get book info via google book
-     * @param query querytype is 1 of the following: intitle, inauthor, inpublisher, subject, isbn, lccn, oclc
+     * @param bookQuery querytype is 1 of the following: intitle, inauthor, inpublisher, subject, isbn, lccn, oclc
      * see more on https://developers.google.com/books/docs/v1/using#WorkingVolumes
      * @return arraylist of books satisfied
      */
-    public ArrayList<Book> getBookInfo(Query query) throws IOException, ParseException {
+    public ArrayList<Book> getBookInfo(BookQuery bookQuery) throws IOException, ParseException {
         ArrayList<Book> bookshelf = new ArrayList<>();
 
-        int responseCode = connect(query);
+        int responseCode = connect(bookQuery);
         if(responseCode == HttpURLConnection.HTTP_OK) {
             System.out.println("Status: Connection success");
 

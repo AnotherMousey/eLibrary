@@ -5,4 +5,12 @@ public class user extends libraryUser{
                 String username, String password, int uid) {
         super(name, bday, phone, email, username, password, uid, 1);
     }
+
+    public user() {
+        super();
+    }
+
+    public user(libraryUser p) {
+        super(p);
+    }
 }
