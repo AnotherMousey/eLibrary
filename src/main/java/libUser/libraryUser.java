@@ -112,18 +112,17 @@ public class libraryUser {
         this.authority = p.authority;
     }
 
-    public void register(String tenDangNhap, String matKhau) throws SQLException {
+    public String register(String tenDangNhap, String matKhau) throws SQLException {
         if (management.checkUserIfExists(tenDangNhap)) {
-            System.out.println("User already exists");
-            return;
+            return "User already exists";
         }
 
         if (management.checkValidPassword(matKhau)) {
-            System.out.println("Password is not in right format");
-            return;
+            return "Password is not in right format";
         }
 
         management.addUser(tenDangNhap, matKhau, 1);
+        return "Please login";
     }
 
     public void logIn(String tenDangNhap, String matKhau) throws SQLException {
