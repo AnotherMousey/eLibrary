@@ -3,10 +3,8 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
 
-public class userManagement {
+public class userManagement extends SQL{
     private static Statement stmt;
-    private static final String user = "root";
-    private static final String password = "thanhbinh19072006@@";
 
     /**
      * check if the password is valid.
@@ -33,6 +31,7 @@ public class userManagement {
     }
 
     public static boolean checkUserIfExists(String username) throws SQLException {
+        stmt = getStmt();
         String query = "SELECT * FROM user WHERE username = " + username + ";";
         ResultSet rs = stmt.executeQuery(query);
         return rs.next();
@@ -41,6 +40,7 @@ public class userManagement {
     public static void addUser(String username, String password,
                                int priority, String DoB, String email,
                                String phoneNumber) throws SQLException {
+        stmt = getStmt();
         String query = "INSERT INTO user (username, password, priority, DoB, email, phoneNumber)"
                 + " VALUES ('" + username + "', '" + password + "', " + priority
                 + ", '" + DoB + "', '" + email + "', '" + phoneNumber + "');";
@@ -48,6 +48,7 @@ public class userManagement {
     }
 
     public static int getUserUID(String username, String password) throws SQLException {
+        stmt = getStmt();
         String query = "SELECT * FROM user WHERE username = '" + username
                 + "' AND password = '" + password + "';";
         ResultSet rs = stmt.executeQuery(query);
@@ -56,6 +57,7 @@ public class userManagement {
     }
 
     public static String getUserName(int uid) throws SQLException {
+        stmt = getStmt();
         String query = "SELECT * FROM user WHERE uid = " + uid + ";";
         ResultSet rs = stmt.executeQuery(query);
         List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
@@ -63,6 +65,7 @@ public class userManagement {
     }
 
     public static String getUserPhoneNumber(int uid) throws SQLException {
+        stmt = getStmt();
         String query = "SELECT * FROM user WHERE uid = " + uid + ";";
         ResultSet rs = stmt.executeQuery(query);
         List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
@@ -70,6 +73,7 @@ public class userManagement {
     }
 
     public static String getUserEmail(int uid) throws SQLException {
+        stmt = getStmt();
         String query = "SELECT * FROM user WHERE uid = " + uid + ";";
         ResultSet rs = stmt.executeQuery(query);
         List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
@@ -77,6 +81,7 @@ public class userManagement {
     }
 
     public static String getUserDoB(int uid) throws SQLException {
+        stmt = getStmt();
         String query = "SELECT * FROM user WHERE uid = " + uid + ";";
         ResultSet rs = stmt.executeQuery(query);
         List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
@@ -84,6 +89,7 @@ public class userManagement {
     }
 
     public static int getUserPriority(int uid) throws SQLException {
+        stmt = getStmt();
         String query = "SELECT * FROM user WHERE uid = " + uid + ";";
         ResultSet rs = stmt.executeQuery(query);
         List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
@@ -91,55 +97,50 @@ public class userManagement {
     }
 
     public static void updatePassword(int uid, String newPassword) throws SQLException {
+        stmt = getStmt();
         String query = "UPDATE user SET password = '"
                 + newPassword + "' WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
     }
 
     public static void updatePhoneNumber(int uid, String newPhoneNumber) throws SQLException {
+        stmt = getStmt();
         String query = "UPDATE user SET phoneNumber = '"
                 + newPhoneNumber + "' WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
     }
 
     public static void updateDoB(int uid, String newDoB) throws SQLException {
+        stmt = getStmt();
         String query = "UPDATE user SET dob = '"
                 + newDoB + "' WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
     }
 
     public static void updateName(int uid, String newName) throws SQLException {
+        stmt = getStmt();
         String query = "UPDATE user SET name = '"
                 + newName + "' WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
     }
 
     public static void updateEmail(int uid, String newEmail) throws SQLException {
+        stmt = getStmt();
         String query = "UPDATE user SET email = '"
                 + newEmail + "' WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
     }
 
     public static void updatePriority(int uid, int newPriority) throws SQLException {
+        stmt = getStmt();
         String query = "UPDATE user SET priority = '"
                 + newPriority + "' WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
     }
 
     public static void deleteUser(int uid) throws SQLException {
+        stmt = getStmt();
         String query = "DELETE FROM user WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
-    }
-
-    public static void main(String[] args) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/elibrary", user, password);
-            System.out.println("connection success");
-
-            stmt = con.createStatement();
-        } catch (Exception ex) {
-            System.out.println("connection failed");
-        }
     }
 }
