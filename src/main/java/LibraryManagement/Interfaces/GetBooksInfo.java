@@ -1,7 +1,9 @@
 package LibraryManagement.Interfaces;
 
+import APIManagement.BookManagement.Book;
+
 import java.util.ArrayList;
 
 public interface GetBooksInfo {
-    ArrayList<String> getBooks();
+    ArrayList<Book> getBooks();
 }
