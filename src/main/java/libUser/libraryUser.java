@@ -22,22 +22,6 @@ public class libraryUser {
         this.name = name;
     }
 
-    public String getBday() {
-        return bday;
-    }
-
-    public void setBday(String bday) {
-        this.bday = bday;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -81,8 +65,6 @@ public class libraryUser {
     public libraryUser(String name, String bday, String phone, String email,
                        String username, String password, int uid, int authority) {
         this.name = name;
-        this.bday = bday;
-        this.phone = phone;
         this.email = email;
         this.username = username;
         this.password = password;
@@ -92,8 +74,6 @@ public class libraryUser {
 
     public libraryUser() {
         name = "";
-        bday = "";
-        phone = "";
         email = "";
         username = "";
         password = "";
@@ -103,8 +83,6 @@ public class libraryUser {
 
     public libraryUser(libraryUser p) {
         this.name = p.name;
-        this.bday = p.bday;
-        this.phone = p.phone;
         this.email = p.email;
         this.username = p.username;
         this.password = p.password;
@@ -112,33 +90,28 @@ public class libraryUser {
         this.authority = p.authority;
     }
 
-    public String register(String tenDangNhap, String matKhau,
-                           String dob, String email, String phoneNumber) throws SQLException {
+    public String register(String tenDangNhap, String matKhau, String email) throws SQLException {
         if (userManagement.checkUserIfExists(tenDangNhap)) {
-            return "User already exists";
+            return "Username already exists";
         }
 
         if (userManagement.checkValidPassword(matKhau)) {
             return "Password is not in right format";
         }
 
-        userManagement.addUser(tenDangNhap, matKhau, 1, dob, email, phoneNumber);
+        userManagement.addUser(tenDangNhap, matKhau, 1, email);
         return "Please login";
     }
 
     public void logIn(String tenDangNhap, String matKhau) throws SQLException {
         uid = userManagement.getUserUID(tenDangNhap, matKhau);
         name = userManagement.getUserName(uid);
-        phone = userManagement.getUserPhoneNumber(uid);
-        bday = userManagement.getUserDoB(uid);
         email = userManagement.getUserEmail(uid);
         authority = userManagement.getUserPriority(uid);
     }
 
     public void logOut() {
         name = "";
-        bday = "";
-        phone = "";
         email = "";
         username = "";
         password = "";
@@ -149,8 +122,6 @@ public class libraryUser {
     public void deleteAccount() throws SQLException {
         userManagement.deleteUser(uid);
         name = "";
-        bday = "";
-        phone = "";
         email = "";
         username = "";
         password = "";

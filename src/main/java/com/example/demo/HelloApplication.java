@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import SQLManagement.SQL;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,8 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        SQL.main(new String[]{});
+
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         primaryStage.setTitle("Login!");
         primaryStage.setScene(new Scene(root));
