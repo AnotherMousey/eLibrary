@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Signup">
    <children>
       <Pane prefHeight="554.0" prefWidth="803.0" style="-fx-background-color: #BCD9CE;">
          <children>
@@ -26,14 +26,14 @@
                         <Font name="Arial" size="15.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="40.0" layoutY="110.0" prefHeight="37.0" prefWidth="299.0" />
+                  <TextField fx:id="Email" layoutX="40.0" layoutY="110.0" prefHeight="37.0" prefWidth="299.0" />
                   <Label layoutX="41.0" layoutY="156.0" prefHeight="24.0" prefWidth="78.0" text="Username">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
                   </Label>
-                  <PasswordField layoutX="41.0" layoutY="188.0" prefHeight="37.0" prefWidth="299.0" />
-                  <Button fx:id="log" layoutX="41.0" layoutY="400.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" stylesheets="@CssStyle.css" text="Sign up" textAlignment="CENTER" textFill="WHITE" />
+                  <TextField fx:id="username" layoutX="41.0" layoutY="188.0" prefHeight="37.0" prefWidth="299.0" />
+                  <Button fx:id="log" layoutX="41.0" layoutY="400.0" mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" stylesheets="@CssStyle.css" text="Sign up" textAlignment="CENTER" textFill="WHITE" />
                   <Label alignment="CENTER" layoutX="125.0" layoutY="21.0" prefHeight="37.0" prefWidth="130.0" text="SIGN UP" textFill="#14544c">
                      <font>
                         <Font name="Calibri Bold" size="32.0" />
@@ -44,16 +44,17 @@
                         <Font name="Arial" size="15.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="41.0" layoutY="263.0" prefHeight="37.0" prefWidth="299.0" />
+                  <PasswordField fx:id="Password" layoutX="41.0" layoutY="263.0" prefHeight="37.0" prefWidth="299.0" />
                   <Label layoutX="41.0" layoutY="310.0" prefHeight="24.0" prefWidth="130.0" text="Repeat password">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
                   </Label>
-                  <PasswordField layoutX="41.0" layoutY="342.0" prefHeight="37.0" prefWidth="299.0" />
+                  <PasswordField fx:id="RePassword" layoutX="41.0" layoutY="342.0" prefHeight="37.0" prefWidth="299.0" />
+                  <Label fx:id="registerMsg" layoutX="241.0" layoutY="404.0" />
                </children>
             </Pane>
-            <Button fx:id="log1" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Back" textAlignment="CENTER" textFill="WHITE" />
+            <Button fx:id="log1" mnemonicParsing="false" onAction="#backToLogin" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Back" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </Pane>
    </children>
