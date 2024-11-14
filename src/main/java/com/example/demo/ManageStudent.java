@@ -27,7 +27,6 @@ public class ManageStudent {
         assert log != null : "fx:id=\"log\" was not injected: check your FXML file 'ManageStudent.fxml'.";
         assert log1 != null : "fx:id=\"log1\" was not injected: check your FXML file 'ManageStudent.fxml'.";
         assert log11 != null : "fx:id=\"log11\" was not injected: check your FXML file 'ManageStudent.fxml'.";
-
     }
 
 }
