@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -86,6 +87,14 @@ public class Home {
     }
 
     public void toManageBook(MouseEvent event) throws IOException {
+        if(CurrentUser.currentUser.getAuthority() == 1) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Lỗi quyền truy cập");
+            alert.setContentText("Bạn không có quyền truy cập vào mục này");
+            alert.show();
+            return;
+        }
         Parent manageBook = FXMLLoader.load(getClass().getResource("ManageBook.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(manageBook);
@@ -94,6 +103,14 @@ public class Home {
     }
 
     public void toManageStudent(MouseEvent event) throws IOException {
+        if(CurrentUser.currentUser.getAuthority() == 1) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Lỗi quyền truy cập");
+            alert.setContentText("Bạn không có quyền truy cập vào mục này");
+            alert.show();
+            return;
+        }
         Parent manageStudent = FXMLLoader.load(getClass().getResource("ManageStudent.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(manageStudent);
