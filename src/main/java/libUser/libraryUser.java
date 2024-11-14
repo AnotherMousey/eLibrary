@@ -6,8 +6,6 @@ import java.sql.SQLException;
 
 public class libraryUser {
     private String name;
-    private String bday;
-    private String phone;
     private String email;
     private String username;
     private String password;
