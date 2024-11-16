@@ -23,10 +23,14 @@ public class ManageStudent {
     private Button log11;
 
     @FXML
+    private Button log12;
+
+    @FXML
     void initialize() {
         assert log != null : "fx:id=\"log\" was not injected: check your FXML file 'ManageStudent.fxml'.";
         assert log1 != null : "fx:id=\"log1\" was not injected: check your FXML file 'ManageStudent.fxml'.";
         assert log11 != null : "fx:id=\"log11\" was not injected: check your FXML file 'ManageStudent.fxml'.";
+        assert log12 != null : "fx:id=\"log12\" was not injected: check your FXML file 'ManageStudent.fxml'.";
 
     }
 

@@ -48,6 +48,7 @@
                   <Font name="Calibri Bold" size="32.0" />
                </font>
             </Label>
+            <Button fx:id="log11" layoutY="528.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </Pane>
       <ImageView fitHeight="133.0" fitWidth="201.0" layoutX="390.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">

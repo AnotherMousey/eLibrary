@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<AnchorPane prefHeight="554.0" prefWidth="803.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Books">
+   <children>
+      <Pane layoutX="159.0" layoutY="25.0" prefHeight="87.0" prefWidth="509.0">
+         <children>
+            <TextField layoutX="57.0" layoutY="27.0" prefHeight="33.0" prefWidth="354.0" style="-fx-background-color: #BCD9CE;" />
+            <FontAwesomeIcon glyphName="SEARCH" layoutX="423.0" layoutY="55.0" size="2.5EM" text="" wrappingWidth="29.142857551574707" />
+         </children>
+      </Pane>
+      <Button fx:id="log12" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
+      <TableView layoutX="67.0" layoutY="146.0" prefHeight="319.0" prefWidth="670.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Number" />
+          <TableColumn prefWidth="75.0" text="Book id" />
+            <TableColumn prefWidth="214.5" text="Book name" />
+            <TableColumn minWidth="0.0" prefWidth="131.0" text="Author" />
+            <TableColumn prefWidth="93.5" text="Quantity" />
+            <TableColumn text="Check box" />
+        </columns>
+      </TableView>
+      <Button fx:id="log121" layoutX="653.0" layoutY="484.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round" stylesheets="@CssStyle.css" text="Save" textAlignment="CENTER" textFill="WHITE" />
+   </children>
+</AnchorPane>

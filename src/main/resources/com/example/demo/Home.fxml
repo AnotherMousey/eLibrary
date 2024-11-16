@@ -41,11 +41,6 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="setting" layoutX="43.0" layoutY="247.0" text="Setting" textFill="#14544c">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
             <Button fx:id="log" layoutX="22.0" layoutY="492.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" text="Log out" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </Pane>

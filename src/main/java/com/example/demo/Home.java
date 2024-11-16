@@ -40,9 +40,6 @@ public class Home {
     private Label profile;
 
     @FXML
-    private Label setting;
-
-    @FXML
     void initialize() {
         assert Collections != null : "fx:id=\"Collections\" was not injected: check your FXML file 'Home.fxml'.";
         assert ManageBook != null : "fx:id=\"ManageBook\" was not injected: check your FXML file 'Home.fxml'.";
@@ -52,7 +49,6 @@ public class Home {
         assert books != null : "fx:id=\"books\" was not injected: check your FXML file 'Home.fxml'.";
         assert log != null : "fx:id=\"log\" was not injected: check your FXML file 'Home.fxml'.";
         assert profile != null : "fx:id=\"profile\" was not injected: check your FXML file 'Home.fxml'.";
-        assert setting != null : "fx:id=\"setting\" was not injected: check your FXML file 'Home.fxml'.";
 
     }
 
