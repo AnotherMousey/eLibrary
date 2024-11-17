@@ -41,12 +41,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="setting" layoutX="43.0" layoutY="247.0" text="Setting" textFill="#14544c">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <Button fx:id="log" layoutX="22.0" layoutY="492.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" text="Log out" textAlignment="CENTER" textFill="WHITE" />
+            <Button fx:id="log" layoutX="22.0" layoutY="492.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" text="Log out" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </Pane>
       <Pane fx:id="books" layoutX="203.0" layoutY="191.0" onMouseReleased="#toBooks" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">

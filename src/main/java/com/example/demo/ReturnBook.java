@@ -20,9 +20,13 @@ public class ReturnBook {
     private Button log1;
 
     @FXML
+    private Button log11;
+
+    @FXML
     void initialize() {
         assert log != null : "fx:id=\"log\" was not injected: check your FXML file 'ReturnBook.fxml'.";
         assert log1 != null : "fx:id=\"log1\" was not injected: check your FXML file 'ReturnBook.fxml'.";
+        assert log11 != null : "fx:id=\"log11\" was not injected: check your FXML file 'ReturnBook.fxml'.";
 
     }
 
