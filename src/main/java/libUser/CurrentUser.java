@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.SQLException;
 
 public class CurrentUser {
-    static libraryUser currentUser = new libraryUser();
+    public static libraryUser currentUser = new libraryUser();
 
     @NotNull
     public static String login(String username, String password) {
@@ -24,9 +24,8 @@ public class CurrentUser {
         return "Login successfully";
     }
 
-    public static String register(String username, String password,
-                                  String dob, String email, String phoneNumber) throws SQLException {
-        String msg = currentUser.register(username, password, dob, email, phoneNumber);
+    public static String register(String username, String password, String email) throws SQLException {
+        String msg = currentUser.register(username, password, email);
         currentUser = new libraryUser();
         return msg;
     }
