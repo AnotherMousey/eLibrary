@@ -11,6 +11,9 @@ public class CurrentUser {
     public static String login(String username, String password) {
         try {
             currentUser.logIn(username, password);
+            if(currentUser.getUid() == -1) {
+                return "Incorrect username or password";
+            }
         } catch (SQLException e) {
             return "Incorrect username or password";
         }

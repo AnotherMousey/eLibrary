@@ -9,6 +9,7 @@ module com.example.demo {
     requires java.sql;
     requires mysql.connector.j;
     requires annotations;
+    requires java.desktop;
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;

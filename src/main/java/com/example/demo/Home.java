@@ -18,7 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import libUser.CurrentUser;
 
-public class Home {
+public class Home extends DefaultPanel {
 
     @FXML
     private ResourceBundle resources;
@@ -51,6 +51,9 @@ public class Home {
     private Label profile;
 
     @FXML
+    private Label displayName;
+
+    @FXML
     void initialize() {
         assert Collections != null : "fx:id=\"Collections\" was not injected: check your FXML file 'Home.fxml'.";
         assert ManageBook != null : "fx:id=\"ManageBook\" was not injected: check your FXML file 'Home.fxml'.";
@@ -60,26 +63,22 @@ public class Home {
         assert books != null : "fx:id=\"books\" was not injected: check your FXML file 'Home.fxml'.";
         assert log != null : "fx:id=\"log\" was not injected: check your FXML file 'Home.fxml'.";
         assert profile != null : "fx:id=\"profile\" was not injected: check your FXML file 'Home.fxml'.";
+        displayName.setText(CurrentUser.currentUser.getName());
     }
 
     public void toBooks(MouseEvent event) throws IOException {
-        //Go to stage Book
+        Parent books = FXMLLoader.load(getClass().getResource("Books.fxml"));
+        super.changeSceneTo(books);
     }
 
     public void toReturnBooks(MouseEvent event) throws IOException {
         Parent returnBook = FXMLLoader.load(getClass().getResource("ReturnBook.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(returnBook);
-        stage.setScene(scene);
-        stage.show();
+        super.changeSceneTo(returnBook);
     }
 
     public void toReviewBooks(MouseEvent event) throws IOException {
         Parent reviewBook = FXMLLoader.load(getClass().getResource("ReviewBook.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(reviewBook);
-        stage.setScene(scene);
-        stage.show();
+        super.changeSceneTo(reviewBook);
     }
 
     public void toManageBook(MouseEvent event) throws IOException {
@@ -92,10 +91,7 @@ public class Home {
             return;
         }
         Parent manageBook = FXMLLoader.load(getClass().getResource("ManageBook.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(manageBook);
-        stage.setScene(scene);
-        stage.show();
+        super.changeSceneTo(manageBook);
     }
 
     public void toManageStudent(MouseEvent event) throws IOException {
@@ -108,14 +104,12 @@ public class Home {
             return;
         }
         Parent manageStudent = FXMLLoader.load(getClass().getResource("ManageStudent.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(manageStudent);
-        stage.setScene(scene);
-        stage.show();
+        super.changeSceneTo(manageStudent);
     }
 
     public void toCollections(MouseEvent event) throws IOException {
-        //Go to stage collections
+        Parent myCollections = FXMLLoader.load(getClass().getResource("MyCollections.fxml"));
+        super.changeSceneTo(myCollections);
     }
 
     public void toMyProfile(MouseEvent event) throws IOException {
@@ -125,9 +119,6 @@ public class Home {
     public void logout(ActionEvent event) throws IOException {
         CurrentUser.logout();
         Parent login = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(login);
-        stage.setScene(scene);
-        stage.show();
+        super.changeSceneTo(login);
     }
 }

@@ -34,7 +34,7 @@ public class userManagement extends SQL{
         stmt = getStmt();
         String query = "SELECT * FROM user WHERE username = '" + username + "';";
         ResultSet rs = stmt.executeQuery(query);
-        return rs.next();
+        return rs.isBeforeFirst();
     }
 
     public static void addUser(String username, String password,
@@ -51,6 +51,9 @@ public class userManagement extends SQL{
         String query = "SELECT * FROM user WHERE username = '" + username
                 + "' AND password = '" + password + "';";
         ResultSet rs = stmt.executeQuery(query);
+        if(!rs.isBeforeFirst()) {
+            return -1;
+        }
         List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
         return (int) result.get(0).get("uid");
     }

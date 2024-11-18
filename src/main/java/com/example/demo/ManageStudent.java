@@ -1,11 +1,20 @@
 package com.example.demo;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
-public class ManageStudent {
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+public class ManageStudent extends DefaultPanel {
 
     @FXML
     private ResourceBundle resources;
@@ -31,6 +40,11 @@ public class ManageStudent {
         assert log1 != null : "fx:id=\"log1\" was not injected: check your FXML file 'ManageStudent.fxml'.";
         assert log11 != null : "fx:id=\"log11\" was not injected: check your FXML file 'ManageStudent.fxml'.";
         assert log12 != null : "fx:id=\"log12\" was not injected: check your FXML file 'ManageStudent.fxml'.";
+    }
+
+    public void toHome(ActionEvent event) throws IOException {
+        Parent home = FXMLLoader.load(getClass().getResource("Home.fxml"));
+        super.changeSceneTo(home);
     }
 
 }
