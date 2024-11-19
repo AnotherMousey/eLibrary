@@ -5,17 +5,20 @@ import APIManagement.BookManagement.BookForBorrow;
 import LibraryManagement.Interfaces.*;
 import SQLManagement.ResultSetToList;
 import SQLManagement.SQL;
+import libUser.CurrentUser;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 public class LibraryManagement implements GetBooksInfo,
-        BorrowedBooks {
+        BorrowedBooks, doesBookExists, BorrowAndReturnBooks {
 
     private static ArrayList<Book> books;
     private static ArrayList<Book> borrowedBooks;
@@ -107,5 +110,54 @@ public class LibraryManagement implements GetBooksInfo,
         }
         LibraryManagement.borrowedBooks = books;
         return borrowedBooks;
+    }
+
+    @Override
+    public boolean doesExists(String isbn) throws SQLException {
+        Statement stmt = SQL.getStmt();
+        String query = "SELECT * FROM book WHERE isbn='" + isbn + "';";
+        ResultSet rs = stmt.executeQuery(query);
+        return rs.isBeforeFirst();
+    }
+
+    @Override
+    public int getCountBook(String isbn) throws SQLException {
+        Statement stmt = SQL.getStmt();
+        String query = "SELECT * FROM book WHERE isbn='" + isbn + "';";
+        ResultSet rs = stmt.executeQuery(query);
+        List<HashMap<String,Object>> book = ResultSetToList.convertResultSetToList(rs);
+        return (int) book.get(0).get("bookCount");
+    }
+
+    @Override
+    public boolean borrowBookYet(String isbn) throws SQLException {
+        Statement stmt = SQL.getStmt();
+        String query = "SELECT * FROM userborrowbook WHERE isbn='" + isbn + "';";
+        ResultSet rs = stmt.executeQuery(query);
+        return rs.isBeforeFirst();
+    }
+
+    @Override
+    public void borrowBook(String isbn) throws SQLException {
+        if(borrowBookYet(isbn)) {
+            //report that the book is already borrowed
+            return;
+        }
+        int countBook = getCountBook(isbn);
+        Statement stmt = SQL.getStmt();
+        String query = "UPDATE book SET bookCount = " + (countBook - 1) +
+                " WHERE isbn='" + isbn + "';";
+        stmt.executeUpdate(query);
+
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        query = "INSERT INTO userborrowbook " +
+                "VALUES(" + CurrentUser.currentUser.getUid() + ", '" +
+                isbn + "', " + currentTime + ");";
+        stmt.executeUpdate(query);
+    }
+
+    @Override
+    public void returnBook(String isbn) throws SQLException{
+
     }
 }

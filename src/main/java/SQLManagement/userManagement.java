@@ -2,6 +2,7 @@ package SQLManagement;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
+import LibraryManagement.Management.LibraryManagement;
 
 public class userManagement extends SQL{
     private static Statement stmt;
@@ -114,5 +115,19 @@ public class userManagement extends SQL{
         stmt = getStmt();
         String query = "DELETE FROM user WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
+    }
+
+    public static void borrowBook(String isbn) throws SQLException {
+        LibraryManagement lm = new LibraryManagement();
+        if(!lm.doesExists(isbn)) {
+            //report that the book does not exist
+            return;
+        }
+        int bookCount = lm.getCountBook(isbn);
+        if(bookCount == 0) {
+            //report that there's no available book
+            return;
+        }
+
     }
 }
