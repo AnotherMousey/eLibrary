@@ -32,18 +32,17 @@ public class userManagement extends SQL{
 
     public static boolean checkUserIfExists(String username) throws SQLException {
         stmt = getStmt();
-        String query = "SELECT * FROM user WHERE username = " + username + ";";
+        String query = "SELECT * FROM user WHERE username = '" + username + "';";
         ResultSet rs = stmt.executeQuery(query);
         return rs.next();
     }
 
     public static void addUser(String username, String password,
-                               int priority, String DoB, String email,
-                               String phoneNumber) throws SQLException {
+                               int priority, String email) throws SQLException {
         stmt = getStmt();
-        String query = "INSERT INTO user (username, password, priority, DoB, email, phoneNumber)"
+        String query = "INSERT INTO user (username, password, priority, email)"
                 + " VALUES ('" + username + "', '" + password + "', " + priority
-                + ", '" + DoB + "', '" + email + "', '" + phoneNumber + "');";
+                + ", '" + email + "');";
         stmt.executeUpdate(query);
     }
 
@@ -64,28 +63,12 @@ public class userManagement extends SQL{
         return (String) result.get(0).get("username");
     }
 
-    public static String getUserPhoneNumber(int uid) throws SQLException {
-        stmt = getStmt();
-        String query = "SELECT * FROM user WHERE uid = " + uid + ";";
-        ResultSet rs = stmt.executeQuery(query);
-        List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
-        return (String) result.get(0).get("phoneNumber");
-    }
-
     public static String getUserEmail(int uid) throws SQLException {
         stmt = getStmt();
         String query = "SELECT * FROM user WHERE uid = " + uid + ";";
         ResultSet rs = stmt.executeQuery(query);
         List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
         return (String) result.get(0).get("email");
-    }
-
-    public static String getUserDoB(int uid) throws SQLException {
-        stmt = getStmt();
-        String query = "SELECT * FROM user WHERE uid = " + uid + ";";
-        ResultSet rs = stmt.executeQuery(query);
-        List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
-        return (String) result.get(0).get("dob");
     }
 
     public static int getUserPriority(int uid) throws SQLException {
@@ -100,20 +83,6 @@ public class userManagement extends SQL{
         stmt = getStmt();
         String query = "UPDATE user SET password = '"
                 + newPassword + "' WHERE uid = " + uid + ";";
-        stmt.executeUpdate(query);
-    }
-
-    public static void updatePhoneNumber(int uid, String newPhoneNumber) throws SQLException {
-        stmt = getStmt();
-        String query = "UPDATE user SET phoneNumber = '"
-                + newPhoneNumber + "' WHERE uid = " + uid + ";";
-        stmt.executeUpdate(query);
-    }
-
-    public static void updateDoB(int uid, String newDoB) throws SQLException {
-        stmt = getStmt();
-        String query = "UPDATE user SET dob = '"
-                + newDoB + "' WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
     }
 
