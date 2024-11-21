@@ -64,6 +64,12 @@ public class Home {
 
     public void toBooks(MouseEvent event) throws IOException {
         //Go to stage Book
+        Parent returnBook = FXMLLoader.load(getClass().getResource("Books.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(returnBook);
+        stage.setScene(scene);
+        stage.show();
+
     }
 
     public void toReturnBooks(MouseEvent event) throws IOException {
@@ -122,11 +128,19 @@ public class Home {
         //Go to my profile
     }
 
-    public void logout(ActionEvent event) throws IOException {
+    public void logout(MouseEvent event) throws IOException {
         CurrentUser.logout();
         Parent login = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(login);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void toMyCollection(MouseEvent event) throws IOException {
+        Parent reviewBook = FXMLLoader.load(getClass().getResource("MyCollections.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(reviewBook);
         stage.setScene(scene);
         stage.show();
     }
