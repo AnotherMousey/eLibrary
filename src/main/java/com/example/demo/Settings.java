@@ -27,15 +27,11 @@ public class Settings {
     private Label profile1;
 
     @FXML
-    private Label profile11;
-
-    @FXML
     void initialize() {
         assert log121 != null : "fx:id=\"log121\" was not injected: check your FXML file 'Settings.fxml'.";
         assert log1211 != null : "fx:id=\"log1211\" was not injected: check your FXML file 'Settings.fxml'.";
         assert profile != null : "fx:id=\"profile\" was not injected: check your FXML file 'Settings.fxml'.";
         assert profile1 != null : "fx:id=\"profile1\" was not injected: check your FXML file 'Settings.fxml'.";
-        assert profile11 != null : "fx:id=\"profile11\" was not injected: check your FXML file 'Settings.fxml'.";
 
     }
 
