@@ -59,7 +59,7 @@
             </Label>
          </children>
       </Pane>
-      <Button fx:id="log12" mnemonicParsing="false" onMouseClicked="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="log12" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
       <TableView layoutX="22.0" layoutY="331.0" prefHeight="153.0" prefWidth="389.0">
          <columns>
             <TableColumn prefWidth="75.0" text="Number" />

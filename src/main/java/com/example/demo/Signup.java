@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import libUser.CurrentUser;
 
-public class Signup {
+public class Signup extends DefaultPanel{
 
     @FXML
     private ResourceBundle resources;
@@ -55,10 +55,7 @@ public class Signup {
 
     public void backToLogin(ActionEvent event) throws IOException {
         Parent login = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(login);
-        stage.setScene(scene);
-        stage.show();
+        super.changeSceneTo(login);
     }
 
     public void register(ActionEvent event) throws IOException, SQLException {

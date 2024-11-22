@@ -18,7 +18,7 @@
                   <Image url="@../../../4cbeb2d9c2a030a4f81d37b5eb159c2f-removebg-preview.png" />
                </image>
             </ImageView>
-            <Label layoutX="39.0" layoutY="30.0" text="&quot;Trước những cuốn sách, tất cả mọi thứ đều trở nên mờ nhạt.&quot;">
+            <Label layoutX="83.0" layoutY="30.0" text="Sách là phép màu độc nhất và diệu kỳ trong đời thực">
                <font>
                   <Font name="System Italic" size="17.0" />
                </font>
@@ -27,21 +27,17 @@
       </Pane>
       <Pane prefHeight="554.0" prefWidth="141.0" style="-fx-background-color: #FCFAF2;">
          <children>
-            <Pane layoutY="27.0" prefHeight="169.0" prefWidth="126.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
+            <Pane layoutX="8.0" layoutY="26.0" prefHeight="169.0" prefWidth="126.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
                <children>
-                  <Label layoutX="37.0" layoutY="123.0" text="Username" textFill="#6f6c6c">
-                     <font>
-                        <Font name="System Italic" size="12.0" />
-                     </font>
-                  </Label>
+                  <Label fx:id="displayName" alignment="CENTER" layoutX="37.0" layoutY="123.0" text="Username" textAlignment="CENTER" textFill="#150000" />
                   <FontAwesomeIcon fill="#124a42" glyphName="USER" layoutX="39.0" layoutY="90.0" size="5EM" />
                </children></Pane>
-            <Label fx:id="profile" layoutX="35.0" layoutY="216.0" onMouseReleased="#toMyProfile" text="My profile" textFill="#14544c">
+            <Label fx:id="profile" layoutX="42.0" layoutY="215.0" onMouseReleased="#toMyProfile" text="My profile" textFill="#14544c">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Button fx:id="log" layoutX="22.0" layoutY="492.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" text="Log out" textAlignment="CENTER" textFill="WHITE" />
+            <Button fx:id="log" layoutX="22.0" layoutY="492.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" text="Log out" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </Pane>
       <Pane fx:id="books" layoutX="203.0" layoutY="191.0" onMouseReleased="#toBooks" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
@@ -51,7 +47,7 @@
                   <Image url="@../../../4298af780bd737793fb075dba9e6330b-removebg-preview.png" />
                </image>
             </ImageView>
-            <Label fx:id="label1" layoutX="35.0" layoutY="60.0" text="Books" textFill="#14544c">
+            <Label layoutX="35.0" layoutY="60.0" text="Books" textFill="#14544c">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -114,7 +110,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="Collections" layoutX="617.0" layoutY="370.0" onMouseReleased="#toMyCollection" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
+      <Pane fx:id="Collections" layoutX="617.0" layoutY="370.0" onMouseReleased="#toCollections" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
          <children>
             <ImageView fitHeight="86.0" fitWidth="97.0" layoutX="-14.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true">
                <image>

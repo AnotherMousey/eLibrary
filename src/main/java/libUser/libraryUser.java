@@ -103,6 +103,9 @@ public class libraryUser {
 
     public void logIn(String tenDangNhap, String matKhau) throws SQLException {
         uid = userManagement.getUserUID(tenDangNhap, matKhau);
+        if (uid == -1) {
+            return;
+        }
         name = userManagement.getUserName(uid);
         email = userManagement.getUserEmail(uid);
         authority = userManagement.getUserPriority(uid);

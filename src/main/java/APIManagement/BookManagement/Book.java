@@ -14,6 +14,7 @@ public class Book {
     private int avgRating; //0-5
     private int totalRating;
     private String description;
+    private int bookCount;
 
     public String getPublisher() {
         return publisher;
@@ -103,7 +104,34 @@ public class Book {
         this.description = description;
     }
 
+    public int getBookCount() {
+        return bookCount;
+    }
+
+    public void setBookCount(int bookCount) {
+        this.bookCount = bookCount;
+    }
+
+    public void setBook(Book book) {
+        this.publisher = book.getPublisher();
+        this.title = book.getTitle();
+        this.author = book.getAuthor();
+        this.publishedDate = book.getPublishedDate();
+        this.language = book.getLanguage();
+        this.isbn = book.getIsbn();
+        this.pages = book.getPages();
+        this.categories = book.getCategories();
+        this.avgRating = book.getAvgRating();
+        this.totalRating = book.getTotalRating();
+        this.description = book.getDescription();
+        this.bookCount = book.getBookCount();
+    }
+
     public Book() {
 
+    }
+
+    public Book(Book book) {
+        setBook(book);
     }
 }

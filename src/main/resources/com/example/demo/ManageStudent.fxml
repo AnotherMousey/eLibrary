@@ -80,6 +80,6 @@
             <TableColumn prefWidth="108.5" text="Email" />
          </columns>
       </TableView>
-      <Button fx:id="log12" layoutX="719.0" mnemonicParsing="false" onMouseClicked="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="log12" layoutX="719.0" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
    </children>
 </AnchorPane>

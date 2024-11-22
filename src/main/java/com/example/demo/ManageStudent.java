@@ -3,16 +3,18 @@ package com.example.demo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class ManageStudent {
+public class ManageStudent extends DefaultPanel {
 
     @FXML
     private ResourceBundle resources;
@@ -40,11 +42,9 @@ public class ManageStudent {
         assert log12 != null : "fx:id=\"log12\" was not injected: check your FXML file 'ManageStudent.fxml'.";
     }
 
-    public void toHome(MouseEvent event) throws IOException {
+    public void toHome(ActionEvent event) throws IOException {
         Parent home = FXMLLoader.load(getClass().getResource("Home.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(home);
-        stage.setScene(scene);
-        stage.show();
+        super.changeSceneTo(home);
     }
+
 }
