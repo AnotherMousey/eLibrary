@@ -1,22 +1,11 @@
 package com.example.demo;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import libUser.CurrentUser;
 
 public class Home extends DefaultPanel {
 
@@ -25,9 +14,6 @@ public class Home extends DefaultPanel {
 
     @FXML
     private URL location;
-
-    @FXML
-    private Pane Collections;
 
     @FXML
     private Pane ManageBook;
@@ -51,11 +37,13 @@ public class Home extends DefaultPanel {
     private Label profile;
 
     @FXML
+    private Label profile1;
+
+    @FXML 
     private Label displayName;
 
     @FXML
     void initialize() {
-        assert Collections != null : "fx:id=\"Collections\" was not injected: check your FXML file 'Home.fxml'.";
         assert ManageBook != null : "fx:id=\"ManageBook\" was not injected: check your FXML file 'Home.fxml'.";
         assert ManageStudent != null : "fx:id=\"ManageStudent\" was not injected: check your FXML file 'Home.fxml'.";
         assert Return != null : "fx:id=\"Return\" was not injected: check your FXML file 'Home.fxml'.";
@@ -63,6 +51,7 @@ public class Home extends DefaultPanel {
         assert books != null : "fx:id=\"books\" was not injected: check your FXML file 'Home.fxml'.";
         assert log != null : "fx:id=\"log\" was not injected: check your FXML file 'Home.fxml'.";
         assert profile != null : "fx:id=\"profile\" was not injected: check your FXML file 'Home.fxml'.";
+        assert profile1 != null : "fx:id=\"profile1\" was not injected: check your FXML file 'Home.fxml'.";
         displayName.setText(CurrentUser.currentUser.getName());
     }
 
