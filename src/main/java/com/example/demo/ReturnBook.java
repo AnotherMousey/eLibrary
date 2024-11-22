@@ -1,11 +1,19 @@
 package com.example.demo;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
-public class ReturnBook {
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+public class ReturnBook extends DefaultPanel {
 
     @FXML
     private ResourceBundle resources;
@@ -30,4 +38,8 @@ public class ReturnBook {
 
     }
 
+    public void toHome(ActionEvent event) throws IOException {
+        Parent home = FXMLLoader.load(getClass().getResource("Home.fxml"));
+        super.changeSceneTo(home);
+    }
 }

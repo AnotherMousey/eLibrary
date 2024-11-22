@@ -5,17 +5,20 @@ import APIManagement.BookManagement.BookForBorrow;
 import LibraryManagement.Interfaces.*;
 import SQLManagement.ResultSetToList;
 import SQLManagement.SQL;
+import libUser.CurrentUser;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 public class LibraryManagement implements GetBooksInfo,
-        BorrowedBooks {
+        BorrowedBooks, doesBookExists, BorrowAndReturnBooks {
 
     private static ArrayList<Book> books;
     private static ArrayList<Book> borrowedBooks;
@@ -40,7 +43,7 @@ public class LibraryManagement implements GetBooksInfo,
         return listOfAuthors;
     }
 
-    private ArrayList<String> getBookCategory(Statement stmt, String isbn) throws SQLException {
+    private static ArrayList<String> getBookCategory(Statement stmt, String isbn) throws SQLException {
         String query;
         query = "SELECT * FROM bookandcategory bac " +
                 "JOIN category c ON bac.categoryID = c.categoryID " +
@@ -52,6 +55,22 @@ public class LibraryManagement implements GetBooksInfo,
             listOfCategories.add((String) categoryObj.get("category"));
         }
         return listOfCategories;
+    }
+
+    public static Book getSingleBook(Statement stmt, String isbn) throws SQLException {
+        String query = "SELECT * FROM book WHERE ISBN='" + isbn + "';";
+        Book book = new Book();
+        ResultSet rs = stmt.executeQuery(query);
+        List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
+        book.setTitle(result.get(0).get("title").toString());
+        book.setIsbn(isbn);
+        book.setAuthor(getBookAuthor(stmt, isbn));
+        book.setCategories(getBookCategory(stmt, isbn));
+        book.setLanguage(result.get(0).get("language").toString());
+        book.setPublisher(result.get(0).get("publishedDate").toString());
+        book.setDescription(result.get(0).get("description").toString());
+        book.setBookCount((int) result.get(0).get("bookCount"));
+        return book;
     }
 
     public void getBookFromSQL() throws SQLException {
@@ -90,22 +109,74 @@ public class LibraryManagement implements GetBooksInfo,
         List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
 
         for(HashMap<String,Object> book : result) {
-            String isbn = book.get("isbn").toString();
-            BookForBorrow newBook = new BookForBorrow();
-            newBook.setIsbn(isbn);
-            newBook.setBorrowedDate((Date) book.get("borrowTime"));
-            query = "SELECT * FROM book WHERE isbn='" + isbn + "';";
-            ResultSet bookRs = stmt.executeQuery(query);
-            List<HashMap<String,Object>> bookList = ResultSetToList.convertResultSetToList(bookRs);
-            newBook.setTitle(bookList.get(0).get("title").toString());
-            newBook.setDescription(bookList.get(0).get("description").toString());
-            newBook.setPublishedDate(bookList.get(0).get("publishedDate").toString());
-            newBook.setLanguage(bookList.get(0).get("language").toString());
-            newBook.setAuthor(getBookAuthor(stmt, newBook.getIsbn()));
-            newBook.setCategories(getBookCategory(stmt, newBook.getIsbn()));
-            books.add(newBook);
+            books.add(getSingleBook(stmt, book.get("isbn").toString()));
         }
         LibraryManagement.borrowedBooks = books;
         return borrowedBooks;
+    }
+
+    @Override
+    public boolean doesExists(String isbn) throws SQLException {
+        Statement stmt = SQL.getStmt();
+        String query = "SELECT * FROM book WHERE isbn='" + isbn + "';";
+        ResultSet rs = stmt.executeQuery(query);
+        return rs.isBeforeFirst();
+    }
+
+    @Override
+    public int getCountBook(String isbn) throws SQLException {
+        Statement stmt = SQL.getStmt();
+        String query = "SELECT * FROM book WHERE isbn='" + isbn + "';";
+        ResultSet rs = stmt.executeQuery(query);
+        List<HashMap<String,Object>> book = ResultSetToList.convertResultSetToList(rs);
+        return (int) book.get(0).get("bookCount");
+    }
+
+    @Override
+    public boolean borrowBookYet(String isbn) throws SQLException {
+        Statement stmt = SQL.getStmt();
+        String query = "SELECT * FROM userborrowbook WHERE isbn='" + isbn + "';";
+        ResultSet rs = stmt.executeQuery(query);
+        return rs.isBeforeFirst();
+    }
+
+    @Override
+    public void borrowBook(String isbn) throws SQLException {
+        if(borrowBookYet(isbn)) {
+            //report that the book is already borrowed
+            return;
+        }
+        int countBook = getCountBook(isbn);
+        Statement stmt = SQL.getStmt();
+        String query = "UPDATE book SET bookCount = " + (countBook - 1) +
+                " WHERE isbn='" + isbn + "';";
+        stmt.executeUpdate(query);
+
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        query = "INSERT INTO userborrowbook " +
+                "VALUES(" + CurrentUser.currentUser.getUid() + ", '" +
+                isbn + "', " + currentTime + ");";
+        stmt.executeUpdate(query);
+    }
+
+    @Override
+    public void returnBook(String isbn) throws SQLException{
+        if(!borrowBookYet(isbn)) {
+            //report that the book is not borrowed
+            return;
+        }
+        Statement stmt = SQL.getStmt();
+        String query = "SELECT * FROM userborrowbook WHERE isbn='" + isbn + "';";
+        ResultSet rs = stmt.executeQuery(query);
+
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        query = "DELETE FROM userreturnbook WHERE isbn='" + isbn + "';";
+        stmt.executeUpdate(query);
+        query = "INSERT INTO userreturnbook" +
+                "VALUES(" + CurrentUser.currentUser.getUid() + ", '" +
+                isbn + "', " + currentTime + ");";
+        stmt.executeUpdate(query);
+        query = "DELETE FROM userborrowbook WHERE isbn='" + isbn + "';";
+        stmt.executeUpdate(query);
     }
 }
