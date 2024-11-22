@@ -27,21 +27,17 @@
       </Pane>
       <Pane prefHeight="554.0" prefWidth="141.0" style="-fx-background-color: #FCFAF2;">
          <children>
-            <Pane layoutY="27.0" prefHeight="169.0" prefWidth="126.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
+            <Pane layoutX="8.0" layoutY="26.0" prefHeight="169.0" prefWidth="126.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
                <children>
-                  <Label layoutX="37.0" layoutY="123.0" text="Username" textFill="#6f6c6c">
-                     <font>
-                        <Font name="System Italic" size="12.0" />
-                     </font>
-                  </Label>
+                  <Label fx:id="displayName" alignment="CENTER" layoutX="37.0" layoutY="123.0" text="Username" textAlignment="CENTER" textFill="#150000" />
                   <FontAwesomeIcon fill="#124a42" glyphName="USER" layoutX="39.0" layoutY="90.0" size="5EM" />
                </children></Pane>
-            <Label fx:id="profile" layoutX="34.0" layoutY="218.0" text="My profile" textFill="#14544c">
+            <Label fx:id="profile" layoutX="34.0" layoutY="218.0" onMouseReleased="#toMyProfile" text="My profile" textFill="#14544c">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Button fx:id="log" layoutX="22.0" layoutY="492.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" text="Log out" textAlignment="CENTER" textFill="WHITE" />
+            <Button fx:id="log" layoutX="22.0" layoutY="492.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" text="Log out" textAlignment="CENTER" textFill="WHITE" />
             <Label fx:id="profile1" layoutX="40.0" layoutY="248.0" text="Settings" textFill="#14544c">
                <font>
                   <Font name="System Bold" size="12.0" />

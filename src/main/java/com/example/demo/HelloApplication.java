@@ -22,7 +22,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         SQL.main(new String[]{});
-
+        DefaultPanel.setCurrentStage(primaryStage);
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         primaryStage.setTitle("Login!");
         primaryStage.setScene(new Scene(root));

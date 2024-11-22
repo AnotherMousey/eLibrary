@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
-public class Home {
+public class Home extends DefaultPanel {
 
     @FXML
     private ResourceBundle resources;
@@ -39,6 +39,9 @@ public class Home {
     @FXML
     private Label profile1;
 
+    @FXML 
+    private Label displayName;
+
     @FXML
     void initialize() {
         assert ManageBook != null : "fx:id=\"ManageBook\" was not injected: check your FXML file 'Home.fxml'.";
@@ -49,7 +52,63 @@ public class Home {
         assert log != null : "fx:id=\"log\" was not injected: check your FXML file 'Home.fxml'.";
         assert profile != null : "fx:id=\"profile\" was not injected: check your FXML file 'Home.fxml'.";
         assert profile1 != null : "fx:id=\"profile1\" was not injected: check your FXML file 'Home.fxml'.";
-
+        displayName.setText(CurrentUser.currentUser.getName());
     }
 
+    public void toBooks(MouseEvent event) throws IOException {
+        Parent books = FXMLLoader.load(getClass().getResource("Books.fxml"));
+        super.changeSceneTo(books);
+    }
+
+    public void toReturnBooks(MouseEvent event) throws IOException {
+        Parent returnBook = FXMLLoader.load(getClass().getResource("ReturnBook.fxml"));
+        super.changeSceneTo(returnBook);
+    }
+
+    public void toReviewBooks(MouseEvent event) throws IOException {
+        Parent reviewBook = FXMLLoader.load(getClass().getResource("ReviewBook.fxml"));
+        super.changeSceneTo(reviewBook);
+    }
+
+    public void toManageBook(MouseEvent event) throws IOException {
+        if(CurrentUser.currentUser.getAuthority() == 1) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Lỗi quyền truy cập");
+            alert.setContentText("Bạn không có quyền truy cập vào mục này");
+            alert.show();
+            return;
+        }
+        Parent manageBook = FXMLLoader.load(getClass().getResource("ManageBook.fxml"));
+        super.changeSceneTo(manageBook);
+    }
+
+    public void toManageStudent(MouseEvent event) throws IOException {
+        if(CurrentUser.currentUser.getAuthority() == 1) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Lỗi quyền truy cập");
+            alert.setContentText("Bạn không có quyền truy cập vào mục này");
+            alert.show();
+            return;
+        }
+        Parent manageStudent = FXMLLoader.load(getClass().getResource("ManageStudent.fxml"));
+        super.changeSceneTo(manageStudent);
+    }
+
+    public void toCollections(MouseEvent event) throws IOException {
+        Parent myCollections = FXMLLoader.load(getClass().getResource("MyCollections.fxml"));
+        super.changeSceneTo(myCollections);
+    }
+
+    public void toMyProfile(MouseEvent event) throws IOException {
+        Parent myProfile = FXMLLoader.load(getClass().getResource("Settings.fxml"));
+        super.changeSceneTo(myProfile);
+    }
+
+    public void logout(ActionEvent event) throws IOException {
+        CurrentUser.logout();
+        Parent login = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        super.changeSceneTo(login);
+    }
 }
