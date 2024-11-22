@@ -1,8 +1,13 @@
 package SQLManagement;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import APIManagement.BookManagement.BookForBorrow;
+import LibraryManagement.Interfaces.BorrowedBooks;
 import LibraryManagement.Management.LibraryManagement;
+import libUser.CurrentUser;
 
 public class userManagement extends SQL{
     private static Statement stmt;
@@ -128,6 +133,45 @@ public class userManagement extends SQL{
             //report that there's no available book
             return;
         }
+        lm.borrowBook(isbn);
+    }
 
+    public static void returnBook(String isbn) throws SQLException {
+        LibraryManagement lm = new LibraryManagement();
+        if(!lm.doesExists(isbn)) {
+            //report that the book does not exist
+            return;
+        }
+        lm.returnBook(isbn);
+    }
+
+    public static ArrayList<BookForBorrow> getBorrowedBook() throws SQLException {
+        ArrayList<BookForBorrow> borrowedBooks = new ArrayList<>();
+        Statement stmt = getStmt();
+        String query = "SELECT * FROM userborrowbook WHERE uid = " + CurrentUser.currentUser.getUid() + ";";
+        ResultSet rs = stmt.executeQuery(query);
+        List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
+        for(HashMap<String,Object> book : result) {
+            BookForBorrow borrowBook = new BookForBorrow();
+            borrowBook.setBook(LibraryManagement.getSingleBook(stmt, book.get("isbn").toString()));
+            borrowBook.setBorrowedDate((Timestamp) book.get("borrowTime"));
+            borrowedBooks.add(borrowBook);
+        }
+        return borrowedBooks;
+    }
+
+    public static ArrayList<BookForBorrow> getReturnedBook() throws SQLException {
+        ArrayList<BookForBorrow> returnedBooks = new ArrayList<>();
+        Statement stmt = getStmt();
+        String query = "SELECT * FROM userreturnbook WHERE uid = " + CurrentUser.currentUser.getUid() + ";";
+        ResultSet rs = stmt.executeQuery(query);
+        List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
+        for(HashMap<String,Object> book : result) {
+            BookForBorrow returnBook = new BookForBorrow();
+            returnBook.setBook(LibraryManagement.getSingleBook(stmt, book.get("isbn").toString()));
+            returnBook.setBorrowedDate((Timestamp) book.get("returnTime"));
+            returnedBooks.add(returnBook);
+        }
+        return returnedBooks;
     }
 }

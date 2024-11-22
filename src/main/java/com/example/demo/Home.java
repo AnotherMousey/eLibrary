@@ -113,7 +113,8 @@ public class Home extends DefaultPanel {
     }
 
     public void toMyProfile(MouseEvent event) throws IOException {
-        //Go to my profile
+        Parent myProfile = FXMLLoader.load(getClass().getResource("Settings.fxml"));
+        super.changeSceneTo(myProfile);
     }
 
     public void logout(ActionEvent event) throws IOException {
