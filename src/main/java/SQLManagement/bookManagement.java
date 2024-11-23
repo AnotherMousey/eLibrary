@@ -9,13 +9,13 @@ public class bookManagement extends SQL{
 
     public static void addBook(Book book) throws SQLException {
         Statement stmt = getStmt();
-        String query = "INSERT INTO book(isbn, title, description, publishedDate, language" +
+        String query = "INSERT INTO book(isbn, title, author, description, publishedDate, language" +
                 ") VALUES ('" + book.getIsbn() + "', '" + book.getTitle() + "', '" +
                 book.getDescription() + "', '" + book.getPublishedDate() + "', '" +
                 book.getLanguage() + "');";
         stmt.executeUpdate(query);
 
-        for(String author: book.getAuthor()) {
+        for(String author: book.getAuthors()) {
             query = "INSERT INTO bookandauthor(isbn, author) VALUES ('" + book.getIsbn() +
                     "', '" + author + "');";
             stmt.executeUpdate(query);

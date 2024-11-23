@@ -1,19 +1,16 @@
 package LibraryManagement.Management;
 
 import APIManagement.BookManagement.Book;
-import APIManagement.BookManagement.BookForBorrow;
 import LibraryManagement.Interfaces.*;
 import SQLManagement.ResultSetToList;
 import SQLManagement.SQL;
 import libUser.CurrentUser;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -64,12 +61,13 @@ public class LibraryManagement implements GetBooksInfo,
         List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
         book.setTitle(result.get(0).get("title").toString());
         book.setIsbn(isbn);
-        book.setAuthor(getBookAuthor(stmt, isbn));
+        book.setAuthors(getBookAuthor(stmt, isbn));
         book.setCategories(getBookCategory(stmt, isbn));
         book.setLanguage(result.get(0).get("language").toString());
         book.setPublisher(result.get(0).get("publishedDate").toString());
         book.setDescription(result.get(0).get("description").toString());
-        book.setBookCount((int) result.get(0).get("bookCount"));
+        book.setQuantity((int) result.get(0).get("bookCount"));
+        book.setAuthor(result.get(0).get("mainAuthor").toString());
         return book;
     }
 
@@ -87,7 +85,7 @@ public class LibraryManagement implements GetBooksInfo,
             newBook.setDescription((String) book.get("description"));
             newBook.setPublishedDate((String) book.get("publishedDate"));
             newBook.setLanguage((String) book.get("language"));
-            newBook.setAuthor(getBookAuthor(stmt, newBook.getIsbn()));
+            newBook.setAuthors(getBookAuthor(stmt, newBook.getIsbn()));
             newBook.setCategories(getBookCategory(stmt, newBook.getIsbn()));
             books.add(newBook);
         }

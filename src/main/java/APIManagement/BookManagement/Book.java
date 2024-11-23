@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Book {
     private String title;
-    private ArrayList<String> author;
+    private ArrayList<String> Authors;
     private String publishedDate;
     private String publisher;
     private String language;
@@ -14,7 +14,8 @@ public class Book {
     private int avgRating; //0-5
     private int totalRating;
     private String description;
-    private int bookCount;
+    private int quantity;
+    private String author;
 
     public String getPublisher() {
         return publisher;
@@ -28,16 +29,24 @@ public class Book {
         return title;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public ArrayList<String> getAuthor() {
-        return author;
+    public ArrayList<String> getAuthors() {
+        return Authors;
     }
 
-    public void setAuthor(ArrayList<String> author) {
-        this.author = author;
+    public void setAuthors(ArrayList<String> authors) {
+        this.Authors = authors;
     }
 
     public String getPublishedDate() {
@@ -104,18 +113,18 @@ public class Book {
         this.description = description;
     }
 
-    public int getBookCount() {
-        return bookCount;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setBookCount(int bookCount) {
-        this.bookCount = bookCount;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public void setBook(Book book) {
         this.publisher = book.getPublisher();
         this.title = book.getTitle();
-        this.author = book.getAuthor();
+        this.Authors = book.getAuthors();
         this.publishedDate = book.getPublishedDate();
         this.language = book.getLanguage();
         this.isbn = book.getIsbn();
@@ -124,7 +133,15 @@ public class Book {
         this.avgRating = book.getAvgRating();
         this.totalRating = book.getTotalRating();
         this.description = book.getDescription();
-        this.bookCount = book.getBookCount();
+        this.quantity = book.getQuantity();
+        this.author = book.getAuthor();
+    }
+
+    public Book(String isbn, String title, String author, int quantity) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.quantity = quantity;
     }
 
     public Book() {
