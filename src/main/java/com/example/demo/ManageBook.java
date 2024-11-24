@@ -6,10 +6,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +61,8 @@ public class ManageBook extends DefaultPanel{
     private TextField bookSearch_author;
     @FXML
     private TextField bookSearch_quantity;
+    @FXML
+    private TextField avaiBookSearch;
 
     private Connection connect;
     private PreparedStatement prepare;
@@ -101,15 +106,115 @@ public class ManageBook extends DefaultPanel{
                     prepare.setString(4, bookSearch_quantity.getText());
 
                     prepare.executeUpdate();
+
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("System notification");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Added successfully!");
+                    alert.showAndWait();
+
                     availableBooksShowListData();
                     availableBooksClear();
                 }
-
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void availableBooksUpdate() {
+        String sql = "UPDATE book SET title = '" + bookSearch_title.getText()
+                + "', author = '" + bookSearch_author.getText()
+                + "', quantity = '" + bookSearch_quantity.getText()
+                + "' WHERE isbn = '" + bookSearch_isbn.getText() + "'";
+
+        connect = database.connectDb();
+        try  {
+            Alert alert;
+            if (bookSearch_author.getText().isEmpty()
+                    || bookSearch_title.getText().isEmpty()
+                    || bookSearch_quantity.getText().isEmpty()
+                    || bookSearch_isbn.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please enter a valid book information");
+                alert.showAndWait();
+
+            } else {
+
+                alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Double-check");
+                alert.setHeaderText(null);
+                alert.setContentText("Are you sure you want to update this book?");
+                Optional<ButtonType> option = alert.showAndWait();
+
+                if(option.get().equals(ButtonType.OK)) {
+                    statement = connect.createStatement();
+                    statement.executeUpdate(sql);
+
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("System notification");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Updated successfully!");
+                    alert.showAndWait();
+
+                    availableBooksShowListData();
+                    availableBooksClear();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void availableBooksDelete(){
+
+        String sql = "DELETE FROM book WHERE isbn = '"
+                + bookSearch_isbn.getText()+"'";
+
+        connect = database.connectDb();
+
+        try{
+            Alert alert;
+
+            if (bookSearch_author.getText().isEmpty()
+                    || bookSearch_title.getText().isEmpty()
+                    || bookSearch_quantity.getText().isEmpty()
+                    || bookSearch_isbn.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please enter a valid book information");
+                alert.showAndWait();
+            } else {
+                alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("System notification");
+                alert.setHeaderText(null);
+                alert.setContentText("Are you sure you want to delete this book?");
+                Optional<ButtonType> option = alert.showAndWait();
+
+                if(option.get().equals(ButtonType.OK)) {
+                    statement = connect.createStatement();
+                    statement.executeUpdate(sql);
+
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("System notification");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Deleted successfully!");
+                    alert.showAndWait();
+
+                    availableBooksShowListData();
+                    availableBooksClear();
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void availableBooksClear() {
@@ -161,10 +266,39 @@ public class ManageBook extends DefaultPanel{
             return;
         }
 
-        mngB_col_isbn.setText(String.valueOf(book.getIsbn()));
-        mngB_col_title.setText(String.valueOf(book.getTitle()));
-        mngB_col_author.setText(String.valueOf(book.getAuthor()));
-        mngB_col_quantity.setText(String.valueOf(book.getQuantity()));
+        bookSearch_isbn.setText(String.valueOf(book.getIsbn()));
+        bookSearch_title.setText(String.valueOf(book.getTitle()));
+        bookSearch_author.setText(String.valueOf(book.getAuthor()));
+        bookSearch_quantity.setText(String.valueOf(book.getQuantity()));
+    }
+
+    public void availableBooksSearch() {
+
+        FilteredList<Book> filter = new FilteredList<>(avaiBookList, e -> true);
+        avaiBookSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filter.setPredicate(predicateBook -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String searchKey = newValue.toLowerCase();
+
+                if (predicateBook.getTitle().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateBook.getAuthor().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateBook.getIsbn().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            });
+        });
+
+        SortedList<Book> sortedList = new SortedList<>(filter);
+        sortedList.comparatorProperty().bind(mngB_tableView.comparatorProperty());
+        mngB_tableView.setItems(sortedList);
     }
 
 
@@ -177,6 +311,7 @@ public class ManageBook extends DefaultPanel{
         assert log13 != null : "fx:id=\"log11\" was not injected: check your FXML file 'ManageBook.fxml'.";
 
         availableBooksShowListData();
+        availableBooksSearch();
     }
 
     public void toHome(ActionEvent event) throws IOException {

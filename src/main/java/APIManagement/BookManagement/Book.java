@@ -1,6 +1,7 @@
 package APIManagement.BookManagement;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Book {
     private String title;
@@ -16,6 +17,24 @@ public class Book {
     private String description;
     private int quantity;
     private String author;
+    private Date issueDay;
+    private Date returnDay;
+
+    public Date getIssueDay() {
+        return issueDay;
+    }
+
+    public void setIssueDay(Date issueDay) {
+        this.issueDay = issueDay;
+    }
+
+    public Date getReturnDay() {
+        return returnDay;
+    }
+
+    public void setReturnDay(Date returnDay) {
+        this.returnDay = returnDay;
+    }
 
     public String getPublisher() {
         return publisher;
@@ -135,13 +154,23 @@ public class Book {
         this.description = book.getDescription();
         this.quantity = book.getQuantity();
         this.author = book.getAuthor();
+        this.issueDay = book.getIssueDay();
+        this.returnDay = book.getReturnDay();
     }
 
-    public Book(String isbn, String title, String author, int quantity) {
+    public Book (String isbn, String title, String author, int quantity) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.quantity = quantity;
+    }
+
+    public Book (String isbn, String title, String author, Date issueDay, Date returnDay) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.issueDay = issueDay;
+        this.returnDay = returnDay;
     }
 
     public Book() {

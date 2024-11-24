@@ -33,7 +33,7 @@ public class Books extends DefaultPanel{
     @FXML
     private TableColumn<Book, String> books_col_isbn;
     @FXML
-    private TableColumn<Book, String> books_col_quantity;
+    private TableColumn<Book, String> books_col_remain;
     @FXML
     private TableView<Book> avaiBooks_tableView;
     @FXML
@@ -43,7 +43,6 @@ public class Books extends DefaultPanel{
     private PreparedStatement prepare;
     private Statement statement;
     private ResultSet result;
-
 
     @FXML
     private ResourceBundle resources;
@@ -56,6 +55,32 @@ public class Books extends DefaultPanel{
 
     @FXML
     private Button log121; //save button
+    /*
+    public ObservableList<Book> borrowedBookListData() {
+
+        String sql = "select * from userborrowbook" +
+                "join book on book.isbn = isbn";
+        ObservableList<Book> bookList = FXCollections.observableArrayList();
+        connect = database.connectDb();
+
+        try {
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            Book book;
+
+            while (result.next()) {
+                book =
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+     */
+
 
     @FXML
     void initialize() {
