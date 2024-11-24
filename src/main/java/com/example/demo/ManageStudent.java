@@ -34,9 +34,6 @@ public class ManageStudent extends DefaultPanel {
     private URL location;
 
     @FXML
-    private Button log;
-
-    @FXML
     private Button log1;
 
     @FXML
@@ -97,7 +94,7 @@ public class ManageStudent extends DefaultPanel {
                 alert.showAndWait();
             } else {
                 // check user if already exist
-                String checkData = "select * from user where uid = '"+mngU_uid.getText()+"'";
+                String checkData = "select * from user where uid = '"+ mngU_uid.getText() +"'";
                 statement = connect.createStatement();
                 result = statement.executeQuery(checkData);
 
@@ -201,6 +198,7 @@ public class ManageStudent extends DefaultPanel {
             libraryUser libUser;
             while (result.next()) {
                 libUser = new libraryUser(result.getString("name"), result.getString("email"), result.getString("username"), result.getString("password"), result.getInt("uid"), result.getInt("priority"));
+                //libUser = new libraryUser(result.getString("name"), result.getString("email"), result.getString("username"), result.getInt("uid"));
                 listData.add(libUser);
             }
         } catch (Exception e) {
@@ -268,10 +266,10 @@ public void userSearch() {
 
     @FXML
     void initialize() {
-        assert log != null : "fx:id=\"log\" was not injected: check your FXML file 'ManageStudent.fxml'.";
         assert log1 != null : "fx:id=\"log1\" was not injected: check your FXML file 'ManageStudent.fxml'.";
         assert log11 != null : "fx:id=\"log11\" was not injected: check your FXML file 'ManageStudent.fxml'.";
         assert log12 != null : "fx:id=\"log12\" was not injected: check your FXML file 'ManageStudent.fxml'.";
+        assert log13 !=  null : "fx:id=\"log13\" was not injected: check your FXML file 'ManageStudent.fxml'.";
 
         userShowListData();
         userSearch();
@@ -281,5 +279,4 @@ public void userSearch() {
         Parent home = FXMLLoader.load(getClass().getResource("Home.fxml"));
         super.changeSceneTo(home);
     }
-
 }

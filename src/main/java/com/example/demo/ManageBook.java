@@ -225,7 +225,7 @@ public class ManageBook extends DefaultPanel{
 
     public ObservableList<Book> avaiBookListData() {
         ObservableList<Book> listData = FXCollections.observableArrayList();
-        String sql = "select * from Book";
+        String sql = "select * from book";
 
         connect = database.connectDb();
 

@@ -10,7 +10,7 @@ public class libraryUser {
     private String username;
     private String password;
     private int uid;
-    protected int authority;
+    protected int priority;
 
     public String getName() {
         return name;
@@ -52,22 +52,30 @@ public class libraryUser {
         this.uid = uId;
     }
 
-    public int getAuthority() {
-        return authority;
+    public int getPriority() {
+        return priority;
     }
 
-    public void setAuthority(int authority) {
-        this.authority = authority;
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     public libraryUser(String name, String email,
-                       String username, String password, int uid, int authority) {
+                       String username, String password, int uid, int priority) {
         this.name = name;
         this.email = email;
         this.username = username;
         this.password = password;
         this.uid = uid;
-        this.authority = authority;
+        this.priority = priority;
+    }
+
+    public libraryUser(String name, String email,
+                       String username, int uid) {
+        this.name = name;
+        this.email = email;
+        this.username = username;
+        this.uid = uid;
     }
 
     public libraryUser() {
@@ -76,7 +84,7 @@ public class libraryUser {
         username = "";
         password = "";
         uid = 0;
-        authority = 0;
+        priority = 0;
     }
 
     public libraryUser(libraryUser p) {
@@ -85,7 +93,7 @@ public class libraryUser {
         this.username = p.username;
         this.password = p.password;
         this.uid = p.uid;
-        this.authority = p.authority;
+        this.priority = p.priority;
     }
 
     public String register(String tenDangNhap, String matKhau, String email) throws SQLException {
@@ -108,7 +116,7 @@ public class libraryUser {
         }
         name = userManagement.getUserName(uid);
         email = userManagement.getUserEmail(uid);
-        authority = userManagement.getUserPriority(uid);
+        priority = userManagement.getUserPriority(uid);
     }
 
     public void logOut() {
@@ -117,7 +125,7 @@ public class libraryUser {
         username = "";
         password = "";
         uid = 0;
-        authority = 0;
+        priority = 0;
     }
 
     public void deleteAccount() throws SQLException {
@@ -127,7 +135,7 @@ public class libraryUser {
         username = "";
         password = "";
         uid = 0;
-        authority = 0;
+        priority = 0;
     }
 
     //anh chua hieu cai update nay lem

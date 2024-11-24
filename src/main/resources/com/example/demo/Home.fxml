@@ -18,7 +18,7 @@
                   <Image url="@../../../4cbeb2d9c2a030a4f81d37b5eb159c2f-removebg-preview.png" />
                </image>
             </ImageView>
-            <Label layoutX="83.0" layoutY="30.0" text="Sách là phép màu độc nhất và diệu kỳ trong đời thực">
+            <Label layoutX="39.0" layoutY="30.0" text="&quot;Trước những cuốn sách, tất cả mọi thứ đều trở nên mờ nhạt.&quot;">
                <font>
                   <Font name="System Italic" size="17.0" />
                </font>

@@ -62,7 +62,7 @@
             </Label>
             <TextField fx:id="mngU_email" layoutX="99.0" layoutY="414.0" />
             <Line endX="131.5" layoutX="173.0" layoutY="449.0" startX="-117.0" />
-            <Label layoutX="63.0" layoutY="457.0" prefHeight="20.0" prefWidth="94.0" text="Enter authority">
+            <Label layoutX="63.0" layoutY="457.0" prefHeight="20.0" prefWidth="94.0" text="Enter priority">
                <font>
                   <Font size="13.0" />
                </font>
@@ -80,7 +80,7 @@
          </columns>
       </TableView>
       <Button fx:id="log12" layoutX="719.0" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
-      <TextField fx:id="mngU_search" layoutX="408.0" layoutY="77.0" onAction="#userSearch" prefHeight="33.0" prefWidth="354.0" style="-fx-background-color: #BCD9CE;" />
+      <TextField fx:id="mngU_search" layoutX="408.0" layoutY="77.0" onAction="#userSearch" onMouseClicked="#userSearch" prefHeight="33.0" prefWidth="354.0" style="-fx-background-color: #BCD9CE;" />
       <FontAwesomeIcon glyphName="SEARCH" layoutX="378.0" layoutY="104.0" size="2.5EM" text="" wrappingWidth="29.142857551574707" />
    </children>
 </AnchorPane>

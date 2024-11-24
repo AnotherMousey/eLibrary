@@ -21,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import libUser.CurrentUser;
 import APIManagement.BookManagement.Book;
+import LibraryManagement.Management.LibraryManagement;
 
 public class Books extends DefaultPanel{
 
@@ -55,30 +56,6 @@ public class Books extends DefaultPanel{
 
     @FXML
     private Button log121; //save button
-    /*
-    public ObservableList<Book> borrowedBookListData() {
-
-        String sql = "select * from userborrowbook" +
-                "join book on book.isbn = isbn";
-        ObservableList<Book> bookList = FXCollections.observableArrayList();
-        connect = database.connectDb();
-
-        try {
-            prepare = connect.prepareStatement(sql);
-            result = prepare.executeQuery();
-
-            Book book;
-
-            while (result.next()) {
-                book =
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-     */
 
 
     @FXML
