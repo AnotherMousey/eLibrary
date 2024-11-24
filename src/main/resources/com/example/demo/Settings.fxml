@@ -41,6 +41,6 @@
          </font>
       </Label>
       <Button fx:id="log121" layoutX="435.0" layoutY="436.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round" stylesheets="@CssStyle.css" text="Save" textAlignment="CENTER" textFill="WHITE" />
-      <Button fx:id="log1211" layoutX="289.0" layoutY="436.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round" stylesheets="@CssStyle.css" text="Cancle" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="log1211" layoutX="289.0" layoutY="436.0" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round" stylesheets="@CssStyle.css" text="Cancle" textAlignment="CENTER" textFill="WHITE" />
    </children>
 </AnchorPane>

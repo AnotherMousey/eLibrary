@@ -1,12 +1,18 @@
 package com.example.demo;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class Settings {
+public class Settings extends DefaultPanel {
 
     @FXML
     private ResourceBundle resources;
@@ -33,6 +39,11 @@ public class Settings {
         assert profile != null : "fx:id=\"profile\" was not injected: check your FXML file 'Settings.fxml'.";
         assert profile1 != null : "fx:id=\"profile1\" was not injected: check your FXML file 'Settings.fxml'.";
 
+    }
+
+    public void toHome(ActionEvent event) throws IOException {
+        Parent home = FXMLLoader.load(getClass().getResource("Home.fxml"));
+        super.changeSceneTo(home);
     }
 
 }
