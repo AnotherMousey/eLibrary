@@ -60,7 +60,7 @@ public class libraryUser {
         this.authority = authority;
     }
 
-    public libraryUser(String name, String bday, String phone, String email,
+    public libraryUser(String name, String email,
                        String username, String password, int uid, int authority) {
         this.name = name;
         this.email = email;

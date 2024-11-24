@@ -214,7 +214,6 @@ public class ManageBook extends DefaultPanel{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void availableBooksClear() {
