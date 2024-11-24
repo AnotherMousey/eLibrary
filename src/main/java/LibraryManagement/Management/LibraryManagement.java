@@ -146,10 +146,20 @@ public class LibraryManagement implements GetBooksInfo,
         }
         int countBook = getCountBook(isbn);
         Statement stmt = SQL.getStmt();
+        //delete the book from userreturnbook if exists
+        String deleteQuery = "DELETE FROM userreturnbook WHERE uid = " + CurrentUser.currentUser.getUid() +
+                "AND isbn = '" + isbn + "';";
+        stmt.executeUpdate(deleteQuery);
+        //delete the book from userborrowbook if exists
+        deleteQuery = "DELETE FROM userborrowbook WHERE uid = " + CurrentUser.currentUser.getUid() +
+                "AND isbn = '" + isbn + "';";
+        stmt.executeUpdate(deleteQuery);
+
+        //update bookCount to bookCount - 1
         String query = "UPDATE book SET bookCount = " + (countBook - 1) +
                 " WHERE isbn='" + isbn + "';";
         stmt.executeUpdate(query);
-
+        //insert borrow book
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         query = "INSERT INTO userborrowbook " +
                 "VALUES(" + CurrentUser.currentUser.getUid() + ", '" +
@@ -164,17 +174,14 @@ public class LibraryManagement implements GetBooksInfo,
             return;
         }
         Statement stmt = SQL.getStmt();
-        String query = "SELECT * FROM userborrowbook WHERE isbn='" + isbn + "';";
+        String query = "SELECT * FROM userborrowbook WHERE isbn='" + isbn +
+                "' AND uid = " + CurrentUser.currentUser.getUid();
         ResultSet rs = stmt.executeQuery(query);
 
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        query = "DELETE FROM userreturnbook WHERE isbn='" + isbn + "';";
-        stmt.executeUpdate(query);
         query = "INSERT INTO userreturnbook" +
                 "VALUES(" + CurrentUser.currentUser.getUid() + ", '" +
                 isbn + "', " + currentTime + ");";
-        stmt.executeUpdate(query);
-        query = "DELETE FROM userborrowbook WHERE isbn='" + isbn + "';";
         stmt.executeUpdate(query);
     }
 }

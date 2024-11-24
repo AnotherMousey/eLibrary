@@ -148,6 +148,8 @@ public class userManagement extends SQL{
     public static ArrayList<BookForBorrow> getBorrowedBook() throws SQLException {
         ArrayList<BookForBorrow> borrowedBooks = new ArrayList<>();
         Statement stmt = getStmt();
+
+        //get all borrowed books
         String query = "SELECT * FROM userborrowbook WHERE uid = " + CurrentUser.currentUser.getUid() + ";";
         ResultSet rs = stmt.executeQuery(query);
         List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
@@ -155,6 +157,17 @@ public class userManagement extends SQL{
             BookForBorrow borrowBook = new BookForBorrow();
             borrowBook.setBook(LibraryManagement.getSingleBook(stmt, book.get("isbn").toString()));
             borrowBook.setBorrowedDate((Timestamp) book.get("borrowTime"));
+
+            //get return time from userreturnbook if exists
+            String newQuery = "SELECT returnTime FROM userreturnbook WHERE uid = " + CurrentUser.currentUser.getUid() +
+                    "AND isbn = '" + borrowBook.getIsbn() + "';";
+            ResultSet rs2 = stmt.executeQuery(newQuery);
+            if(rs2.isBeforeFirst()) {
+                continue;
+            }
+            List<HashMap<String,Object>> result2 = ResultSetToList.convertResultSetToList(rs2);
+            borrowBook.setReturnedDate((Timestamp) result2.get(0).get("returnTime"));
+
             borrowedBooks.add(borrowBook);
         }
         return borrowedBooks;
@@ -170,6 +183,17 @@ public class userManagement extends SQL{
             BookForBorrow returnBook = new BookForBorrow();
             returnBook.setBook(LibraryManagement.getSingleBook(stmt, book.get("isbn").toString()));
             returnBook.setBorrowedDate((Timestamp) book.get("returnTime"));
+
+            //get borrow time from userborrowbook
+            String newQuery = "SELECT borrowTime FROM userborrowbook WHERE uid = " + CurrentUser.currentUser.getUid() +
+                    "AND isbn = '" + returnBook.getIsbn() + "';";
+            ResultSet rs2 = stmt.executeQuery(newQuery);
+            if(rs2.isBeforeFirst()) {
+                continue;
+            }
+            List<HashMap<String,Object>> result2 = ResultSetToList.convertResultSetToList(rs2);
+            returnBook.setBorrowedDate((Timestamp) result2.get(0).get("borrowTime"));
+
             returnedBooks.add(returnBook);
         }
         return returnedBooks;
