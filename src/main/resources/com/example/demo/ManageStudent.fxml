@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
@@ -12,7 +13,7 @@
 
 <AnchorPane prefHeight="554.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ManageStudent">
    <children>
-      <Pane layoutY="1.0" prefHeight="554.0" prefWidth="349.0" style="-fx-background-color: #BCD9CE;">
+      <Pane layoutY="13.0" prefHeight="554.0" prefWidth="349.0" style="-fx-background-color: #BCD9CE;">
          <children>
             <Label layoutX="62.0" layoutY="118.0" prefHeight="20.0" prefWidth="94.0" text="Enter student id:">
                <font>
@@ -23,7 +24,7 @@
             <Line endX="131.5" layoutX="179.0" layoutY="161.0" startX="-117.0" />
             <Button fx:id="log1" layoutX="40.0" layoutY="464.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Add" textAlignment="CENTER" textFill="WHITE" />
             <Button fx:id="log11" layoutX="238.0" layoutY="464.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Delete" textAlignment="CENTER" textFill="WHITE" />
-            <Label alignment="CENTER" layoutX="59.0" layoutY="35.0" prefHeight="37.0" prefWidth="230.0" text="Manage student" textFill="#14544c">
+            <Label alignment="CENTER" layoutX="59.0" layoutY="35.0" prefHeight="37.0" prefWidth="230.0" text="Manage user" textFill="#14544c">
                <font>
                   <Font name="Calibri Bold Italic" size="32.0" />
                </font>
@@ -70,16 +71,22 @@
                </font>
             </Label>
             <FontAwesomeIcon fill="#525252" glyphName="BOOKMARK" layoutX="37.0" layoutY="412.0" selectionFill="#fdfdfd" size="1.7EM" />
+            <TextField layoutX="99.0" layoutY="141.0" />
+            <TextField layoutX="99.0" layoutY="221.0" />
+            <TextField layoutX="99.0" layoutY="307.0" />
+            <TextField layoutX="102.0" layoutY="391.0" />
          </children>
       </Pane>
-      <TableView layoutX="369.0" layoutY="125.0" prefHeight="270.0" prefWidth="414.0">
+      <TableView layoutX="369.0" layoutY="125.0" prefHeight="352.0" prefWidth="414.0">
          <columns>
-            <TableColumn prefWidth="64.5" text="Student id" />
-            <TableColumn prefWidth="139.5" text="Studdent name" />
+            <TableColumn prefWidth="64.5" text="User id" />
+            <TableColumn prefWidth="139.5" text="User name" />
             <TableColumn prefWidth="100.5" text="Phone number" />
             <TableColumn prefWidth="108.5" text="Email" />
          </columns>
       </TableView>
       <Button fx:id="log12" layoutX="719.0" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
+      <TextField fx:id="avaiBookSearch" layoutX="408.0" layoutY="77.0" onAction="#availableBooksSearch" prefHeight="33.0" prefWidth="354.0" style="-fx-background-color: #BCD9CE;" />
+      <FontAwesomeIcon glyphName="SEARCH" layoutX="378.0" layoutY="104.0" size="2.5EM" text="" wrappingWidth="29.142857551574707" />
    </children>
 </AnchorPane>

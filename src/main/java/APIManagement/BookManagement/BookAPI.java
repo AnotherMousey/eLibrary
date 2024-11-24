@@ -70,7 +70,7 @@ public class BookAPI implements API {
                 for (Object author : authors) {
                     authorsArray.add(author.toString());
                 }
-                newBook.setAuthor(authorsArray);
+                newBook.setAuthors(authorsArray);
 
                 //get publishedDate if exists
                 if(volumeInfo.containsKey("publishedDate")) {

@@ -12,18 +12,18 @@
    <children>
       <Pane layoutX="159.0" layoutY="25.0" prefHeight="87.0" prefWidth="509.0">
          <children>
-            <TextField layoutX="57.0" layoutY="27.0" prefHeight="33.0" prefWidth="354.0" style="-fx-background-color: #BCD9CE;" />
+            <TextField fx:id="avaiBookSearch" layoutX="57.0" layoutY="27.0" prefHeight="33.0" prefWidth="354.0" style="-fx-background-color: #BCD9CE;" />
             <FontAwesomeIcon glyphName="SEARCH" layoutX="423.0" layoutY="55.0" size="2.5EM" text="" wrappingWidth="29.142857551574707" />
          </children>
       </Pane>
       <Button fx:id="log12" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
-      <TableView layoutX="67.0" layoutY="146.0" prefHeight="319.0" prefWidth="670.0">
+      <TableView fx:id="avaiBooks_tableView" layoutX="67.0" layoutY="146.0" prefHeight="319.0" prefWidth="670.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Number" />
-          <TableColumn prefWidth="75.0" text="Book id" />
-            <TableColumn prefWidth="214.5" text="Book name" />
-            <TableColumn minWidth="0.0" prefWidth="131.0" text="Author" />
-            <TableColumn prefWidth="93.5" text="Quantity" />
+          <TableColumn fx:id="books_col_number" prefWidth="75.0" text="Number" />
+          <TableColumn fx:id="books_col_isbn" prefWidth="75.0" text="ISBN" />
+            <TableColumn fx:id="books_col_title" prefWidth="214.5" text="Book title" />
+            <TableColumn fx:id="books_col_author" minWidth="0.0" prefWidth="131.0" text="Author" />
+            <TableColumn fx:id="books_col_remain" prefWidth="93.5" text="Remain days" />
             <TableColumn text="Check box" />
         </columns>
       </TableView>

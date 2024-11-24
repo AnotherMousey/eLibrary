@@ -26,6 +26,8 @@ public class HelloApplication extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         primaryStage.setTitle("Login!");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setMinHeight(550);
+        primaryStage.setMinWidth(650);
         primaryStage.show();
     }
 }
