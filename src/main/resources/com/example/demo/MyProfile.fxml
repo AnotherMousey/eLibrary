@@ -41,6 +41,6 @@
       <TextField layoutX="330.0" layoutY="265.0" prefHeight="25.0" prefWidth="205.0" />
       <TextField layoutX="330.0" layoutY="333.0" prefHeight="25.0" prefWidth="205.0" />
       <Button fx:id="log121" layoutX="426.0" layoutY="435.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round" stylesheets="@CssStyle.css" text="Save" textAlignment="CENTER" textFill="WHITE" />
-      <Button fx:id="log1211" layoutX="295.0" layoutY="435.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round" stylesheets="@CssStyle.css" text="Cancle" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="log1211" layoutX="295.0" layoutY="435.0" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round" stylesheets="@CssStyle.css" text="Cancle" textAlignment="CENTER" textFill="WHITE" />
    </children>
 </AnchorPane>

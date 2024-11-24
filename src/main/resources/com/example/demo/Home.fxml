@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="803.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="803.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Home">
    <children>
       <Pane layoutX="162.0" layoutY="25.0" prefHeight="86.0" prefWidth="616.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
          <children>
@@ -38,14 +38,14 @@
                </font>
             </Label>
             <Button fx:id="log" layoutX="22.0" layoutY="492.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" text="Log out" textAlignment="CENTER" textFill="WHITE" />
-            <Label fx:id="profile1" layoutX="40.0" layoutY="248.0" text="Settings" textFill="#14544c">
+            <Label fx:id="profile1" layoutX="40.0" layoutY="248.0" onMouseReleased="#toSettings" text="Settings" textFill="#14544c">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="books" layoutX="203.0" layoutY="191.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
+      <Pane fx:id="books" layoutX="203.0" layoutY="191.0" onMouseReleased="#toBooks" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
          <children>
             <ImageView fitHeight="86.0" fitWidth="97.0" layoutX="-14.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -59,7 +59,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="Return" layoutX="411.0" layoutY="191.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
+      <Pane fx:id="Return" layoutX="411.0" layoutY="191.0" onMouseReleased="#toReturnBooks" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
          <children>
             <ImageView fitHeight="86.0" fitWidth="97.0" layoutX="-14.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -73,7 +73,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="Review" layoutX="617.0" layoutY="191.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
+      <Pane fx:id="Review" layoutX="617.0" layoutY="191.0" onMouseReleased="#toCollections" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
          <children>
             <ImageView fitHeight="75.0" fitWidth="84.0" layoutX="-9.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -87,7 +87,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="ManageBook" layoutX="208.0" layoutY="370.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
+      <Pane fx:id="ManageBook" layoutX="208.0" layoutY="370.0" onMouseReleased="#toManageBook" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
          <children>
             <ImageView fitHeight="76.0" fitWidth="77.0" layoutX="-9.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -101,7 +101,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="ManageStudent" layoutX="411.0" layoutY="370.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
+      <Pane fx:id="ManageStudent" layoutX="411.0" layoutY="370.0" onMouseReleased="#toManageStudent" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
          <children>
             <ImageView fitHeight="86.0" fitWidth="97.0" layoutX="-14.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true">
                <image>
