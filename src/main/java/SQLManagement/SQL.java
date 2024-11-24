@@ -7,7 +7,7 @@ import java.sql.Statement;
 public class SQL {
     private static Statement stmt;
     private static final String user = "root";
-    private static final String password = "quanhhqt123";
+    private static final String password = "thanhbinh19072006@@";
 
     public static Statement getStmt() {
         return stmt;

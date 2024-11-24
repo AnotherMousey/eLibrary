@@ -1,16 +1,17 @@
 package com.example.demo;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import libUser.CurrentUser;
 
@@ -72,11 +73,6 @@ public class Home extends DefaultPanel {
         super.changeSceneTo(returnBook);
     }
 
-    public void toReviewBooks(MouseEvent event) throws IOException {
-        Parent reviewBook = FXMLLoader.load(getClass().getResource("ReviewBook.fxml"));
-        super.changeSceneTo(reviewBook);
-    }
-
     public void toManageBook(MouseEvent event) throws IOException {
         if(CurrentUser.currentUser.getAuthority() == 1) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -109,8 +105,13 @@ public class Home extends DefaultPanel {
     }
 
     public void toMyProfile(MouseEvent event) throws IOException {
-        Parent myProfile = FXMLLoader.load(getClass().getResource("Settings.fxml"));
+        Parent myProfile = FXMLLoader.load(getClass().getResource("MyProfile.fxml"));
         super.changeSceneTo(myProfile);
+    }
+
+    public void toSettings(MouseEvent event) throws IOException {
+        Parent settings = FXMLLoader.load(getClass().getResource("Settings.fxml"));
+        super.changeSceneTo(settings);
     }
 
     public void logout(ActionEvent event) throws IOException {
