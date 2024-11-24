@@ -80,13 +80,13 @@
       <TableView layoutX="369.0" layoutY="125.0" prefHeight="352.0" prefWidth="414.0">
          <columns>
             <TableColumn prefWidth="64.5" text="User id" />
-            <TableColumn prefWidth="139.5" text="User name" />
-            <TableColumn prefWidth="100.5" text="Phone number" />
+            <TableColumn prefWidth="139.5" text="Name" />
+            <TableColumn prefWidth="100.5" text="Username" />
             <TableColumn prefWidth="108.5" text="Email" />
          </columns>
       </TableView>
       <Button fx:id="log12" layoutX="719.0" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
-      <TextField fx:id="avaiBookSearch" layoutX="408.0" layoutY="77.0" onAction="#availableBooksSearch" prefHeight="33.0" prefWidth="354.0" style="-fx-background-color: #BCD9CE;" />
+      <TextField fx:id="avaiBookSearch" layoutX="408.0" layoutY="77.0" prefHeight="33.0" prefWidth="354.0" style="-fx-background-color: #BCD9CE;" />
       <FontAwesomeIcon glyphName="SEARCH" layoutX="378.0" layoutY="104.0" size="2.5EM" text="" wrappingWidth="29.142857551574707" />
    </children>
 </AnchorPane>

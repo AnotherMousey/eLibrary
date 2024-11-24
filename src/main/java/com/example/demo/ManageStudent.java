@@ -2,6 +2,10 @@ package com.example.demo;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import javafx.application.Application;
@@ -12,6 +16,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ManageStudent extends DefaultPanel {
@@ -33,6 +40,36 @@ public class ManageStudent extends DefaultPanel {
 
     @FXML
     private Button log12;
+
+    @FXML
+    private Button log13;
+    @FXML
+    private TableColumn<?, ?> mngU_col_uid;
+    @FXML
+    private TableColumn<?, ?> mngU_col_name;
+    @FXML
+    private TableColumn<?, ?> mngU_col_username;
+    @FXML
+    private TableColumn<?, ?> mngU_col_email;
+    @FXML
+    private TableView<?> mngU_tableView;
+    @FXML
+    private TextField mngU_search;
+    @FXML
+    private TextField mngU_uid;
+    @FXML
+    private TextField mngU_name;
+    @FXML
+    private TextField mngU_username;
+    @FXML
+    private TextField mngU_email;
+
+    private Connection connect;
+    private PreparedStatement prepare;
+    private Statement statement;
+    private ResultSet result;
+
+    
 
     @FXML
     void initialize() {
