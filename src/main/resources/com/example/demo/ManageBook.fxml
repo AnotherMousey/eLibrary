@@ -68,6 +68,6 @@
       </TableView>
       <Button fx:id="log12" layoutX="719.0" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
       <FontAwesomeIcon glyphName="SEARCH" layoutX="369.0" layoutY="86.0" size="2.5EM" text="" wrappingWidth="29.142857551574707" />
-      <TextField fx:id="avaiBookSearch" layoutX="406.0" layoutY="58.0" onAction="#availableBooksSearch" prefHeight="33.0" prefWidth="354.0" style="-fx-background-color: #BCD9CE;" />
+      <TextField fx:id="avaiBookSearch" layoutX="406.0" layoutY="58.0" onAction="#availableBooksSearch" onMouseClicked="#availableBooksSearch" prefHeight="33.0" prefWidth="354.0" style="-fx-background-color: #BCD9CE;" />
    </children>
 </AnchorPane>

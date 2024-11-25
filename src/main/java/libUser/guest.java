@@ -1,9 +1,9 @@
 package libUser;
 
 public class guest extends libraryUser {
-    public guest(String name, String bday, String phone, String email,
+    public guest(String name, String email,
                  String username, String password, int uid) {
-        super(name, bday, phone, email, username, password, uid, 0);
+        super(name, email, username, password, uid, 0);
     }
 
     public guest() {

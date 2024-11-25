@@ -6,10 +6,13 @@ module com.example.demo {
     requires com.dlsc.formsfx;
     requires com.almasb.fxgl.all;
     requires json.simple;
+    requires java.sql;
+    requires java.desktop;
     requires mysql.connector.j;
     requires annotations;
     requires com.fasterxml.jackson.databind;
 
+    opens libUser to javafx.base;
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;
     exports APIManagement.BookManagement;

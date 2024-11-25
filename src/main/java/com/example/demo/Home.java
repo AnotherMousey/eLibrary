@@ -74,7 +74,7 @@ public class Home extends DefaultPanel {
     }
 
     public void toManageBook(MouseEvent event) throws IOException {
-        if(CurrentUser.currentUser.getAuthority() == 1) {
+        if(CurrentUser.currentUser.getPriority() == 1) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText("Lỗi quyền truy cập");
@@ -87,7 +87,7 @@ public class Home extends DefaultPanel {
     }
 
     public void toManageStudent(MouseEvent event) throws IOException {
-        if(CurrentUser.currentUser.getAuthority() == 1) {
+        if(CurrentUser.currentUser.getPriority() == 1) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText("Lỗi quyền truy cập");
