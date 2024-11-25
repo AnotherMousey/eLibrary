@@ -24,7 +24,7 @@ public class HelloApplication extends Application {
         SQL.main(new String[]{});
         DefaultPanel.setCurrentStage(primaryStage);
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        primaryStage.setTitle("Login!");
+        primaryStage.setTitle("Titanium's library management platform");
         primaryStage.setScene(new Scene(root));
         primaryStage.setMinHeight(550);
         primaryStage.setMinWidth(650);

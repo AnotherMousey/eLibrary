@@ -12,6 +12,7 @@ module com.example.demo {
     requires annotations;
     requires com.fasterxml.jackson.databind;
 
+    opens libUser to javafx.base;
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;
     exports APIManagement.BookManagement;
