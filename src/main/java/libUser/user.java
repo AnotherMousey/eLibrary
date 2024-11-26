@@ -1,9 +1,9 @@
 package libUser;
 
 public class user extends libraryUser{
-    public user(String name, String bday, String phone, String email,
+    public user(String name, String email,
                 String username, String password, int uid) {
-        super(name, bday, phone, email, username, password, uid, 1);
+        super(name, email, username, password, uid, 1);
     }
 
     public user() {

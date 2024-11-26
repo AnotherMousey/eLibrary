@@ -17,9 +17,9 @@ public class CurrentUser {
         } catch (SQLException e) {
             return "Incorrect username or password";
         }
-        if(currentUser.getAuthority() == 0) {
+        if(currentUser.getPriority() == 0) {
             currentUser = new guest(currentUser);
-        } else if(currentUser.getAuthority() == 1) {
+        } else if(currentUser.getPriority() == 1) {
             currentUser = new user(currentUser);
         } else {
             currentUser = new admin(currentUser);

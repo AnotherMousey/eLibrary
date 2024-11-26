@@ -6,12 +6,15 @@ module com.example.demo {
     requires com.dlsc.formsfx;
     requires com.almasb.fxgl.all;
     requires json.simple;
+    requires java.sql;
+    requires java.desktop;
     requires mysql.connector.j;
     requires annotations;
     requires com.fasterxml.jackson.databind;
     requires java.sql;
     requires java.desktop;
 
+    opens libUser to javafx.base;
     opens com.example.demo to javafx.fxml;
     requires org.python.jython2.standalone;
     exports com.example.demo;
