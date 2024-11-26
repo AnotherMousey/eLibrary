@@ -13,15 +13,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import APIManagement.BookManagement.Book;
 import libUser.CurrentUser;
 
@@ -112,8 +109,8 @@ public class MyCollections extends DefaultPanel {
         clt_isbn.setText(String.valueOf(book.getIsbn()));
         clt_title.setText(String.valueOf(book.getTitle()));
         clt_author.setText(String.valueOf(book.getAuthor()));
-        clt_issue.setText(String.valueOf(book.getIssueDay()));
-        clt_due.setText(String.valueOf(book.getReturnDay()));
+        clt_issue.setText(String.valueOf(book.getIssueDate()));
+        clt_due.setText(String.valueOf(book.getReturnDate()));
     }
 
     /////////////////////////////////////////////////////////////////////////////
@@ -161,8 +158,8 @@ public class MyCollections extends DefaultPanel {
         clt_isbn.setText(String.valueOf(book.getIsbn()));
         clt_title.setText(String.valueOf(book.getTitle()));
         clt_author.setText(String.valueOf(book.getAuthor()));
-        clt_issue.setText(String.valueOf(book.getIssueDay()));
-        clt_due.setText(String.valueOf(book.getReturnDay()));
+        clt_issue.setText(String.valueOf(book.getIssueDate()));
+        clt_due.setText(String.valueOf(book.getReturnDate()));
     }
 
     @FXML

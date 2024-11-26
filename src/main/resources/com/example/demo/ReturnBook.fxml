@@ -13,27 +13,17 @@
    <children>
       <Pane prefHeight="554.0" prefWidth="400.0" style="-fx-background-color: #BCD9CE;">
          <children>
-            <Label layoutX="34.0" layoutY="193.0" prefHeight="20.0" prefWidth="94.0" text="Issue book:">
+            <Label layoutX="32.0" layoutY="210.0" prefHeight="20.0" prefWidth="105.0" text="Book name: ">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="34.0" layoutY="251.0" prefHeight="20.0" prefWidth="94.0" text="Book name:">
+            <Label layoutX="35.0" layoutY="298.0" prefHeight="20.0" prefWidth="94.0" text="Issue date: ">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="34.0" layoutY="312.0" prefHeight="20.0" prefWidth="105.0" text="Student name: ">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="34.0" layoutY="375.0" prefHeight="20.0" prefWidth="94.0" text="Issue date: ">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="34.0" layoutY="435.0" prefHeight="20.0" prefWidth="94.0" text="Due date:">
+            <Label layoutX="37.0" layoutY="403.0" prefHeight="20.0" prefWidth="94.0" text="Due date:">
                <font>
                   <Font size="14.0" />
                </font>
@@ -49,6 +39,9 @@
                </font>
             </Label>
             <Button fx:id="log11" layoutY="528.0" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
+            <TextField fx:id="ret_name" layoutX="126.0" layoutY="207.0" />
+            <TextField fx:id="ret_issue" layoutX="126.0" layoutY="296.0" />
+            <TextField fx:id="ret_due" layoutX="126.0" layoutY="400.0" />
          </children>
       </Pane>
       <ImageView fitHeight="133.0" fitWidth="201.0" layoutX="390.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -56,23 +49,17 @@
             <Image url="@../../../ef2083eb025b98654e4ec4a28ea6d609-removebg-preview.png" />
          </image>
       </ImageView>
-      <Label layoutX="432.0" layoutY="197.0" prefHeight="20.0" prefWidth="74.0" text="Book id:">
+      <Label layoutX="477.0" layoutY="236.0" prefHeight="20.0" prefWidth="74.0" text="ISBN:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="515.0" layoutY="194.0" prefHeight="25.0" prefWidth="237.0" />
-      <Label layoutX="432.0" layoutY="279.0" prefHeight="20.0" prefWidth="74.0" text="Student id:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <TextField layoutX="515.0" layoutY="277.0" prefHeight="25.0" prefWidth="237.0" />
-      <Button fx:id="log" layoutX="506.0" layoutY="366.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="189.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Find details" textAlignment="CENTER" textFill="WHITE">
+      <TextField fx:id="ret_search" layoutX="506.0" layoutY="264.0" prefHeight="25.0" prefWidth="237.0" />
+      <Button fx:id="log" layoutX="506.0" layoutY="366.0" mnemonicParsing="false" onAction="#finding" prefHeight="25.0" prefWidth="189.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Find details" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font></Button>
-      <Button fx:id="log1" layoutX="506.0" layoutY="430.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="189.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Return book" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="log1" layoutX="506.0" layoutY="430.0" mnemonicParsing="false" onAction="#returning" prefHeight="25.0" prefWidth="189.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Return book" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font></Button>

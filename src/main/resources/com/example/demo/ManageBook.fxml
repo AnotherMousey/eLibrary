@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="554.0" prefWidth="803.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ManageBook">
@@ -21,7 +20,6 @@
                </font>
             </Label>
             <Button fx:id="log" layoutX="171.0" layoutY="464.0" mnemonicParsing="false" onAction="#availableBooksUpdate" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Update" textAlignment="CENTER" textFill="WHITE" />
-            <Line endX="131.5" layoutX="179.0" layoutY="161.0" startX="-117.0" />
             <Button fx:id="log1" layoutX="52.0" layoutY="464.0" mnemonicParsing="false" onAction="#availableBooksAdd" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Add" textAlignment="CENTER" textFill="WHITE" />
             <Button fx:id="log11" layoutX="228.0" layoutY="510.0" mnemonicParsing="false" onAction="#availableBooksDelete" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Delete" textAlignment="CENTER" textFill="WHITE" />
             <Label alignment="CENTER" layoutX="73.0" layoutY="37.0" prefHeight="37.0" prefWidth="203.0" text="Manage book" textFill="#14544c">
@@ -35,21 +33,18 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <Line endX="131.5" layoutX="182.0" layoutY="241.0" startX="-117.0" />
             <FontAwesomeIcon fill="#525252" glyphName="BOOK" layoutX="33.0" layoutY="241.0" selectionFill="#fdfdfd" size="1.7EM" />
             <Label layoutX="65.0" layoutY="284.0" prefHeight="20.0" prefWidth="120.0" text="Enter authors name:">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Line endX="131.5" layoutX="182.0" layoutY="327.0" startX="-117.0" />
             <FontAwesomeIcon fill="#525252" glyphName="USER" layoutX="33.0" layoutY="327.0" selectionFill="#fdfdfd" size="1.7EM" />
             <Label layoutX="69.0" layoutY="369.0" prefHeight="20.0" prefWidth="94.0" text="Enter quantity:">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Line endX="131.5" layoutX="186.0" layoutY="412.0" startX="-117.0" />
             <FontAwesomeIcon fill="#525252" glyphName="BOOKMARK" layoutX="37.0" layoutY="412.0" selectionFill="#fdfdfd" size="1.7EM" />
             <TextField fx:id="bookSearch_isbn" layoutX="100.0" layoutY="141.0" />
             <TextField fx:id="bookSearch_title" layoutX="100.0" layoutY="228.0" />
