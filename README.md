@@ -20,7 +20,7 @@
 
 **CÁCH SỬ DỤNG**
 <br> 1. Đăng ký tài khoản, đăng nhập 
-<br> ![login](https://drive.google.com/file/d/1jsg8abx7CxsW9vhHvP1wxMWEDxQJmlUe/view?usp=sharing)
+<br> ![login.png](https://drive.google.com/file/d/1jsg8abx7CxsW9vhHvP1wxMWEDxQJmlUe/view?usp=sharing)
 <br> ![singnup]()
 <br> 2. Giao diện Home: user không truy cập được vào manage book và manage student, chỉ admin mới quản lí sách và quản lý sinh viên
 <br> ![home]()
