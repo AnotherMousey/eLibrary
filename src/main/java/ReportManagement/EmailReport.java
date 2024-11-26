@@ -33,11 +33,13 @@ public class EmailReport extends SocialReporter {
     public void report(String type, BookForBorrow book) {
         setType(type);
         setBook(book);
-        run();
+        Thread t1 = new Thread(this);
+        t1.start();
     }
 
     @Override
     public void run() {
+        System.out.println("Thread is running");
         String currentEmail = CurrentUser.currentUser.getEmail();
         if(this.type.equals(borrowType)) {
             try {
