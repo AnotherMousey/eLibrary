@@ -23,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import APIManagement.BookManagement.Book;
+import libUser.CurrentUser;
 
 public class MyCollections extends DefaultPanel {
 
@@ -65,8 +66,16 @@ public class MyCollections extends DefaultPanel {
 
     public ObservableList<Book> unfBookListData() {
         ObservableList<Book> listData = FXCollections.observableArrayList();
-        String sql = "select b.* from book b join userborrowbook br " +
-                "on b.isbn = br.isbn and ";
+        // ma oi code 1 dong xong doi branch no ko luu cho h phai di code lai
+        /**
+         * phai trace ra dc user dang dung la ai, lay duoc uid
+         * tu uid do, anh xa vao user borrow/return book de lay isbn cua sach
+         * roi join voi database cua sach de lay ra info cua sach
+         */
+        CurrentUser curUser = new CurrentUser();
+        String res = String.valueOf(curUser.currentUser.getUid());
+        String sql = "select b.* from book b join userreturnbook rt " +
+                "on b.isbn = rt.isbn and rt.uid = '" + res + "'";
 
         connect = database.connectDb();
 
@@ -75,7 +84,7 @@ public class MyCollections extends DefaultPanel {
             result = prepare.executeQuery();
             Book book;
             while (result.next()) {
-                book = new Book(result.getString("isbn"), result.getString("title"), result.getString("author"), result.getDate("issueDate"), result.getDate("returnDate"));
+                book = new Book(result.getString("b.isbn"), result.getString("b.title"), result.getString("b.author"), result.getDate("b.issueDate"), result.getDate("b.returnDate"));
                 listData.add(book);
             }
         } catch (Exception e) {
@@ -88,11 +97,7 @@ public class MyCollections extends DefaultPanel {
 
     public void unfBookShowListData(){
         unfBookList = unfBookListData();
-        Integer n = 1;
-        unf_col_number.setCellValueFactory(new PropertyValueFactory<>(n.toString()));
-        n += 1;
         unf_col_name.setCellValueFactory(new PropertyValueFactory<>("title"));
-
         unf_tableView.setItems(unfBookList);
     }
 
@@ -115,8 +120,11 @@ public class MyCollections extends DefaultPanel {
 
     public ObservableList<Book> finBookListData() {
         ObservableList<Book> listData = FXCollections.observableArrayList();
+
+        CurrentUser curUser = new CurrentUser();
+        String res = String.valueOf(curUser.currentUser.getUid());
         String sql = "select b.* from book b join userreturnbook rt " +
-                "on b.isbn = rt.isbn";
+                "on b.isbn = rt.isbn and rt.uid = '" + res + "'";
 
         connect = database.connectDb();
 
@@ -125,7 +133,7 @@ public class MyCollections extends DefaultPanel {
             result = prepare.executeQuery();
             Book book;
             while (result.next()) {
-                book = new Book(result.getString("isbn"), result.getString("title"), result.getString("author"), result.getDate("issueDate"), result.getDate("returnDate"));
+                book = new Book(result.getString("b.isbn"), result.getString("b.title"), result.getString("b.author"), result.getDate("b.issueDate"), result.getDate("b.returnDate"));
                 listData.add(book);
             }
         } catch (Exception e) {
@@ -138,12 +146,8 @@ public class MyCollections extends DefaultPanel {
 
     public void finBookShowListData(){
         finBookList = finBookListData();
-        Integer n = 1;
-        unf_col_number.setCellValueFactory(new PropertyValueFactory<>(n.toString()));
-        n += 1;
-        unf_col_name.setCellValueFactory(new PropertyValueFactory<>("title"));
-
-        unf_tableView.setItems(unfBookList);
+        fin_col_name.setCellValueFactory(new PropertyValueFactory<>("title"));
+        fin_tableView.setItems(finBookList);
     }
 
     public void finBookSelect() {
@@ -161,9 +165,12 @@ public class MyCollections extends DefaultPanel {
         clt_due.setText(String.valueOf(book.getReturnDay()));
     }
 
+    @FXML
     void initialize() {
         assert log12 != null : "fx:id=\"log12\" was not injected: check your FXML file 'MyCollections.fxml'.";
 
+        unfBookShowListData();
+        finBookShowListData();
     }
 
     public void toHome(ActionEvent event) throws IOException {

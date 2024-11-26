@@ -165,6 +165,12 @@ public class Book {
         this.quantity = quantity;
     }
 
+    public Book (String isbn, String title, String author) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+    }
+
     public Book (String isbn, String title, String author, Date issueDay, Date returnDay) {
         this.isbn = isbn;
         this.title = title;

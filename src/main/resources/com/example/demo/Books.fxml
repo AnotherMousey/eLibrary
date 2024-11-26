@@ -23,7 +23,7 @@
           <TableColumn fx:id="books_col_isbn" prefWidth="75.0" text="ISBN" />
             <TableColumn fx:id="books_col_title" prefWidth="214.5" text="Book title" />
             <TableColumn fx:id="books_col_author" minWidth="0.0" prefWidth="131.0" text="Author" />
-            <TableColumn fx:id="books_col_remain" prefWidth="93.5" text="Remain days" />
+            <TableColumn fx:id="books_col_status" prefWidth="93.5" text="Status" />
             <TableColumn text="Check box" />
         </columns>
       </TableView>
