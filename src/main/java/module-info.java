@@ -11,8 +11,6 @@ module com.example.demo {
     requires mysql.connector.j;
     requires annotations;
     requires com.fasterxml.jackson.databind;
-    requires java.sql;
-    requires java.desktop;
 
     opens libUser to javafx.base;
     opens com.example.demo to javafx.fxml;
