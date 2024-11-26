@@ -7,11 +7,17 @@ module com.example.demo {
     requires com.almasb.fxgl.all;
     requires json.simple;
     requires java.sql;
+    requires java.desktop;
     requires mysql.connector.j;
     requires annotations;
-    requires java.desktop;
+    requires com.fasterxml.jackson.databind;
 
+    opens libUser to javafx.base;
     opens com.example.demo to javafx.fxml;
+    /**
+     *  requires org.python.jython2.standalone;
+     */
+    //requires org.python.jython2.standalone;
     exports com.example.demo;
     exports APIManagement.BookManagement;
     opens APIManagement.BookManagement to javafx.fxml;

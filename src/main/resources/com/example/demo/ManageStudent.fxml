@@ -5,130 +5,77 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.control.TextField?>
 
-<?import javafx.scene.shape.Line?>
 <AnchorPane prefHeight="554.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ManageStudent">
    <children>
-      <Pane layoutY="1.0" prefHeight="554.0" prefWidth="349.0" style="-fx-background-color: #BCD9CE;">
+      <Pane prefHeight="567.0" prefWidth="350.0" style="-fx-background-color: #BCD9CE;">
          <children>
-             <Label layoutX="62.0" layoutY="118.0" prefHeight="20.0" prefWidth="94.0" text="Enter student id:">
-            <Label layoutX="53.0" layoutY="80.0" prefHeight="20.0" prefWidth="94.0" text="Enter Uid:">
+            <Button fx:id="log13" layoutX="140.0" layoutY="503.0" mnemonicParsing="false" onAction="#clearSearch" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Clear" textAlignment="CENTER" textFill="WHITE" />
+            <Button fx:id="log1" layoutX="31.0" layoutY="503.0" mnemonicParsing="false" onAction="#userAdd" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Add" textAlignment="CENTER" textFill="WHITE" />
+            <Button fx:id="log11" layoutX="249.0" layoutY="503.0" mnemonicParsing="false" onAction="#userDelete" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Delete" textAlignment="CENTER" textFill="WHITE" />
+            <Label layoutX="55.0" layoutY="60.0" prefHeight="20.0" prefWidth="94.0" text="Enter Uid:">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-             </Label>
-
-            <Button fx:id="log" layoutX="139.0" layoutY="464.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Update" textAlignment="CENTER" textFill="WHITE" />
-            <Line endX="131.5" layoutX="179.0" layoutY="161.0" startX="-117.0" />
-            <Button fx:id="log1" layoutX="40.0" layoutY="464.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Add" textAlignment="CENTER" textFill="WHITE" />
-            <Button fx:id="log11" layoutX="238.0" layoutY="464.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Delete" textAlignment="CENTER" textFill="WHITE" />
-            <Label alignment="CENTER" layoutX="59.0" layoutY="35.0" prefHeight="37.0" prefWidth="230.0" text="Manage student" textFill="#14544c">
-
-            <Button fx:id="log2" layoutX="22.0" layoutY="514.0" mnemonicParsing="false" onAction="#userAdd" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Add" textAlignment="CENTER" textFill="WHITE" />
-            <Button fx:id="log112" layoutX="256.0" layoutY="514.0" mnemonicParsing="false" onAction="#userDelete" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Delete" textAlignment="CENTER" textFill="WHITE" />
-            <Label alignment="CENTER" layoutX="59.0" layoutY="23.0" prefHeight="37.0" prefWidth="230.0" text="Manage user" textFill="#14544c">
+            <Label alignment="CENTER" layoutX="60.0" layoutY="14.0" prefHeight="37.0" prefWidth="230.0" text="Manage user" textFill="#14544c">
                <font>
                   <Font name="Calibri Bold Italic" size="32.0" />
                </font>
             </Label>
-            </Label>
-            <Label alignment="CENTER" layoutX="86.0" layoutY="144.0" prefHeight="17.0" prefWidth="175.0" text="Enter student id" textFill="#908e8e">
-               <font>
-                  <Font name="System Italic" size="12.0" />
-               </font>
-            </Label>
-            <FontAwesomeIcon fill="#525252" glyphName="PENCIL" layoutX="30.0" layoutY="161.0" selectionFill="#fdfdfd" size="1.7EM" />
-            <Label layoutX="65.0" layoutY="198.0" prefHeight="20.0" prefWidth="126.0" text="Enter student name:">
-
-            <FontAwesomeIcon fill="#525252" glyphName="PENCIL" layoutX="29.0" layoutY="119.0" selectionFill="#fdfdfd" size="1.7EM" />
-            <Label layoutX="54.0" layoutY="144.0" prefHeight="20.0" prefWidth="126.0" text="Enter user's name:">
-
+            <FontAwesomeIcon fill="#525252" glyphName="PENCIL" layoutX="32.0" layoutY="99.0" selectionFill="#fdfdfd" size="1.7EM" />
+            <Label layoutX="57.0" layoutY="124.0" prefHeight="20.0" prefWidth="126.0" text="Enter user's name:">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            </Label>
-
-            <Line endX="131.5" layoutX="182.0" layoutY="241.0" startX="-117.0" />
-            <Label alignment="CENTER" layoutX="89.0" layoutY="224.0" prefHeight="17.0" prefWidth="175.0" text="Enter student name" textFill="#908e8e">
-               <font>
-                  <Font name="System Italic" size="12.0" />
-               </font>
-            </Label>
-            <FontAwesomeIcon fill="#525252" glyphName="USER" layoutX="33.0" layoutY="241.0" selectionFill="#fdfdfd" size="1.7EM" />
-            <Label layoutX="65.0" layoutY="284.0" prefHeight="20.0" prefWidth="136.0" text="Enter phone number:">
-
-            <FontAwesomeIcon fill="#525252" glyphName="USER" layoutX="28.0" layoutY="191.0" selectionFill="#fdfdfd" size="1.7EM" />
-            <Label layoutX="50.0" layoutY="218.0" prefHeight="20.0" prefWidth="136.0" text="Enter username:">
-
+            <FontAwesomeIcon fill="#525252" glyphName="USER" layoutX="31.0" layoutY="171.0" selectionFill="#fdfdfd" size="1.7EM" />
+            <Label layoutX="53.0" layoutY="196.0" prefHeight="20.0" prefWidth="136.0" text="Enter username:">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            </Label>
-
-            <Line endX="131.5" layoutX="182.0" layoutY="327.0" startX="-117.0" />
-            <Label alignment="CENTER" layoutX="89.0" layoutY="310.0" prefHeight="17.0" prefWidth="175.0" text="Enter phone number" textFill="#908e8e">
-               <font>
-                  <Font name="System Italic" size="12.0" />
-               </font>
-            </Label>
-            <FontAwesomeIcon fill="#525252" glyphName="BOOK" layoutX="33.0" layoutY="327.0" selectionFill="#fdfdfd" size="1.7EM" />
-            <Label layoutX="69.0" layoutY="369.0" prefHeight="20.0" prefWidth="94.0" text="Enter email:">
-
-            <FontAwesomeIcon fill="#525252" glyphName="BOOK" layoutX="28.0" layoutY="260.0" selectionFill="#fdfdfd" size="1.7EM" />
-            <Label layoutX="55.0" layoutY="284.0" prefHeight="20.0" prefWidth="111.0" text="Enter password:">
-
+            <FontAwesomeIcon fill="#525252" glyphName="BOOK" layoutX="31.0" layoutY="238.0" selectionFill="#fdfdfd" size="1.7EM" />
+            <Label layoutX="56.0" layoutY="269.0" prefHeight="20.0" prefWidth="111.0" text="Enter password:">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            </Label>
-
-            <Line endX="131.5" layoutX="186.0" layoutY="412.0" startX="-117.0" />
-            <Label alignment="CENTER" layoutX="93.0" layoutY="395.0" prefHeight="17.0" prefWidth="175.0" text="Enter email" textFill="#908e8e">
-
-            <FontAwesomeIcon fill="#525252" glyphName="KEY" layoutX="30.0" layoutY="334.0" selectionFill="#fdfdfd" size="1.7EM" />
-            <TextField fx:id="mngU_uid" layoutX="75.0" layoutY="100.0" prefHeight="25.0" prefWidth="210.0" />
-            <Button fx:id="log13" layoutX="138.0" layoutY="514.0" mnemonicParsing="false" onAction="#clearSearch" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Clear" textAlignment="CENTER" textFill="WHITE" />
-            <Label layoutX="55.0" layoutY="359.0" prefHeight="20.0" prefWidth="94.0" text="Enter email:">
-
-               <font>
-                  <Font name="System Italic" size="12.0" />
-               </font>
-            </Label>
-            </Label>
-
-            <FontAwesomeIcon fill="#525252" glyphName="BOOKMARK" layoutX="37.0" layoutY="412.0" selectionFill="#fdfdfd" size="1.7EM" />
-
-            <Label layoutX="55.0" layoutY="433.0" prefHeight="20.0" prefWidth="94.0" text="Enter priority">
+            <FontAwesomeIcon fill="#525252" glyphName="KEY" layoutX="32.0" layoutY="316.0" selectionFill="#fdfdfd" size="1.7EM" />
+            <TextField fx:id="mngU_uid" layoutX="67.0" layoutY="80.0" prefHeight="25.0" prefWidth="250.0" />
+            <Label layoutX="56.0" layoutY="345.0" prefHeight="20.0" prefWidth="94.0" text="Enter email:">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <FontAwesomeIcon fill="#525252" layoutX="30.0" layoutY="406.0" selectionFill="#fdfdfd" size="1.7EM" />
-            <TextField fx:id="mngU_uid1" layoutX="76.0" layoutY="171.0" prefHeight="25.0" prefWidth="210.0" />
-            <TextField fx:id="mngU_uid11" layoutX="76.0" layoutY="240.0" prefHeight="25.0" prefWidth="210.0" />
-            <TextField fx:id="mngU_uid111" layoutX="76.0" layoutY="314.0" prefHeight="25.0" prefWidth="210.0" />
-            <TextField fx:id="mngU_uid1111" layoutX="76.0" layoutY="386.0" prefHeight="25.0" prefWidth="210.0" />
-            <FontAwesomeIcon fill="#525252" glyphName="BOOKMARK" layoutX="30.0" layoutY="479.0" selectionFill="#fdfdfd" size="1.7EM" />
-            <TextField fx:id="mngU_uid11111" layoutX="76.0" layoutY="460.0" prefHeight="25.0" prefWidth="210.0" />
-
+            <Label layoutX="65.0" layoutY="418.0" prefHeight="20.0" prefWidth="94.0" text="Enter priority:">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <FontAwesomeIcon fill="#525252" glyphName="BOOKMARK" layoutX="32.0" layoutY="390.0" selectionFill="#fdfdfd" size="1.7EM" />
+            <FontAwesomeIcon fill="#525252" layoutX="32.0" layoutY="464.0" selectionFill="#fdfdfd" size="1.7EM" wrappingWidth="16.0285701751709" />
+            <TextField fx:id="mngU_uid1" layoutX="68.0" layoutY="151.0" prefHeight="25.0" prefWidth="250.0" />
+            <TextField fx:id="mngU_uid111" layoutX="68.0" layoutY="296.0" prefHeight="25.0" prefWidth="250.0" />
+            <TextField fx:id="mngU_uid1111" layoutX="68.0" layoutY="371.0" prefHeight="25.0" prefWidth="250.0" />
+            <TextField fx:id="mngU_uid11" layoutX="69.0" layoutY="218.0" prefHeight="25.0" prefWidth="250.0" />
+            <TextField fx:id="mngU_uid11111" layoutX="67.0" layoutY="444.0" prefHeight="25.0" prefWidth="250.0" />
          </children>
       </Pane>
-      <TableView layoutX="369.0" layoutY="125.0" prefHeight="270.0" prefWidth="414.0">
+      <TableView fx:id="mngU_tableView" layoutX="369.0" layoutY="125.0" onMouseClicked="#userSelect" prefHeight="352.0" prefWidth="414.0">
          <columns>
-            <TableColumn prefWidth="64.5" text="Student id" />
-            <TableColumn prefWidth="139.5" text="Studdent name" />
-            <TableColumn prefWidth="100.5" text="Phone number" />
-            <TableColumn prefWidth="108.5" text="Email" />
+            <TableColumn fx:id="mngU_col_uid" prefWidth="64.5" text="UID" />
+            <TableColumn fx:id="mngU_col_name" prefWidth="139.5" text="Name" />
+            <TableColumn fx:id="mngU_col_username" prefWidth="100.5" text="Username" />
+            <TableColumn fx:id="mngU_col_email" prefWidth="108.5" text="Email" />
          </columns>
       </TableView>
       <Button fx:id="log12" layoutX="719.0" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
+      <TextField fx:id="mngU_search" layoutX="408.0" layoutY="77.0" onAction="#userSearch" onMouseClicked="#userSearch" prefHeight="33.0" prefWidth="354.0" style="-fx-background-color: #BCD9CE;" />
+      <FontAwesomeIcon glyphName="SEARCH" layoutX="378.0" layoutY="104.0" size="2.5EM" text="" wrappingWidth="29.142857551574707" />
    </children>
 </AnchorPane>
