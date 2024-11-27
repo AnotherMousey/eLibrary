@@ -59,6 +59,7 @@ public class ReturnBook extends DefaultPanel {
             alert.setHeaderText(null);
             alert.setContentText("Please enter valid information");
             alert.showAndWait();
+            return false;
         }
         return true;
     }

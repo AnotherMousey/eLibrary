@@ -27,6 +27,5 @@
             <TableColumn text="Check box" />
         </columns>
       </TableView>
-      <Button fx:id="log121" layoutX="653.0" layoutY="484.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round" stylesheets="@CssStyle.css" text="Save" textAlignment="CENTER" textFill="WHITE" />
    </children>
 </AnchorPane>
