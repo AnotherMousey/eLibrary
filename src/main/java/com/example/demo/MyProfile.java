@@ -58,12 +58,14 @@ public class MyProfile extends DefaultPanel{
             alert.setHeaderText(null);
             alert.setContentText("Information unchanged");
             alert.showAndWait();
+            return false;
         } else if (prof_name.equals("") || prof_email.equals("")) {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
             alert.setContentText("Please fill in all fields");
             alert.showAndWait();
+            return false;
         }
         return true;
     }

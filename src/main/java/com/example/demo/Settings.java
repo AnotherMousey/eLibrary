@@ -52,6 +52,7 @@ public class Settings extends DefaultPanel {
 
     public boolean checkChangePass(){
         Alert alert;
+        CurrentUser curUser = new CurrentUser();
         if (cur_pass.getText().equals("") || new_pass.getText().equals("") || repeat_pass.getText().equals("")) {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
@@ -59,12 +60,21 @@ public class Settings extends DefaultPanel {
             alert.setContentText("Please fill in all fields");
             alert.showAndWait();
             clearField();
+            return false;
         } else if (!new_pass.getText().equals(repeat_pass.getText())) {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
             alert.setContentText("Please enter the new password again");
             alert.showAndWait();
+            return false;
+        } else if (!cur_pass.getText().equals(curUser.currentUser.getPassword())){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Wrong password");
+            alert.showAndWait();
+            return false;
         }
         return true;
     }
