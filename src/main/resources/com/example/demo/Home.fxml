@@ -80,7 +80,7 @@
                   <Image url="@../../../Screenshot_2024-11-10_223052-removebg-preview.png" />
                </image>
             </ImageView>
-            <Label layoutX="-1.0" layoutY="60.0" text="My collections" textFill="#14544c">
+            <Label layoutX="18.0" layoutY="60.0" text="My books" textFill="#14544c">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -108,7 +108,7 @@
                   <Image url="@../../../4298af780bd737793fb075dba9e6330b-removebg-preview.png" />
                </image>
             </ImageView>
-            <Label layoutX="-8.0" layoutY="69.0" text="Manage student" textFill="#14544c">
+            <Label layoutX="5.0" layoutY="71.0" text="Manage user" textFill="#14544c">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

@@ -77,8 +77,8 @@ public class Home extends DefaultPanel {
         if(CurrentUser.currentUser.getPriority() == 1) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
-            alert.setHeaderText("Lỗi quyền truy cập");
-            alert.setContentText("Bạn không có quyền truy cập vào mục này");
+            alert.setHeaderText("Access invalid");
+            alert.setContentText("You don't have access to this section");
             alert.show();
             return;
         }
@@ -90,8 +90,8 @@ public class Home extends DefaultPanel {
         if(CurrentUser.currentUser.getPriority() == 1) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
-            alert.setHeaderText("Lỗi quyền truy cập");
-            alert.setContentText("Bạn không có quyền truy cập vào mục này");
+            alert.setHeaderText("Access invalid");
+            alert.setContentText("You don't have access to this section");
             alert.show();
             return;
         }

@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="554.0" prefWidth="803.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Settings">
+<AnchorPane prefHeight="554.0" prefWidth="803.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.MyProfile">
    <children>
       <Label fx:id="profile" layoutX="43.0" layoutY="21.0" text="My profile" textFill="#14544c">
          <font>
@@ -22,25 +22,19 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label alignment="TOP_RIGHT" layoutX="224.0" layoutY="201.0" prefHeight="20.0" prefWidth="94.0" text="User name:">
+      <Label alignment="TOP_RIGHT" layoutX="199.0" layoutY="248.0" prefHeight="20.0" prefWidth="94.0" text="Name:">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label alignment="TOP_RIGHT" layoutX="224.0" layoutY="267.0" prefHeight="20.0" prefWidth="94.0" text="Phone number:">
+      <Label alignment="CENTER_RIGHT" layoutX="199.0" layoutY="336.0" prefHeight="20.0" prefWidth="94.0" text="Email:">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label alignment="CENTER_RIGHT" layoutX="224.0" layoutY="335.0" prefHeight="20.0" prefWidth="94.0" text="Email address:">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <TextField layoutX="330.0" layoutY="199.0" prefHeight="25.0" prefWidth="205.0" />
-      <TextField layoutX="330.0" layoutY="265.0" prefHeight="25.0" prefWidth="205.0" />
-      <TextField layoutX="330.0" layoutY="333.0" prefHeight="25.0" prefWidth="205.0" />
-      <Button fx:id="log121" layoutX="426.0" layoutY="435.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round" stylesheets="@CssStyle.css" text="Save" textAlignment="CENTER" textFill="WHITE" />
+      <TextField fx:id="prof_name" layoutX="330.0" layoutY="245.0" prefHeight="25.0" prefWidth="205.0" />
+      <TextField fx:id="prof_email" layoutX="330.0" layoutY="333.0" prefHeight="25.0" prefWidth="205.0" />
+      <Button fx:id="log121" layoutX="426.0" layoutY="435.0" mnemonicParsing="false" onAction="#changeInfo" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round" stylesheets="@CssStyle.css" text="Save" textAlignment="CENTER" textFill="WHITE" />
       <Button fx:id="log1211" layoutX="295.0" layoutY="435.0" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round" stylesheets="@CssStyle.css" text="Cancle" textAlignment="CENTER" textFill="WHITE" />
    </children>
 </AnchorPane>

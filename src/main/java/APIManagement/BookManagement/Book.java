@@ -17,23 +17,23 @@ public class Book {
     private String description;
     private int quantity;
     private String author;
-    private Date issueDay;
-    private Date returnDay;
+    private Date issueDate;
+    private Date returnDate;
 
-    public Date getIssueDay() {
-        return issueDay;
+    public Date getIssueDate() {
+        return issueDate;
     }
 
-    public void setIssueDay(Date issueDay) {
-        this.issueDay = issueDay;
+    public void setIssueDate(Date issueDate) {
+        this.issueDate = issueDate;
     }
 
-    public Date getReturnDay() {
-        return returnDay;
+    public Date getReturnDate() {
+        return returnDate;
     }
 
-    public void setReturnDay(Date returnDay) {
-        this.returnDay = returnDay;
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
     }
 
     public String getPublisher() {
@@ -154,8 +154,8 @@ public class Book {
         this.description = book.getDescription();
         this.quantity = book.getQuantity();
         this.author = book.getAuthor();
-        this.issueDay = book.getIssueDay();
-        this.returnDay = book.getReturnDay();
+        this.issueDate = book.getIssueDate();
+        this.returnDate = book.getReturnDate();
     }
 
     public Book (String isbn, String title, String author, int quantity) {
@@ -165,12 +165,25 @@ public class Book {
         this.quantity = quantity;
     }
 
-    public Book (String isbn, String title, String author, Date issueDay, Date returnDay) {
+    public Book (String isbn, String title, String author) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
-        this.issueDay = issueDay;
-        this.returnDay = returnDay;
+    }
+
+    public Book (String isbn, String title, Date issueDate, Date returnDate) {
+        this.isbn = isbn;
+        this.title = title;
+        this.issueDate = issueDate;
+        this.returnDate = returnDate;
+    }
+
+    public Book (String isbn, String title, String author, Date issueDate, Date returnDate) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.issueDate = issueDate;
+        this.returnDate = returnDate;
     }
 
     public Book() {
