@@ -68,7 +68,8 @@ public class Settings extends DefaultPanel {
             alert.setContentText("Please enter the new password again");
             alert.showAndWait();
             return false;
-        } else if (!cur_pass.getText().equals(curUser.currentUser.getPassword())){
+        }
+        /*else if (!cur_pass.getText().equals(curUser.currentUser.getPassword())){
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
@@ -76,6 +77,7 @@ public class Settings extends DefaultPanel {
             alert.showAndWait();
             return false;
         }
+         */
         return true;
     }
 

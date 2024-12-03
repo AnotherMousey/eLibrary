@@ -19,12 +19,11 @@
       <Button fx:id="log12" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
       <TableView fx:id="avaiBooks_tableView" layoutX="67.0" layoutY="146.0" prefHeight="319.0" prefWidth="670.0">
         <columns>
-          <TableColumn fx:id="books_col_number" prefWidth="75.0" text="Number" />
-          <TableColumn fx:id="books_col_isbn" prefWidth="75.0" text="ISBN" />
-            <TableColumn fx:id="books_col_title" prefWidth="214.5" text="Book title" />
-            <TableColumn fx:id="books_col_author" minWidth="0.0" prefWidth="131.0" text="Author" />
-            <TableColumn fx:id="books_col_status" prefWidth="93.5" text="Status" />
-            <TableColumn text="Check box" />
+          <TableColumn fx:id="books_col_isbn" prefWidth="117.59998321533203" text="ISBN" />
+            <TableColumn fx:id="books_col_title" prefWidth="258.4000244140625" text="Book title" />
+            <TableColumn fx:id="books_col_author" minWidth="0.0" prefWidth="116.79995727539062" text="Author" />
+            <TableColumn fx:id="books_col_status" prefWidth="87.99993896484375" text="Status" />
+            <TableColumn prefWidth="96.800048828125" text="Check box" />
         </columns>
       </TableView>
    </children>
