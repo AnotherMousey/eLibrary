@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="554.0" prefWidth="803.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ManageBook">
+<AnchorPane prefHeight="554.0" prefWidth="803.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ManageBook">
    <children>
       <Pane prefHeight="554.0" prefWidth="349.0" style="-fx-background-color: #BCD9CE;">
          <children>
-            <Label layoutX="62.0" layoutY="118.0" prefHeight="20.0" prefWidth="94.0" text="Enter book id:">
+            <Label layoutX="62.0" layoutY="118.0" prefHeight="20.0" prefWidth="94.0" text="Enter book isbn:">
                <font>
                   <Font size="13.0" />
                </font>
@@ -28,13 +28,13 @@
                </font>
             </Label>
             <FontAwesomeIcon fill="#525252" glyphName="PENCIL" layoutX="30.0" layoutY="161.0" selectionFill="#fdfdfd" size="1.7EM" />
-            <Label layoutX="65.0" layoutY="198.0" prefHeight="20.0" prefWidth="113.0" text="Enter book name:">
+            <Label layoutX="65.0" layoutY="198.0" prefHeight="20.0" prefWidth="113.0" text="Book's name:">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
             <FontAwesomeIcon fill="#525252" glyphName="BOOK" layoutX="33.0" layoutY="241.0" selectionFill="#fdfdfd" size="1.7EM" />
-            <Label layoutX="65.0" layoutY="284.0" prefHeight="20.0" prefWidth="120.0" text="Enter authors name:">
+            <Label layoutX="65.0" layoutY="284.0" prefHeight="20.0" prefWidth="120.0" text="Author's name:">
                <font>
                   <Font size="13.0" />
                </font>
@@ -46,10 +46,10 @@
                </font>
             </Label>
             <FontAwesomeIcon fill="#525252" glyphName="BOOKMARK" layoutX="37.0" layoutY="412.0" selectionFill="#fdfdfd" size="1.7EM" />
-            <TextField fx:id="bookSearch_isbn" layoutX="100.0" layoutY="141.0" />
-            <TextField fx:id="bookSearch_title" layoutX="100.0" layoutY="228.0" />
-            <TextField fx:id="bookSearch_author" layoutX="100.0" layoutY="307.0" />
-            <TextField fx:id="bookSearch_quantity" layoutX="104.0" layoutY="399.0" />
+            <TextField fx:id="bookSearch_isbn" layoutX="100.0" layoutY="141.0" prefHeight="25.0" prefWidth="203.0" />
+            <TextField fx:id="bookSearch_title" layoutX="100.0" layoutY="228.0" prefHeight="25.0" prefWidth="203.0" />
+            <TextField fx:id="bookSearch_author" layoutX="100.0" layoutY="307.0" prefHeight="25.0" prefWidth="203.0" />
+            <TextField fx:id="bookSearch_quantity" layoutX="104.0" layoutY="399.0" prefHeight="25.0" prefWidth="203.0" />
             <Button fx:id="log13" layoutX="116.0" layoutY="510.0" mnemonicParsing="false" onAction="#availableBooksClear" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #63a09a;" styleClass="round3" stylesheets="@CssStyle.css" text="Clear" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </Pane>

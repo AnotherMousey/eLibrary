@@ -5,6 +5,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import ReportManagement.*;
 import SQLManagement.userManagement;
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
 import javafx.event.ActionEvent;
@@ -51,33 +52,22 @@ public class Settings extends DefaultPanel {
     }
 
     public boolean checkChangePass(){
-        Alert alert;
-        CurrentUser curUser = new CurrentUser();
+        Reporter reporter = new BaseReport();
+        reporter = new AlertReport(reporter);
+
         if (cur_pass.getText().equals("") || new_pass.getText().equals("") || repeat_pass.getText().equals("")) {
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Please fill in all fields");
-            alert.showAndWait();
-            clearField();
+            reporter.report("Please fill in all fields");
             return false;
         } else if (!new_pass.getText().equals(repeat_pass.getText())) {
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Please enter the new password again");
-            alert.showAndWait();
+            reporter.report("Please enter the new password again");
+            return false;
+        } else if (!cur_pass.getText().equals(CurrentUser.currentUser.getPassword())) {
+            reporter.report("Incorrect password");
+            return false;
+        } else if (new_pass.getText().equals(CurrentUser.currentUser.getPassword())) {
+            reporter.report("Please enter a different password from your previous password");
             return false;
         }
-        /*else if (!cur_pass.getText().equals(curUser.currentUser.getPassword())){
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Wrong password");
-            alert.showAndWait();
-            return false;
-        }
-         */
         return true;
     }
 
@@ -87,18 +77,17 @@ public class Settings extends DefaultPanel {
              * lay user hien tai ra r change pass
              * set password or sth
              */
-            CurrentUser curUser = new CurrentUser();
             String res = new_pass.getText();
-            curUser.currentUser.setPassword(res);
-            userManagement.updatePassword(curUser.currentUser.getUid(), new_pass.getText());
+            CurrentUser.currentUser.setPassword(res);
+            userManagement.updatePassword(CurrentUser.currentUser.getUid(), new_pass.getText());
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("System Notification");
             alert.setHeaderText(null);
             alert.setContentText("Password changed successfully");
             alert.showAndWait();
-            Parent setting = FXMLLoader.load(getClass().getResource("Settings.fxml"));
-            super.changeSceneTo(setting);
+            Parent home = FXMLLoader.load(getClass().getResource("Home.fxml"));
+            super.changeSceneTo(home);
         }
     }
 

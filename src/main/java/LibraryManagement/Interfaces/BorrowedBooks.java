@@ -1,10 +1,11 @@
 package LibraryManagement.Interfaces;
 
 import APIManagement.BookManagement.Book;
+import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface BorrowedBooks {
-    ArrayList<Book> getBorrowedBooks() throws SQLException;
+    ObservableList<Book> getBorrowedBooks() throws SQLException;
 }

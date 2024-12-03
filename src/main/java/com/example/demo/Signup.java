@@ -5,6 +5,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import ReportManagement.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,20 +57,22 @@ public class Signup extends DefaultPanel{
     }
 
     public void register(ActionEvent event) throws IOException, SQLException {
+        Reporter reporter = new BaseReport();
+        reporter = new AlertReport(reporter);
         if(!Password.getText().equals(RePassword.getText())) {
-            registerMsg.setText("Password does not match");
+            reporter.report("Password does not match");
         }
         else {
             String msg = CurrentUser.register(username.getText(), Password.getText(), Email.getText());
             if(msg.equals("Username already exists") || msg.equals("Password is not in right format")) {
-                registerMsg.setText(msg);
+                reporter.report(msg);
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 registerMsg.setText(msg);
                 alert.setTitle("System Notification");
                 alert.setHeaderText(null);
-                alert.setContentText("Added successfully!");
+                alert.setContentText("Register account successfully!");
                 alert.showAndWait();
                 backToLogin(event);
             }

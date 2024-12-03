@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+import javafx.scene.control.Alert;
 import org.json.simple.*;
 import org.json.simple.parser.*;
 import APIManagement.API;
@@ -56,6 +57,14 @@ public class BookAPI implements API {
             JSONParser parser = new JSONParser();
             JSONObject dataFile = (JSONObject) parser.parse(file);
             JSONArray data = (JSONArray) dataFile.get("items");
+            if(data == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Book does not exist!");
+                alert.showAndWait();
+                return bookshelf;
+            }
             for (Object datum : data) {
                 Book newBook = new Book();
                 JSONObject currentBook = (JSONObject) datum;
@@ -64,17 +73,15 @@ public class BookAPI implements API {
                 //get Title of the book
                 newBook.setTitle(volumeInfo.get("title").toString());
 
-                //get Author of the book
-                JSONArray authors = (JSONArray) volumeInfo.get("authors");
-                ArrayList<String> authorsArray = new ArrayList<>();
-                for (Object author : authors) {
-                    authorsArray.add(author.toString());
-                }
-                newBook.setAuthors(authorsArray);
-
                 //get publishedDate if exists
                 if(volumeInfo.containsKey("publishedDate")) {
                     newBook.setPublishedDate(volumeInfo.get("publishedDate").toString());
+                }
+
+                //get author if exists
+                if(volumeInfo.containsKey("authors")) {
+                    JSONArray authors = (JSONArray) volumeInfo.get("authors");
+                    newBook.setAuthor(authors.get(0).toString());
                 }
 
                 //get publisher if exists

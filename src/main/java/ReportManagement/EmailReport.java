@@ -2,6 +2,7 @@ package ReportManagement;
 
 import APIManagement.BookManagement.BookForBorrow;
 import APIManagement.GmailManagement.GmailSender;
+import javafx.scene.control.Label;
 import libUser.CurrentUser;
 
 import java.io.IOException;
@@ -25,11 +26,6 @@ public class EmailReport extends SocialReporter {
         this.type = type;
     }
 
-    @Override
-    public void report(String message) {
-        //This didn't do anything `
-    }
-
     public void report(String type, BookForBorrow book) {
         setType(type);
         setBook(book);
@@ -38,21 +34,32 @@ public class EmailReport extends SocialReporter {
     }
 
     @Override
+    public void report(Label label, String msg) {
+
+    }
+
+    @Override
+    public void report(String message) {
+        //This didn't do anything `
+    }
+
+    @Override
     public void run() {
         System.out.println("Thread is running");
-        String currentEmail = CurrentUser.currentUser.getEmail();
         if(this.type.equals(borrowType)) {
             try {
                 GmailSender.sendMailNotifyBorrowBook(book);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        } else {
+        } else if(this.type.equals(returnType)) {
             try {
                 GmailSender.sendMailNotifyReturnBook(book);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        } else {
+            throw new RuntimeException("Unsupported report type");
         }
     }
 }

@@ -5,15 +5,13 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import ReportManagement.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import libUser.CurrentUser;
 
 public class Login extends DefaultPanel {
@@ -43,15 +41,22 @@ public class Login extends DefaultPanel {
     public void initialize() {
         assert log != null : "fx:id=\"log\" was not injected: check your FXML file 'Login.fxml'.";
         assert log1 != null : "fx:id=\"log1\" was not injected: check your FXML file 'Login.fxml'.";
+        log.setDefaultButton(true);
     }
 
     public boolean checkLogin() {
+        Reporter reporter = new BaseReport();
+        reporter = new AlertReport(reporter);
         String msg = CurrentUser.login(username.getText(), password.getText());
         if(msg.equals("Incorrect username or password")) {
-            loginMsg.setText(msg);
+            reporter.report(msg);
             return false;
         }
-        loginMsg.setText(msg);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("System Notification");
+        alert.setHeaderText(null);
+        alert.setContentText("Login successfully!");
+        alert.showAndWait();
         return true;
     }
 
@@ -66,15 +71,5 @@ public class Login extends DefaultPanel {
     public void toSignUp(ActionEvent event) throws IOException {
         Parent register = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
         super.changeSceneTo(register);
-    }
-
-    public void onKeyPressed(KeyEvent event) throws IOException {
-        if(event.getKeyCode() == KeyEvent.VK_ENTER) {
-            if(!checkLogin()) {
-                return;
-            }
-            Parent library = FXMLLoader.load(getClass().getResource("Home.fxml"));
-            super.changeSceneTo(library);
-        }
     }
 }

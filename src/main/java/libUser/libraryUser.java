@@ -114,9 +114,11 @@ public class libraryUser {
         if (uid == -1) {
             return;
         }
-        name = userManagement.getUserName(uid);
+        name = userManagement.getName(uid);
+        username = userManagement.getUserName(uid);
         email = userManagement.getUserEmail(uid);
         priority = userManagement.getUserPriority(uid);
+        password = matKhau;
     }
 
     public void logOut() {

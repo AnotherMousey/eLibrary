@@ -64,11 +64,27 @@ public class Home extends DefaultPanel {
     }
 
     public void toBooks(MouseEvent event) throws IOException {
+        if(CurrentUser.currentUser.getPriority() == 2) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Access invalid");
+            alert.setContentText("You are an admin bro...");
+            alert.show();
+            return;
+        }
         Parent books = FXMLLoader.load(getClass().getResource("Books.fxml"));
         super.changeSceneTo(books);
     }
 
     public void toReturnBooks(MouseEvent event) throws IOException {
+        if(CurrentUser.currentUser.getPriority() == 2) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Access invalid");
+            alert.setContentText("You are an admin bro...");
+            alert.show();
+            return;
+        }
         Parent returnBook = FXMLLoader.load(getClass().getResource("ReturnBook.fxml"));
         super.changeSceneTo(returnBook);
     }
@@ -100,6 +116,14 @@ public class Home extends DefaultPanel {
     }
 
     public void toCollections(MouseEvent event) throws IOException {
+        if(CurrentUser.currentUser.getPriority() == 2) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Access invalid");
+            alert.setContentText("You are an admin bro...");
+            alert.show();
+            return;
+        }
         Parent myCollections = FXMLLoader.load(getClass().getResource("MyCollections.fxml"));
         super.changeSceneTo(myCollections);
     }

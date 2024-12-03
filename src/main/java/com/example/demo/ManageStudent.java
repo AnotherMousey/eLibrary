@@ -2,13 +2,12 @@ package com.example.demo;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import SQLManagement.SQL;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -77,16 +76,16 @@ public class ManageStudent extends DefaultPanel {
     public void userAdd() {
         String sql = "INSERT INTO user(uid, username, password, priority, name, email) value(?, ?, ?, ?, ?, ?)";
 
-        connect = database.connectDb();
+        Statement stmt = SQL.getStmt();
 
         try {
             Alert alert;
-            if (mngU_uid.getText().equals("")
-                || mngU_username.getText().equals("")
-                || mngU_password.getText().equals("")
-                || mngU_email.getText().equals("")
-                || mngU_prior.getText().equals("")
-                || mngU_name.getText().equals("") ) {
+            if (mngU_uid.getText().isEmpty()
+                || mngU_username.getText().isEmpty()
+                || mngU_password.getText().isEmpty()
+                || mngU_email.getText().isEmpty()
+                || mngU_prior.getText().isEmpty()
+                || mngU_name.getText().isEmpty()) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
                 alert.setHeaderText(null);
@@ -95,8 +94,7 @@ public class ManageStudent extends DefaultPanel {
             } else {
                 // check user if already exist
                 String checkData = "select * from user where uid = '"+ mngU_uid.getText() +"'";
-                statement = connect.createStatement();
-                result = statement.executeQuery(checkData);
+                result = stmt.executeQuery(checkData);
 
                 if (result.next()) {
                     alert = new Alert(Alert.AlertType.ERROR);
@@ -140,76 +138,67 @@ public class ManageStudent extends DefaultPanel {
         mngU_prior.setText("");
     }
 
-    public void userDelete(){
+    public void userDelete() throws SQLException {
 
         String sql = "DELETE FROM user WHERE uid = '"
                 + mngU_uid.getText()+"'";
 
-        connect = database.connectDb();
+        Statement stmt = SQL.getStmt();
 
-        try{
-            Alert alert;
+        Alert alert;
 
-            if (mngU_uid.getText().isEmpty()
-                    || mngU_name.getText().isEmpty()
-                    || mngU_username.getText().isEmpty()
-                    || mngU_email.getText().isEmpty()) {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid user information");
-                alert.showAndWait();
-            } else {
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
+        if (mngU_uid.getText().isEmpty()
+                || mngU_name.getText().isEmpty()
+                || mngU_username.getText().isEmpty()
+                || mngU_email.getText().isEmpty()) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter a valid user information");
+            alert.showAndWait();
+        } else {
+            alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("System notification");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to delete this account?");
+            Optional<ButtonType> option = alert.showAndWait();
+
+            if(option.get().equals(ButtonType.OK)) {
+                stmt.executeUpdate(sql);
+
+                alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("System notification");
                 alert.setHeaderText(null);
-                alert.setContentText("Are you sure you want to delete this account?");
-                Optional<ButtonType> option = alert.showAndWait();
+                alert.setContentText("Deleted successfully!");
+                alert.showAndWait();
 
-                if(option.get().equals(ButtonType.OK)) {
-                    statement = connect.createStatement();
-                    statement.executeUpdate(sql);
+                userShowListData();
+                clearSearch();
 
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("System notification");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Deleted successfully!");
-                    alert.showAndWait();
-
-                    userShowListData();
-                    clearSearch();
-
-                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
     }
 
-    public ObservableList<libraryUser> userListData() {
+    public ObservableList<libraryUser> userListData() throws SQLException {
         ObservableList<libraryUser> listData = FXCollections.observableArrayList();
         String sql = "select * from user";
-        connect = database.connectDb();
+        Statement stmt = SQL.getStmt();
 
-        try {
-            prepare = connect.prepareStatement(sql);
-            result = prepare.executeQuery();
-            libraryUser libUser;
-            while (result.next()) {
-                libUser = new libraryUser(result.getString("name"), result.getString("email"), result.getString("username"), result.getString("password"), result.getInt("uid"), result.getInt("priority"));
-                //libUser = new libraryUser(result.getString("name"), result.getString("email"), result.getString("username"), result.getInt("uid"));
-                listData.add(libUser);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        result = stmt.executeQuery(sql);
+        libraryUser libUser;
+        while (result.next()) {
+            if(result.getInt("priority") == 2) continue;
+            libUser = new libraryUser(result.getString("name"), result.getString("email"), result.getString("username"), result.getString("password"), result.getInt("uid"), result.getInt("priority"));
+            //libUser = new libraryUser(result.getString("name"), result.getString("email"), result.getString("username"), result.getInt("uid"));
+            listData.add(libUser);
         }
         return listData;
     }
 
     private ObservableList<libraryUser> userList;
 
-    public void userShowListData() {
+    public void userShowListData() throws SQLException {
 
         userList = userListData();
 
@@ -265,7 +254,7 @@ public void userSearch() {
 }
 
     @FXML
-    void initialize() {
+    void initialize() throws SQLException {
         assert log1 != null : "fx:id=\"log1\" was not injected: check your FXML file 'ManageStudent.fxml'.";
         assert log11 != null : "fx:id=\"log11\" was not injected: check your FXML file 'ManageStudent.fxml'.";
         assert log12 != null : "fx:id=\"log12\" was not injected: check your FXML file 'ManageStudent.fxml'.";

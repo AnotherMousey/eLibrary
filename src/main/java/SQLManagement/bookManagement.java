@@ -15,12 +15,6 @@ public class bookManagement extends SQL{
                 book.getLanguage() + "');";
         stmt.executeUpdate(query);
 
-        for(String author: book.getAuthors()) {
-            query = "INSERT INTO bookandauthor(isbn, author) VALUES ('" + book.getIsbn() +
-                    "', '" + author + "');";
-            stmt.executeUpdate(query);
-        }
-
         for(String category: book.getCategories()) {
             query = "INSERT INTO category(categoryName) VALUES('" + category + "') " +
                     "WHERE NOT EXISTS(SELECT * FROM category WHERE categoryName = '" + category + "')";

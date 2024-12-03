@@ -14,7 +14,7 @@ module com.example.demo {
 
     opens libUser to javafx.base;
     opens com.example.demo to javafx.fxml;
-    //requires org.python.jython2.standalone;
+    requires org.python.jython2.standalone;
     exports com.example.demo;
     exports APIManagement.BookManagement;
     opens APIManagement.BookManagement to javafx.fxml;

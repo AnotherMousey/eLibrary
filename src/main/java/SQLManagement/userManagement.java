@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import APIManagement.BookManagement.BookForBorrow;
-import LibraryManagement.Interfaces.BorrowedBooks;
 import LibraryManagement.Management.LibraryManagement;
+import ReportManagement.*;
 import libUser.CurrentUser;
 
 public class userManagement extends SQL{
@@ -64,6 +64,17 @@ public class userManagement extends SQL{
         return (int) result.get(0).get("uid");
     }
 
+    public static String getName(int uid) throws SQLException {
+        stmt = getStmt();
+        String query = "SELECT * FROM user WHERE uid = '" + uid + "';";
+        ResultSet rs = stmt.executeQuery(query);
+        if(!rs.isBeforeFirst()) {
+            return null;
+        }
+        List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
+        return (String) result.get(0).get("name");
+    }
+
     public static String getUserName(int uid) throws SQLException {
         stmt = getStmt();
         String query = "SELECT * FROM user WHERE uid = " + uid + ";";
@@ -100,6 +111,7 @@ public class userManagement extends SQL{
         String query = "UPDATE user SET name = '"
                 + newName + "' WHERE uid = " + uid + ";";
         stmt.executeUpdate(query);
+        System.out.println(query);
     }
 
     public static void updateEmail(int uid, String newEmail) throws SQLException {
@@ -123,26 +135,45 @@ public class userManagement extends SQL{
     }
 
     public static void borrowBook(String isbn) throws SQLException {
+        Reporter reporter = new BaseReport();
+        reporter = new AlertReport(reporter);
         LibraryManagement lm = new LibraryManagement();
         if(!lm.doesExists(isbn)) {
-            //report that the book does not exist
+            reporter.report("The book does not exist.");
             return;
         }
         int bookCount = lm.getCountBook(isbn);
         if(bookCount == 0) {
-            //report that there's no available book
+            reporter.report("This book is out of stock.");
             return;
         }
+        System.out.println("Borrowing");
         lm.borrowBook(isbn);
     }
 
     public static void returnBook(String isbn) throws SQLException {
         LibraryManagement lm = new LibraryManagement();
+        Reporter reporter = new BaseReport();
+        reporter = new AlertReport(reporter);
         if(!lm.doesExists(isbn)) {
-            //report that the book does not exist
+            reporter.report("The book does not exist.");
             return;
         }
         lm.returnBook(isbn);
+    }
+
+    public static BookForBorrow getSingleBorrowBook(String isbn) throws SQLException {
+        Statement stmt = getStmt();
+        BookForBorrow book = new BookForBorrow();
+
+        String query = "SELECT * FROM userborrowbook WHERE isbn = '" + isbn + "' AND uid = " + CurrentUser.currentUser.getUid();
+        ResultSet rs = stmt.executeQuery(query);
+        List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
+
+        book.setBook(LibraryManagement.getSingleBook(stmt, isbn));
+        book.setBorrowedDate((Timestamp) result.get(0).get("borrowDate"));
+        book.setReturnDate((Timestamp) result.get(0).get("returnDate"));
+        return book;
     }
 
     public static ArrayList<BookForBorrow> getBorrowedBook() throws SQLException {

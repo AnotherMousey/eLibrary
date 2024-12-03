@@ -1,14 +1,16 @@
 package com.example.demo;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import APIManagement.BookManagement.BookAPI;
+import APIManagement.BookManagement.BookQuery;
+import SQLManagement.SQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -20,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import APIManagement.BookManagement.Book;
+import org.json.simple.parser.ParseException;
 
 public class ManageBook extends DefaultPanel{
 
@@ -68,151 +71,114 @@ public class ManageBook extends DefaultPanel{
     private PreparedStatement prepare;
     private Statement statement;
     private ResultSet result;
+    private BookAPI bookAPI = new BookAPI();
 
-    public void availableBooksAdd() {
+    public void availableBooksAdd() throws SQLException {
         String sql = "INSERT INTO book (isbn, title, author, quantity) VALUES (?, ?, ?, ?)";
 
-        connect = database.connectDb();
-        try {
-            Alert alert;
-            if (bookSearch_author.getText().isEmpty()
-                    || bookSearch_title.getText().isEmpty()
-                    || bookSearch_quantity.getText().isEmpty()
-                    || bookSearch_isbn.getText().isEmpty()) {
+        Statement stmt = SQL.getStmt();
+        Alert alert;
+        if (bookSearch_author.getText().isEmpty()
+                || bookSearch_title.getText().isEmpty()
+                || bookSearch_quantity.getText().isEmpty()
+                || bookSearch_isbn.getText().isEmpty()) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter a valid book information");
+            alert.showAndWait();
+        } else {
+            //check if book id is already exist
+            String checkData = "Select * from book where isbn = '"
+                    + bookSearch_isbn.getText() + "'";
+
+            statement = connect.createStatement();
+            result = statement.executeQuery(checkData);
+
+            if (result.next()) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
                 alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid book information");
+                alert.setContentText("Book already exists!");
                 alert.showAndWait();
             } else {
-                //check if book id is already exist
-                String checkData = "Select * from book where isbn = '"
-                        + bookSearch_isbn.getText() + "'";
+                prepare = connect.prepareStatement(sql);
+                prepare.setString(1, bookSearch_isbn.getText());
+                prepare.setString(2, bookSearch_title.getText());
+                prepare.setString(3, bookSearch_author.getText());
+                prepare.setString(4, bookSearch_quantity.getText());
 
-                statement = connect.createStatement();
-                result = statement.executeQuery(checkData);
+                prepare.executeUpdate();
 
-                if (result.next()) {
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Book already exists!");
-                    alert.showAndWait();
-                } else {
-                    prepare = connect.prepareStatement(sql);
-                    prepare.setString(1, bookSearch_isbn.getText());
-                    prepare.setString(2, bookSearch_title.getText());
-                    prepare.setString(3, bookSearch_author.getText());
-                    prepare.setString(4, bookSearch_quantity.getText());
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("System notification");
+                alert.setHeaderText(null);
+                alert.setContentText("Added successfully!");
+                alert.showAndWait();
 
-                    prepare.executeUpdate();
-
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("System notification");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Added successfully!");
-                    alert.showAndWait();
-
-                    availableBooksShowListData();
-                    availableBooksClear();
-                }
+                availableBooksShowListData();
+                availableBooksClear();
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
-    public void availableBooksUpdate() {
-        String sql = "UPDATE book SET title = '" + bookSearch_title.getText()
-                + "', author = '" + bookSearch_author.getText()
-                + "', quantity = '" + bookSearch_quantity.getText()
-                + "' WHERE isbn = '" + bookSearch_isbn.getText() + "'";
-
-        connect = database.connectDb();
-        try  {
-            Alert alert;
-            if (bookSearch_author.getText().isEmpty()
-                    || bookSearch_title.getText().isEmpty()
-                    || bookSearch_quantity.getText().isEmpty()
-                    || bookSearch_isbn.getText().isEmpty()) {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid book information");
-                alert.showAndWait();
-
-            } else {
-
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Double-check");
-                alert.setHeaderText(null);
-                alert.setContentText("Are you sure you want to update this book?");
-                Optional<ButtonType> option = alert.showAndWait();
-
-                if(option.get().equals(ButtonType.OK)) {
-                    statement = connect.createStatement();
-                    statement.executeUpdate(sql);
-
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("System notification");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Updated successfully!");
-                    alert.showAndWait();
-
-                    availableBooksShowListData();
-                    availableBooksClear();
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void availableBooksUpdate() throws IOException, ParseException {
+        if(bookSearch_isbn.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter an ISBN number");
+            alert.showAndWait();
+            return;
         }
+        BookQuery bookQuery = new BookQuery();
+        bookQuery.setIsbn(bookSearch_isbn.getText());
+        ArrayList<Book> satisfiedBooks = bookAPI.getBookInfo(bookQuery);
+        if(satisfiedBooks.isEmpty()) {
+            return;
+        }
+        bookSearch_title.setText(satisfiedBooks.get(0).getTitle());
+        bookSearch_author.setText(satisfiedBooks.get(0).getAuthor());
     }
 
-    public void availableBooksDelete(){
+    public void availableBooksDelete() throws SQLException {
 
         String sql = "DELETE FROM book WHERE isbn = '"
                 + bookSearch_isbn.getText()+"'";
 
-        connect = database.connectDb();
+        Statement stmt = SQL.getStmt();
 
-        try{
-            Alert alert;
+        Alert alert;
 
-            if (bookSearch_author.getText().isEmpty()
-                    || bookSearch_title.getText().isEmpty()
-                    || bookSearch_quantity.getText().isEmpty()
-                    || bookSearch_isbn.getText().isEmpty()) {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid book information");
-                alert.showAndWait();
-            } else {
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
+        if (bookSearch_author.getText().isEmpty()
+                || bookSearch_title.getText().isEmpty()
+                || bookSearch_quantity.getText().isEmpty()
+                || bookSearch_isbn.getText().isEmpty()) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter a valid book information");
+            alert.showAndWait();
+        } else {
+            alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("System notification");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to delete this book?");
+            Optional<ButtonType> option = alert.showAndWait();
+
+            if(option.get().equals(ButtonType.OK)) {
+                stmt.executeUpdate(sql);
+
+                alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("System notification");
                 alert.setHeaderText(null);
-                alert.setContentText("Are you sure you want to delete this book?");
-                Optional<ButtonType> option = alert.showAndWait();
+                alert.setContentText("Deleted successfully!");
+                alert.showAndWait();
 
-                if(option.get().equals(ButtonType.OK)) {
-                    statement = connect.createStatement();
-                    statement.executeUpdate(sql);
+                availableBooksShowListData();
+                availableBooksClear();
 
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("System notification");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Deleted successfully!");
-                    alert.showAndWait();
-
-                    availableBooksShowListData();
-                    availableBooksClear();
-
-                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -223,30 +189,25 @@ public class ManageBook extends DefaultPanel{
         bookSearch_quantity.setText("");
     }
 
-    public ObservableList<Book> avaiBookListData() {
+    public ObservableList<Book> avaiBookListData() throws SQLException {
         ObservableList<Book> listData = FXCollections.observableArrayList();
         String sql = "select * from book";
 
-        connect = database.connectDb();
+        Statement stmt = SQL.getStmt();
 
-        try{
-            prepare = connect.prepareStatement(sql);
-            result = prepare.executeQuery();
-            Book book;
+        result = stmt.executeQuery(sql);
+        Book book;
 
-            while(result.next()) {
-                book = new Book(result.getString("isbn"), result.getString("title"), result.getString("author"), result.getInt("quantity"));
-                listData.add(book);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        while(result.next()) {
+            book = new Book(result.getString("isbn"), result.getString("title"), result.getString("author"), result.getInt("quantity"));
+            listData.add(book);
         }
         return listData;
     }
 
     private ObservableList<Book> avaiBookList;
 
-    public void availableBooksShowListData() {
+    public void availableBooksShowListData() throws SQLException {
         avaiBookList = avaiBookListData();
 
         mngB_col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -302,7 +263,7 @@ public class ManageBook extends DefaultPanel{
 
 
     @FXML
-    void initialize() {
+    void initialize() throws SQLException {
         assert log != null : "fx:id=\"log\" was not injected: check your FXML file 'ManageBook.fxml'.";
         assert log1 != null : "fx:id=\"log1\" was not injected: check your FXML file 'ManageBook.fxml'.";
         assert log11 != null : "fx:id=\"log11\" was not injected: check your FXML file 'ManageBook.fxml'.";

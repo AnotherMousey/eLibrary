@@ -76,22 +76,20 @@ public class MyProfile extends DefaultPanel{
 
         if (checkChange()) {
             if (!currentName.equals(oldName)) {
-                CurrentUser curUser = new CurrentUser();
-                curUser.currentUser.setName(currentName);
-                userManagement.updateName(curUser.currentUser.getUid(), currentName);
+                CurrentUser.currentUser.setName(currentName);
+                userManagement.updateName(CurrentUser.currentUser.getUid(), currentName);
             }
             if (!currentEmail.equals(oldEmail)) {
-                CurrentUser curUser = new CurrentUser();
-                curUser.currentUser.setEmail(currentEmail);
-                userManagement.updateEmail(curUser.currentUser.getUid(), currentEmail);
+                CurrentUser.currentUser.setEmail(currentEmail);
+                userManagement.updateEmail(CurrentUser.currentUser.getUid(), currentEmail);
             }
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("System Notification");
             alert.setHeaderText(null);
             alert.setContentText("Information changed successfully");
             alert.showAndWait();
-            Parent myProf = FXMLLoader.load(getClass().getResource("MyProfile.fxml"));
-            super.changeSceneTo(myProf);
+            Parent home = FXMLLoader.load(getClass().getResource("Home.fxml"));
+            super.changeSceneTo(home);
         }
     }
 

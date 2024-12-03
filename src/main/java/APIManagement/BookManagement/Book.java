@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class Book {
     private String title;
-    private ArrayList<String> Authors;
     private String publishedDate;
     private String publisher;
     private String language;
@@ -58,14 +57,6 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public ArrayList<String> getAuthors() {
-        return Authors;
-    }
-
-    public void setAuthors(ArrayList<String> authors) {
-        this.Authors = authors;
     }
 
     public String getPublishedDate() {
@@ -143,7 +134,7 @@ public class Book {
     public void setBook(Book book) {
         this.publisher = book.getPublisher();
         this.title = book.getTitle();
-        this.Authors = book.getAuthors();
+        this.author = book.getAuthor();
         this.publishedDate = book.getPublishedDate();
         this.language = book.getLanguage();
         this.isbn = book.getIsbn();
@@ -153,7 +144,6 @@ public class Book {
         this.totalRating = book.getTotalRating();
         this.description = book.getDescription();
         this.quantity = book.getQuantity();
-        this.author = book.getAuthor();
         this.issueDate = book.getIssueDate();
         this.returnDate = book.getReturnDate();
     }

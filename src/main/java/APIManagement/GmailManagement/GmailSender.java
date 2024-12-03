@@ -34,16 +34,7 @@ public class GmailSender {
         msg.append("ISBN: ").append(book.getIsbn()).append(".\n");
         msg.append("Title: ").append(book.getTitle()).append(".\n");
         msg.append("Author: ").append(book.getAuthor()).append(".\n");
-        msg.append("Categories: ");
-        for(int i = 0; i < book.getCategories() .size(); i++) {
-            msg.append(book.getCategories().get(i));
-            if(i != book.getCategories().size() - 1) {
-                msg.append(", ");
-            } else {
-                msg.append(".\n");
-            }
-        }
-        msg.append("Please return the book before ").append(book.getReturnedDate()).append(".\n");
+        msg.append("Please return the book before next week");
 
         ProcessBuilder processBuilder = new ProcessBuilder(executable, path,
                 emailTo, subject, msg.toString());
@@ -54,22 +45,13 @@ public class GmailSender {
         //Same but in a kinda different way
         String emailTo = CurrentUser.currentUser.getEmail();
 
-        String subject = "You have borrowed a book";
+        String subject = "You have returned a book";
         StringBuilder msg = new StringBuilder();
         msg.append("Dear ").append(CurrentUser.currentUser.getName()).append(".\n\n");
         msg.append("You have returned a book to Titanium Library on ").append(book.getReturnedDate()).append(". Book's info:\n");
         msg.append("ISBN: ").append(book.getIsbn()).append(".\n");
         msg.append("Title: ").append(book.getTitle()).append(".\n");
         msg.append("Author: ").append(book.getAuthor()).append(".\n");
-        msg.append("Categories: ");
-        for(int i = 0; i < book.getCategories() .size(); i++) {
-            msg.append(book.getCategories().get(i));
-            if(i != book.getCategories().size() - 1) {
-                msg.append(", ");
-            } else {
-                msg.append(".\n");
-            }
-        }
         ProcessBuilder processBuilder = new ProcessBuilder(executable, path,
                 emailTo, subject, msg.toString());
         sendEmail(processBuilder);

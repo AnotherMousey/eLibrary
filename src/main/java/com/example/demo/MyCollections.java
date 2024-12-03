@@ -2,12 +2,10 @@ package com.example.demo;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 
+import SQLManagement.SQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,12 +54,9 @@ public class MyCollections extends DefaultPanel {
     @FXML
     private TextField clt_due;
 
-    private Connection connect;
-    private PreparedStatement prepare;
-    private Statement statement;
     private ResultSet result;
 
-    public ObservableList<Book> unfBookListData() {
+    public ObservableList<Book> unfBookListData() throws SQLException {
         ObservableList<Book> listData = FXCollections.observableArrayList();
         // ma oi code 1 dong xong doi branch no ko luu cho h phai di code lai
         /**
@@ -69,31 +64,22 @@ public class MyCollections extends DefaultPanel {
          * tu uid do, anh xa vao user borrow/return book de lay isbn cua sach
          * roi join voi database cua sach de lay ra info cua sach
          */
-        CurrentUser curUser = new CurrentUser();
-        String res = String.valueOf(curUser.currentUser.getUid());
+        String res = String.valueOf(CurrentUser.currentUser.getUid());
         String sql = "select b.* from book b join userreturnbook rt " +
                 "on b.isbn = rt.isbn and rt.uid = '" + res + "'";
 
-        connect = database.connectDb();
-
-        try {
-            prepare = connect.prepareStatement(sql);
-            result = prepare.executeQuery();
-            Book book;
-            while (result.next()) {
-                book = new Book(result.getString("b.isbn"), result.getString("b.title"), result.getString("b.author"), result.getDate("b.issueDate"), result.getDate("b.returnDate"));
-                listData.add(book);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        Statement stmt = SQL.getStmt();
+        result = stmt.executeQuery(sql);
+        Book book;
+        while (result.next()) {
+            book = new Book(result.getString("b.isbn"), result.getString("b.title"), result.getString("b.author"), result.getDate("b.issueDate"), result.getDate("b.returnDate"));
+            listData.add(book);
         }
         return listData;
     }
 
-    private ObservableList<Book> unfBookList;
-
-    public void unfBookShowListData(){
-        unfBookList = unfBookListData();
+    public void unfBookShowListData() throws SQLException {
+        ObservableList<Book> unfBookList = unfBookListData();
         unf_col_name.setCellValueFactory(new PropertyValueFactory<>("title"));
         unf_tableView.setItems(unfBookList);
     }
@@ -115,34 +101,26 @@ public class MyCollections extends DefaultPanel {
 
     /////////////////////////////////////////////////////////////////////////////
 
-    public ObservableList<Book> finBookListData() {
+    public ObservableList<Book> finBookListData() throws SQLException {
         ObservableList<Book> listData = FXCollections.observableArrayList();
 
-        CurrentUser curUser = new CurrentUser();
-        String res = String.valueOf(curUser.currentUser.getUid());
+        String res = String.valueOf(CurrentUser.currentUser.getUid());
         String sql = "select b.* from book b join userreturnbook rt " +
                 "on b.isbn = rt.isbn and rt.uid = '" + res + "'";
 
-        connect = database.connectDb();
+        Statement stmt = SQL.getStmt();
+        result = stmt.executeQuery(sql);
 
-        try {
-            prepare = connect.prepareStatement(sql);
-            result = prepare.executeQuery();
-            Book book;
-            while (result.next()) {
-                book = new Book(result.getString("b.isbn"), result.getString("b.title"), result.getString("b.author"), result.getDate("b.issueDate"), result.getDate("b.returnDate"));
-                listData.add(book);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        Book book;
+        while (result.next()) {
+            book = new Book(result.getString("b.isbn"), result.getString("b.title"), result.getString("b.author"), result.getDate("b.issueDate"), result.getDate("b.returnDate"));
+            listData.add(book);
         }
         return listData;
     }
 
-    private ObservableList<Book> finBookList;
-
-    public void finBookShowListData(){
-        finBookList = finBookListData();
+    public void finBookShowListData() throws SQLException {
+        ObservableList<Book> finBookList = finBookListData();
         fin_col_name.setCellValueFactory(new PropertyValueFactory<>("title"));
         fin_tableView.setItems(finBookList);
     }
@@ -163,7 +141,7 @@ public class MyCollections extends DefaultPanel {
     }
 
     @FXML
-    void initialize() {
+    void initialize() throws SQLException {
         assert log12 != null : "fx:id=\"log12\" was not injected: check your FXML file 'MyCollections.fxml'.";
 
         unfBookShowListData();

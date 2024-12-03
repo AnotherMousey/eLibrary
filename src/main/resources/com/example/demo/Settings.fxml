@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="554.0" prefWidth="803.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Settings">
+<AnchorPane prefHeight="554.0" prefWidth="803.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Settings">
    <children>
       <Label fx:id="profile" layoutX="43.0" layoutY="21.0" text="Settings" textFill="#14544c">
          <font>
@@ -28,8 +28,8 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="new_pass" layoutX="387.0" layoutY="264.0" prefHeight="25.0" prefWidth="180.0" />
-      <Label alignment="TOP_RIGHT" layoutX="236.0" layoutY="266.0" prefHeight="20.0" prefWidth="94.0" text="New password:">
+      <TextField fx:id="new_pass" layoutX="387.0" layoutY="278.0" prefHeight="25.0" prefWidth="180.0" />
+      <Label alignment="TOP_RIGHT" layoutX="236.0" layoutY="280.0" prefHeight="20.0" prefWidth="94.0" text="New password:">
          <font>
             <Font size="13.0" />
          </font>
