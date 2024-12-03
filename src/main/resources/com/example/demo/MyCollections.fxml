@@ -14,7 +14,7 @@
    <children>
       <TableView fx:id="unf_tableView" layoutX="22.0" layoutY="106.0" onMouseClicked="#unfBookSelect" prefHeight="154.0" prefWidth="390.0">
         <columns>
-          <TableColumn fx:id="unf_col_name" prefWidth="328.0" text="Book name" />
+          <TableColumn fx:id="unf_col_name" prefWidth="389.599987411499" text="Book name" />
         </columns>
       </TableView>
       <Pane layoutX="428.0" layoutY="46.0" prefHeight="463.0" prefWidth="361.0" style="-fx-background-color: #BCD9CE;" stylesheets="@CssStyle.css">
@@ -67,7 +67,7 @@
       <Button fx:id="log12" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #63a09a;" styleClass="round2" stylesheets="@CssStyle.css" text="Home" textAlignment="CENTER" textFill="WHITE" />
       <TableView fx:id="fin_tableView" layoutX="22.0" layoutY="331.0" onMouseClicked="#finBookSelect" prefHeight="166.0" prefWidth="390.0">
          <columns>
-            <TableColumn fx:id="fin_col_name" prefWidth="328.0" text="Book name" />
+            <TableColumn fx:id="fin_col_name" prefWidth="389.599987411499" text="Book name" />
          </columns>
       </TableView>
       <Label alignment="CENTER" layoutX="84.0" layoutY="69.0" prefHeight="37.0" prefWidth="247.0" text="Unfinished book" textFill="#14544c">
