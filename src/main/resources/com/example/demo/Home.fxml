@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="803.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Home">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="803.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Home">
    <children>
       <Pane layoutX="162.0" layoutY="25.0" prefHeight="86.0" prefWidth="616.0" style="-fx-background-color: #BCD9CE;" styleClass="round" stylesheets="@CssStyle.css">
          <children>
@@ -66,7 +66,12 @@
                   <Image url="@../../../fe42b0299051d2b821c54d6807195031-removebg-preview.png" />
                </image>
             </ImageView>
-            <Label layoutX="8.0" layoutY="60.0" text="Return Book" textFill="#14544c">
+            <Label layoutX="7.0" layoutY="79.0" text="Return Book" textFill="#14544c">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="4.0" layoutY="54.0" text="Borrow Book" textFill="#14544c">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
