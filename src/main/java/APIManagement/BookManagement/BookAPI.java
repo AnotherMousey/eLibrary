@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+import ReportManagement.*;
 import javafx.scene.control.Alert;
 import org.json.simple.*;
 import org.json.simple.parser.*;
@@ -73,25 +74,10 @@ public class BookAPI implements API {
                 //get Title of the book
                 newBook.setTitle(volumeInfo.get("title").toString());
 
-                //get publishedDate if exists
-                if(volumeInfo.containsKey("publishedDate")) {
-                    newBook.setPublishedDate(volumeInfo.get("publishedDate").toString());
-                }
-
                 //get author if exists
                 if(volumeInfo.containsKey("authors")) {
                     JSONArray authors = (JSONArray) volumeInfo.get("authors");
                     newBook.setAuthor(authors.get(0).toString());
-                }
-
-                //get publisher if exists
-                if(volumeInfo.containsKey("publisher")) {
-                    newBook.setPublisher(volumeInfo.get("publisher").toString());
-                }
-
-                //get language if exists
-                if(volumeInfo.containsKey("language")) {
-                    newBook.setLanguage(volumeInfo.get("language").toString());
                 }
 
                 //get isbn if exists
@@ -105,31 +91,14 @@ public class BookAPI implements API {
                     }
                 }
 
-                //get page if exists
-                if(volumeInfo.containsKey("pageCount")) {
-                    newBook.setPages(Integer.parseInt(volumeInfo.get("pageCount").toString()));
-                }
-
-                //get categories if exists
-                if(volumeInfo.containsKey("categories")) {
-                    JSONArray cats = (JSONArray) volumeInfo.get("categories");
-                    ArrayList<String> categories = new ArrayList<>();
-                    for (Object cat : cats) {
-                        categories.add(cat.toString());
-                    }
-                    newBook.setCategories(categories);
-                }
-
-                //get description if exists
-                if(volumeInfo.containsKey("description")) {
-                    newBook.setDescription(volumeInfo.get("description").toString());
-                }
-
                 bookshelf.add(newBook);
             }
         }
         else {
             System.out.println("Status: Connection failed");
+            Reporter reporter = new BaseReport();
+            reporter = new AlertReport(reporter);
+            reporter.report("Something went wrong, please try a different ISBN");
         }
         return bookshelf;
     }

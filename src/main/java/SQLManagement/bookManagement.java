@@ -9,20 +9,9 @@ public class bookManagement extends SQL{
 
     public static void addBook(Book book) throws SQLException {
         Statement stmt = getStmt();
-        String query = "INSERT INTO book(isbn, title, author, description, publishedDate, language" +
+        String query = "INSERT INTO book(isbn, title, author, quantity" +
                 ") VALUES ('" + book.getIsbn() + "', '" + book.getTitle() + "', '" +
-                book.getDescription() + "', '" + book.getPublishedDate() + "', '" +
-                book.getLanguage() + "');";
+                book.getAuthor() + "', '" + book.getQuantity() + "');";
         stmt.executeUpdate(query);
-
-        for(String category: book.getCategories()) {
-            query = "INSERT INTO category(categoryName) VALUES('" + category + "') " +
-                    "WHERE NOT EXISTS(SELECT * FROM category WHERE categoryName = '" + category + "')";
-            stmt.executeUpdate(query);
-            query = "INSERT INTO bookandcategory(isbn, categoryName) VALUES(" +
-                    "('" + book.getIsbn() + "', SELECT categoryID FROM category WHERE categoryName = '" +
-                    category + "');";
-            stmt.executeUpdate(query);
-        }
     }
 }

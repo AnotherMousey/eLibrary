@@ -172,7 +172,7 @@ public class userManagement extends SQL{
 
         book.setBook(LibraryManagement.getSingleBook(stmt, isbn));
         book.setBorrowedDate((Timestamp) result.get(0).get("borrowDate"));
-        book.setReturnDate((Timestamp) result.get(0).get("returnDate"));
+        book.setReturnedDate((Timestamp) result.get(0).get("returnDate"));
         return book;
     }
 

@@ -6,6 +6,7 @@ import LibraryManagement.Interfaces.*;
 import SQLManagement.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import libUser.CurrentUser;
 import ReportManagement.*;
 
@@ -27,29 +28,22 @@ public class LibraryManagement implements GetBooksInfo,
         books.add(book);
     }
 
-    private static ArrayList<String> getBookCategory(Statement stmt, String isbn) throws SQLException {
-        String query;
-        query = "SELECT * FROM bookandcategory bac " +
-                "JOIN category c ON bac.categoryID = c.categoryID " +
-                "HAVING bac.ISBN = '" + isbn + "';";
-        ResultSet categoryRs = stmt.executeQuery(query);
-        List<HashMap<String,Object>> category = ResultSetToList.convertResultSetToList(categoryRs);
-        ArrayList<String> listOfCategories = new ArrayList<>();
-        for(HashMap<String,Object> categoryObj : category) {
-            listOfCategories.add((String) categoryObj.get("category"));
-        }
-        return listOfCategories;
-    }
-
     public static Book getSingleBook(Statement stmt, String isbn) throws SQLException {
         String query = "SELECT * FROM book WHERE ISBN='" + isbn + "';";
         Book book = new Book();
         ResultSet rs = stmt.executeQuery(query);
         List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
+        if(result.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Book not found");
+            alert.showAndWait();
+            return null;
+        }
         book.setTitle(result.get(0).get("title").toString());
         book.setIsbn(isbn);
         book.setAuthor(result.get(0).get("author").toString());
-        book.setCategories(getBookCategory(stmt, isbn));
         book.setQuantity((int) result.get(0).get("quantity"));
         return book;
     }
@@ -67,6 +61,13 @@ public class LibraryManagement implements GetBooksInfo,
             newBook.setTitle((String) book.get("title"));
             newBook.setQuantity((int) book.get("quantity"));
             newBook.setAuthor((String) book.get("author"));
+            String smallQuery = "SELECT * FROM userborrowbook WHERE ISBN='" + newBook.getIsbn() + "' AND uid = " + CurrentUser.currentUser.getUid();
+            ResultSet rs2 = stmt.executeQuery(smallQuery);
+            if(rs2.next()) {
+                newBook.setStatus("Borrowing");
+            } else {
+                newBook.setStatus("");
+            }
             books.add(newBook);
         }
         LibraryManagement.books = books;
@@ -143,6 +144,7 @@ public class LibraryManagement implements GetBooksInfo,
         query = "INSERT INTO userborrowbook " +
                 "VALUES(" + CurrentUser.currentUser.getUid() + ", '" +
                 isbn + "', '" + currentTime + "');";
+        System.out.println(currentTime);
         stmt.executeUpdate(query);
 
         //report
@@ -163,6 +165,12 @@ public class LibraryManagement implements GetBooksInfo,
         int countBook = getCountBook(isbn);
         Statement stmt = SQL.getStmt();
 
+        //get borrowTime
+        Timestamp borrowTime = new Timestamp(System.currentTimeMillis());
+        String getTime = "SELECT * FROM userborrowbook WHERE isbn='" + isbn + "' AND uid = " + CurrentUser.currentUser.getUid() + ";";
+        ResultSet rs = stmt.executeQuery(getTime);
+        List<HashMap<String,Object>> borrowBook = ResultSetToList.convertResultSetToList(rs);
+        borrowTime = (Timestamp) borrowBook.get(0).get("borrowTime");
         //delete the book from userborrowbook if exists
         String deleteQuery = "DELETE FROM userborrowbook WHERE uid = " + CurrentUser.currentUser.getUid() +
                 " AND isbn = '" + isbn + "';";
@@ -175,7 +183,7 @@ public class LibraryManagement implements GetBooksInfo,
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         query = "INSERT INTO userreturnbook " +
                 "VALUES(" + CurrentUser.currentUser.getUid() + ", '" +
-                isbn + "', '" + currentTime + "');";
+                isbn + "', '" + currentTime + "', '" + borrowTime + "');";
         stmt.executeUpdate(query);
 
         //report
