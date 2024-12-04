@@ -20,10 +20,10 @@
       <TableView fx:id="avaiBooks_tableView" layoutX="67.0" layoutY="146.0" prefHeight="319.0" prefWidth="670.0">
         <columns>
           <TableColumn fx:id="books_col_isbn" prefWidth="117.59998321533203" text="ISBN" />
-            <TableColumn fx:id="books_col_title" prefWidth="258.4000244140625" text="Book title" />
+            <TableColumn fx:id="books_col_title" prefWidth="258.4000244140625" text="Title" />
             <TableColumn fx:id="books_col_author" minWidth="0.0" prefWidth="116.79995727539062" text="Author" />
-            <TableColumn fx:id="books_col_status" prefWidth="87.99993896484375" text="Status" />
-            <TableColumn prefWidth="96.800048828125" text="Check box" />
+            <TableColumn fx:id="books_col_quantity" prefWidth="87.99993896484375" text="Quantity" />
+            <TableColumn fx:id="books_col_status" prefWidth="87.0" text="Status" />
         </columns>
       </TableView>
    </children>

@@ -27,20 +27,6 @@ public class LibraryManagement implements GetBooksInfo,
         books.add(book);
     }
 
-    private static ArrayList<String> getBookCategory(Statement stmt, String isbn) throws SQLException {
-        String query;
-        query = "SELECT * FROM bookandcategory bac " +
-                "JOIN category c ON bac.categoryID = c.categoryID " +
-                "HAVING bac.ISBN = '" + isbn + "';";
-        ResultSet categoryRs = stmt.executeQuery(query);
-        List<HashMap<String,Object>> category = ResultSetToList.convertResultSetToList(categoryRs);
-        ArrayList<String> listOfCategories = new ArrayList<>();
-        for(HashMap<String,Object> categoryObj : category) {
-            listOfCategories.add((String) categoryObj.get("category"));
-        }
-        return listOfCategories;
-    }
-
     public static Book getSingleBook(Statement stmt, String isbn) throws SQLException {
         String query = "SELECT * FROM book WHERE ISBN='" + isbn + "';";
         Book book = new Book();
@@ -49,7 +35,6 @@ public class LibraryManagement implements GetBooksInfo,
         book.setTitle(result.get(0).get("title").toString());
         book.setIsbn(isbn);
         book.setAuthor(result.get(0).get("author").toString());
-        book.setCategories(getBookCategory(stmt, isbn));
         book.setQuantity((int) result.get(0).get("quantity"));
         return book;
     }
@@ -67,6 +52,13 @@ public class LibraryManagement implements GetBooksInfo,
             newBook.setTitle((String) book.get("title"));
             newBook.setQuantity((int) book.get("quantity"));
             newBook.setAuthor((String) book.get("author"));
+            String smallQuery = "SELECT * FROM userborrowbook WHERE ISBN='" + newBook.getIsbn() + "' AND uid = " + CurrentUser.currentUser.getUid();
+            ResultSet rs2 = stmt.executeQuery(smallQuery);
+            if(rs2.next()) {
+                newBook.setStatus("Borrowing");
+            } else {
+                newBook.setStatus("");
+            }
             books.add(newBook);
         }
         LibraryManagement.books = books;
@@ -143,6 +135,7 @@ public class LibraryManagement implements GetBooksInfo,
         query = "INSERT INTO userborrowbook " +
                 "VALUES(" + CurrentUser.currentUser.getUid() + ", '" +
                 isbn + "', '" + currentTime + "');";
+        System.out.println(currentTime);
         stmt.executeUpdate(query);
 
         //report

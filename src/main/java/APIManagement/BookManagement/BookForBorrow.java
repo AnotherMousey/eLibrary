@@ -15,6 +15,12 @@ public class BookForBorrow extends Book{
 
     }
 
+    public BookForBorrow(String isbn, String title, String author, Timestamp borrowedDate, Timestamp returnedDate) {
+        super(isbn, title, author);
+        this.borrowedDate = borrowedDate;
+        this.returnedDate = returnedDate;
+    }
+
     public Timestamp getBorrowedDate() {
         return borrowedDate;
     }

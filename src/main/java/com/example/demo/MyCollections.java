@@ -3,8 +3,12 @@ package com.example.demo;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import APIManagement.BookManagement.BookForBorrow;
+import SQLManagement.ResultSetToList;
 import SQLManagement.SQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,17 +36,17 @@ public class MyCollections extends DefaultPanel {
     private Button log12;
 
     @FXML
-    private TableColumn<Book, Integer> unf_col_number;
+    private TableColumn<BookForBorrow, Integer> unf_col_number;
     @FXML
-    private TableColumn<Book, Integer> fin_col_number;
+    private TableColumn<BookForBorrow, Integer> fin_col_number;
     @FXML
-    private TableColumn<Book, String> unf_col_name;
+    private TableColumn<BookForBorrow, String> unf_col_name;
     @FXML
-    private TableColumn<Book, String> fin_col_name;
+    private TableColumn<BookForBorrow, String> fin_col_name;
     @FXML
-    private TableView<Book> unf_tableView;
+    private TableView<BookForBorrow> unf_tableView;
     @FXML
-    private TableView<Book> fin_tableView;
+    private TableView<BookForBorrow> fin_tableView;
     @FXML
     private TextField clt_isbn;
     @FXML
@@ -56,36 +60,45 @@ public class MyCollections extends DefaultPanel {
 
     private ResultSet result;
 
-    public ObservableList<Book> unfBookListData() throws SQLException {
-        ObservableList<Book> listData = FXCollections.observableArrayList();
+    public ObservableList<BookForBorrow> unfBookListData() throws SQLException {
+        ObservableList<BookForBorrow> listData = FXCollections.observableArrayList();
         // ma oi code 1 dong xong doi branch no ko luu cho h phai di code lai
         /**
          * phai trace ra dc user dang dung la ai, lay duoc uid
          * tu uid do, anh xa vao user borrow/return book de lay isbn cua sach
          * roi join voi database cua sach de lay ra info cua sach
          */
-        String res = String.valueOf(CurrentUser.currentUser.getUid());
-        String sql = "select b.* from book b join userreturnbook rt " +
-                "on b.isbn = rt.isbn and rt.uid = '" + res + "'";
+        String sql = "SELECT * FROM userborrowbook " +
+                "WHERE uid = " + CurrentUser.currentUser.getUid() + ";";
 
         Statement stmt = SQL.getStmt();
         result = stmt.executeQuery(sql);
-        Book book;
-        while (result.next()) {
-            book = new Book(result.getString("b.isbn"), result.getString("b.title"), result.getString("b.author"), result.getDate("b.issueDate"), result.getDate("b.returnDate"));
+        List<HashMap<String,Object>> res = ResultSetToList.convertResultSetToList(result);
+
+        for (HashMap<String,Object> borrowBook : res) {
+            BookForBorrow book = new BookForBorrow();
+            book.setIsbn(borrowBook.get("isbn").toString());
+            book.setBorrowedDate((Timestamp) borrowBook.get("borrowTime"));
+
+            String smallQuery = "SELECT * FROM book WHERE isbn = '" + book.getIsbn() + "';";
+            Statement stmt2 = SQL.getStmt();
+            ResultSet rs = stmt2.executeQuery(smallQuery);
+            List<HashMap<String,Object>> curBook = ResultSetToList.convertResultSetToList(rs);
+            book.setTitle(curBook.get(0).get("title").toString());
+            book.setAuthor(curBook.get(0).get("author").toString());
             listData.add(book);
         }
         return listData;
     }
 
     public void unfBookShowListData() throws SQLException {
-        ObservableList<Book> unfBookList = unfBookListData();
+        ObservableList<BookForBorrow> unfBookList = unfBookListData();
         unf_col_name.setCellValueFactory(new PropertyValueFactory<>("title"));
         unf_tableView.setItems(unfBookList);
     }
 
     public void unfBookSelect() {
-        Book book = unf_tableView.getSelectionModel().getSelectedItem();
+        BookForBorrow book = unf_tableView.getSelectionModel().getSelectedItem();
         int num = unf_tableView.getSelectionModel().getSelectedIndex();
 
         if (num - 1 < -1) {
@@ -95,38 +108,46 @@ public class MyCollections extends DefaultPanel {
         clt_isbn.setText(String.valueOf(book.getIsbn()));
         clt_title.setText(String.valueOf(book.getTitle()));
         clt_author.setText(String.valueOf(book.getAuthor()));
-        clt_issue.setText(String.valueOf(book.getIssueDate()));
-        clt_due.setText(String.valueOf(book.getReturnDate()));
+        clt_issue.setText(String.valueOf(book.getBorrowedDate()));
+        clt_due.setText(String.valueOf(book.getReturnedDate()));
     }
 
     /////////////////////////////////////////////////////////////////////////////
 
-    public ObservableList<Book> finBookListData() throws SQLException {
-        ObservableList<Book> listData = FXCollections.observableArrayList();
+    public ObservableList<BookForBorrow> finBookListData() throws SQLException {
+        ObservableList<BookForBorrow> listData = FXCollections.observableArrayList();
 
-        String res = String.valueOf(CurrentUser.currentUser.getUid());
-        String sql = "select b.* from book b join userreturnbook rt " +
-                "on b.isbn = rt.isbn and rt.uid = '" + res + "'";
+        String sql = "SELECT * FROM userreturnbook " +
+                "WHERE uid = " + CurrentUser.currentUser.getUid() + ";";
 
         Statement stmt = SQL.getStmt();
         result = stmt.executeQuery(sql);
+        List<HashMap<String,Object>> res = ResultSetToList.convertResultSetToList(result);
 
-        Book book;
-        while (result.next()) {
-            book = new Book(result.getString("b.isbn"), result.getString("b.title"), result.getString("b.author"), result.getDate("b.issueDate"), result.getDate("b.returnDate"));
+        for (HashMap<String,Object> borrowBook : res) {
+            BookForBorrow book = new BookForBorrow();
+            book.setIsbn(borrowBook.get("isbn").toString());
+            book.setBorrowedDate((Timestamp) borrowBook.get("borrowTime"));
+
+            String smallQuery = "SELECT * FROM book WHERE isbn = '" + book.getIsbn() + "';";
+            Statement stmt2 = SQL.getStmt();
+            ResultSet rs = stmt2.executeQuery(smallQuery);
+            List<HashMap<String,Object>> curBook = ResultSetToList.convertResultSetToList(rs);
+            book.setTitle(curBook.get(0).get("title").toString());
+            book.setAuthor(curBook.get(0).get("author").toString());
             listData.add(book);
         }
         return listData;
     }
 
     public void finBookShowListData() throws SQLException {
-        ObservableList<Book> finBookList = finBookListData();
+        ObservableList<BookForBorrow> finBookList = finBookListData();
         fin_col_name.setCellValueFactory(new PropertyValueFactory<>("title"));
         fin_tableView.setItems(finBookList);
     }
 
     public void finBookSelect() {
-        Book book = fin_tableView.getSelectionModel().getSelectedItem();
+        BookForBorrow book = fin_tableView.getSelectionModel().getSelectedItem();
         int num = fin_tableView.getSelectionModel().getSelectedIndex();
 
         if (num - 1 < -1) {
@@ -136,8 +157,8 @@ public class MyCollections extends DefaultPanel {
         clt_isbn.setText(String.valueOf(book.getIsbn()));
         clt_title.setText(String.valueOf(book.getTitle()));
         clt_author.setText(String.valueOf(book.getAuthor()));
-        clt_issue.setText(String.valueOf(book.getIssueDate()));
-        clt_due.setText(String.valueOf(book.getReturnDate()));
+        clt_issue.setText(String.valueOf(book.getBorrowedDate()));
+        clt_due.setText(String.valueOf(book.getReturnedDate()));
     }
 
     @FXML

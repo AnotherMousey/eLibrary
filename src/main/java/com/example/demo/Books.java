@@ -27,7 +27,7 @@ import LibraryManagement.Management.LibraryManagement;
 public class Books extends DefaultPanel{
 
     @FXML
-    private TableColumn<Book, String> books_col_number;
+    private TableColumn<Book, String> books_col_status;
     @FXML
     private TableColumn<Book, String> books_col_title;
     @FXML
@@ -35,7 +35,7 @@ public class Books extends DefaultPanel{
     @FXML
     private TableColumn<Book, String> books_col_isbn;
     @FXML
-    private TableColumn<Book, String> books_col_status;
+    private TableColumn<Book, String> books_col_quantity;
     @FXML
     private TableView<Book> avaiBooks_tableView;
     @FXML
@@ -78,6 +78,8 @@ public class Books extends DefaultPanel{
         books_col_isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         books_col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
         books_col_author.setCellValueFactory(new PropertyValueFactory<>("author"));
+        books_col_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        books_col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         avaiBooks_tableView.setItems(bookList);
     }
