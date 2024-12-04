@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+import ReportManagement.*;
 import javafx.scene.control.Alert;
 import org.json.simple.*;
 import org.json.simple.parser.*;
@@ -95,6 +96,9 @@ public class BookAPI implements API {
         }
         else {
             System.out.println("Status: Connection failed");
+            Reporter reporter = new BaseReport();
+            reporter = new AlertReport(reporter);
+            reporter.report("Something went wrong, please try a different ISBN");
         }
         return bookshelf;
     }

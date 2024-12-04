@@ -97,6 +97,7 @@ public class Settings extends DefaultPanel {
         assert log1211 != null : "fx:id=\"log1211\" was not injected: check your FXML file 'Settings.fxml'.";
         assert profile != null : "fx:id=\"profile\" was not injected: check your FXML file 'Settings.fxml'.";
         assert profile1 != null : "fx:id=\"profile1\" was not injected: check your FXML file 'Settings.fxml'.";
+        log121.setDefaultButton(true);
     }
 
     public void toHome(ActionEvent event) throws IOException {

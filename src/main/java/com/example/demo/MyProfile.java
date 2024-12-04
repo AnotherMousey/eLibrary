@@ -109,6 +109,7 @@ public class MyProfile extends DefaultPanel{
         displayInfo();
         oldName = prof_name.getText();
         oldEmail = prof_email.getText();
+        log121.setDefaultButton(true);
     }
 
     public void toHome(ActionEvent event) throws IOException {

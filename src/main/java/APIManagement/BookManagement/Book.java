@@ -49,6 +49,9 @@ public class Book {
         this.status = status;
     }
     public void setBook(Book book) {
+        if(book == null) {
+            return;
+        }
         this.title = book.getTitle();
         this.author = book.getAuthor();
         this.isbn = book.getIsbn();

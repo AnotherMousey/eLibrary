@@ -49,6 +49,7 @@ public class Signup extends DefaultPanel{
     void initialize() {
         assert log != null : "fx:id=\"log\" was not injected: check your FXML file 'Signup.fxml'.";
         assert log1 != null : "fx:id=\"log1\" was not injected: check your FXML file 'Signup.fxml'.";
+        log.setDefaultButton(true);
     }
 
     public void backToLogin(ActionEvent event) throws IOException {

@@ -6,6 +6,7 @@ import LibraryManagement.Interfaces.*;
 import SQLManagement.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import libUser.CurrentUser;
 import ReportManagement.*;
 
@@ -32,6 +33,14 @@ public class LibraryManagement implements GetBooksInfo,
         Book book = new Book();
         ResultSet rs = stmt.executeQuery(query);
         List<HashMap<String,Object>> result = ResultSetToList.convertResultSetToList(rs);
+        if(result.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Book not found");
+            alert.showAndWait();
+            return null;
+        }
         book.setTitle(result.get(0).get("title").toString());
         book.setIsbn(isbn);
         book.setAuthor(result.get(0).get("author").toString());
