@@ -156,6 +156,12 @@ public class LibraryManagement implements GetBooksInfo,
         int countBook = getCountBook(isbn);
         Statement stmt = SQL.getStmt();
 
+        //get borrowTime
+        Timestamp borrowTime = new Timestamp(System.currentTimeMillis());
+        String getTime = "SELECT * FROM userborrowbook WHERE isbn='" + isbn + "' AND uid = " + CurrentUser.currentUser.getUid() + ";";
+        ResultSet rs = stmt.executeQuery(getTime);
+        List<HashMap<String,Object>> borrowBook = ResultSetToList.convertResultSetToList(rs);
+        borrowTime = (Timestamp) borrowBook.get(0).get("borrowTime");
         //delete the book from userborrowbook if exists
         String deleteQuery = "DELETE FROM userborrowbook WHERE uid = " + CurrentUser.currentUser.getUid() +
                 " AND isbn = '" + isbn + "';";
@@ -168,7 +174,7 @@ public class LibraryManagement implements GetBooksInfo,
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         query = "INSERT INTO userreturnbook " +
                 "VALUES(" + CurrentUser.currentUser.getUid() + ", '" +
-                isbn + "', '" + currentTime + "');";
+                isbn + "', '" + currentTime + "', '" + borrowTime + "');";
         stmt.executeUpdate(query);
 
         //report

@@ -128,6 +128,7 @@ public class MyCollections extends DefaultPanel {
             BookForBorrow book = new BookForBorrow();
             book.setIsbn(borrowBook.get("isbn").toString());
             book.setBorrowedDate((Timestamp) borrowBook.get("borrowTime"));
+            book.setReturnedDate((Timestamp) borrowBook.get("returnTime"));
 
             String smallQuery = "SELECT * FROM book WHERE isbn = '" + book.getIsbn() + "';";
             Statement stmt2 = SQL.getStmt();

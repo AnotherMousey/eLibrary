@@ -91,10 +91,7 @@ public class ManageBook extends DefaultPanel{
             //check if book id is already exist
             String checkData = "Select * from book where isbn = '"
                     + bookSearch_isbn.getText() + "'";
-
-            statement = connect.createStatement();
-            result = statement.executeQuery(checkData);
-
+            result = stmt.executeQuery(checkData);
             if (result.next()) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
@@ -102,13 +99,8 @@ public class ManageBook extends DefaultPanel{
                 alert.setContentText("Book already exists!");
                 alert.showAndWait();
             } else {
-                prepare = connect.prepareStatement(sql);
-                prepare.setString(1, bookSearch_isbn.getText());
-                prepare.setString(2, bookSearch_title.getText());
-                prepare.setString(3, bookSearch_author.getText());
-                prepare.setString(4, bookSearch_quantity.getText());
-
-                prepare.executeUpdate();
+                String query = "INSERT INTO book VALUES ('" + bookSearch_isbn.getText() + "', '" + bookSearch_title.getText() + "', '" + bookSearch_author.getText() + "', " + bookSearch_quantity.getText() + ");";
+                System.out.println(query);
 
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("System notification");
